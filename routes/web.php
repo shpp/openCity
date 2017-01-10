@@ -15,8 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Route::get('/','HomeController@welcome');
-
 Route::get('/getplaces','PlaceController@GetPlaces');
 Route::get('/getinfo','PlaceController@GetPlaceInfo');
 Route::get('/getaccess','PlaceController@GetPlaceAccessebilities');
