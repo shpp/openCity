@@ -16,7 +16,7 @@ class Address extends Model
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        
     ];
 
 	public function place()

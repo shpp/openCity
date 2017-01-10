@@ -12,6 +12,6 @@ class AccessibilityTitle extends Model
 
     public function accessibility()
     {
-        return $this->hasMany('App\accessibility', 'acces_title_id');
+        return $this->hasMany('App\accessibility', 'acces_title_id', 'id');
     }
 }

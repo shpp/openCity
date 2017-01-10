@@ -18,6 +18,10 @@ Route::get('/', function () {
 //Route::get('/','HomeController@welcome');
 
 Route::get('/getplaces','PlaceController@GetPlaces');
+Route::get('/getinfo','PlaceController@GetPlaceInfo');
+Route::get('/getaccess','PlaceController@GetPlaceAccessebilities');
+Route::get('/getcategories','PlaceController@GetCategories');
+//Route::get('/getlevels','PlaceController@GetAccessebilityLevel');
 
 Auth::routes();
 
@@ -27,10 +31,20 @@ Route::get('/register',function(){
     return redirect('/login');
 });
 
-//Route::get('/loadplaces', 'PlaceController@LoadFromFile')->middleware('auth');
-Route::get('/catalogue/{id}', 'Catalogue@index');
+
+Route::group(['prefix' => 'catalogue', 'middleware' => ['auth']], function() {
+	Route::get('/{id}', 'Catalogue@index');
+	Route::post('/add', 'Catalogue@add');
+	Route::post('/save', 'Catalogue@store');
+	Route::post('/delete', 'Catalogue@destroy');
+}); 
+
+Route::group(['prefix' => 'places', 'middleware' => ['auth']], function() {
+	Route::get('/', 'Places@index');
+	Route::post('/edit/{id}', 'Places@edit');
+	Route::post('/save', 'Places@store');
+	Route::delete('/delete/{id}', 'Places@destroy');
+}); 
+
 
 Route::get('/geo', 'PlaceController@LoadGeo')->middleware('auth');
-/*Route::get('/categories', 'PlaceController@LoadFromFile');
-Route::get('/param_name', 'PlaceController@LoadFromFile');
-Route::get('/acc_name', 'PlaceController@LoadFromFile');*/

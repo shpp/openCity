@@ -11,6 +11,6 @@ class ParameterTitle extends Model
     ]; 
 	public function parameter()
 	{
-		return $this->hasMany('Parameter'); 
+		return $this->hasMany('Parameter', 'param_title_id', 'id'); 
 	}
 }

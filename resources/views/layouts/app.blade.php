@@ -46,35 +46,18 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         @if (!Auth::guest())
-                            <li><a href="{{ url('/places_list') }}">Список мест</a></li>
+                            <li><a href="{{ url('/places') }}">Список місць</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    Справочники
+                                    Довідники
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{ url('/catalogue/categories') }}">Категории</a></li>                                
-                                    <li><a href="{{ url('/catalogue/param_name') }}">Названия параметров</a></li>
-                                    <li><a href="{{ url('/catalogue/acc_name') }}">Названия доступности</a></li>
+                                    <li><a href="{{ url('/catalogue/categories') }}">Категорії</a></li>                                
+                                    <li><a href="{{ url('/catalogue/param_name') }}">Назви параметрів</a></li>
+                                    <li><a href="{{ url('/catalogue/acc_name') }}">Назви доступностей</a></li>
                                 </ul>
                             </li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         <li><a href="{{ url('/loadplaces') }}">Загузить данные</a></li>
                             <li><a href="{{ url('/geo') }}">Геолокация</a></li>
                         @endif
@@ -84,8 +67,8 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ url('/login') }}">Login</a></li>
-                            {{--<li><a href="{{ url('/register') }}">Register</a></li>--}}
+                            <li><a href="{{ url('/login') }}">Увійти</a></li>
+                            {{--<li><a href="{{ url('/register') }}">Зареєструватись</a></li>--}}
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -97,7 +80,7 @@
                                         <a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                            Вийти
                                         </a>
 
                                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">

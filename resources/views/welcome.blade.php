@@ -10,6 +10,8 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css">
         <!-- Styles -->
         <style>
             html, body {
@@ -64,11 +66,38 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+            .typeahead{
+                width: 95%;
+            }
 
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
         height: 100%;
+      }
+
+      #right-bar{
+          top: 10%;
+          position: fixed;
+          height: 80%;
+          width: 400px;
+          right: -390px;
+          padding: 10px;
+          background-color: #ecf0f1;
+          box-sizing: border-box;
+          border: solid #95a5a6;
+      }
+
+      #left-bar{
+        top: 10%;
+        position: fixed;
+        height: 80%;
+        width: 192px;
+        left: 0;
+        padding: 10px;
+        background-color: #ecf0f1;
+        box-sizing: border-box;
+        border: solid #95a5a6;
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
@@ -88,16 +117,53 @@
                     {{--<a href="{{ url('/register') }}">Register</a>--}}
                 </div>
             @endif
-
             <div class="content">
 				 <div id="map"></div>
             </div>
+            <div id="left-bar">
+
+                <div class="accordion" id="accordion2">
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                                Категорії
+                            </a>
+                        </div>
+                        <div id="collapseOne" class="accordion-body collapse in">
+                        </div>
+                    </div>
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                                Параметри зручності
+                            </a>
+                        </div>
+                        <div id="collapseTwo" class="accordion-body collapse">
+                            <div class="accordion-inner">
+                                <label><input type="checkbox" id="check" checked> Пандус</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="buton" id="submit_params">Застосувати</button>
+            </div>
+            <div id="right-bar">
+            {{--<div class="col-md-4 text-left" id="right-bar">--}}
+                    {{--<input class="typeahead" type="text" placeholder="Пошук...">--}}
+                <div  id="info"><h1>Open City</h1></div>
+            </div>
+
         </div>
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="/js/mapinit.js"></script>
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDt5Vck3ldCkvKNslOHScKiXdGnKuy1pYI&callback=initMap"
 		async defer>
 	    </script>
 
-</body>
+        <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+
+    </body>
 </html>

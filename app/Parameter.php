@@ -15,6 +15,6 @@ class Parameter extends Model
 	}
 	public function parameterTitle()
 	{
-		return $this->belongsTo('App\ParameterTitle');
+		return $this->belongsTo('App\ParameterTitle', 'param_title_id', 'id');
 	}
 }
