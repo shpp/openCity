@@ -113,7 +113,7 @@
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
-                    <a href="{{ url('/login') }}">Login</a>
+                    <a href="{{ url('/login') }}">Увійти</a>
                     {{--<a href="{{ url('/register') }}">Register</a>--}}
                 </div>
             @endif
@@ -126,7 +126,7 @@
                     <div class="accordion-group">
                         <div class="accordion-heading">
                             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-                                Категорії
+                                <strong>Категорії</strong>
                             </a>
                         </div>
                         <div id="collapseOne" class="accordion-body collapse in">
@@ -135,7 +135,7 @@
                     <div class="accordion-group">
                         <div class="accordion-heading">
                             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-                                Параметри зручності
+                                <strong>Параметри зручності</strong>
                             </a>
                         </div>
                         <div id="collapseTwo" class="accordion-body collapse">
@@ -151,6 +151,8 @@
             {{--<div class="col-md-4 text-left" id="right-bar">--}}
                     {{--<input class="typeahead" type="text" placeholder="Пошук...">--}}
                 <div  id="info"><h1>Open City</h1></div>
+                <div  id="infoAdd"><h1></h1></div>
+                <div  id="infoAcc"><h1></h1></div>
             </div>
 
         </div>

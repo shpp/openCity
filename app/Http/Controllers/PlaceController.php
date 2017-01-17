@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Address;
+use App\Category;
+use App\AccessibilityTitle;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -88,13 +90,21 @@ class PlaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    publiC function GetPlaces() {
-    $access_all = DB::table('accessibility_titles')->count();
+    publiC function GetPlaces(Request $request) {
+     if(isset($request->acc)){
+         $access_all = DB::table('accessibility_titles')->whereIn('id', $request->acc)->count();
+     }
+     else{
+         $access_all = DB::table('accessibility_titles')->count();
+     }
     //-----------------------------------------------------------------
-        $places = DB::table('places')
-            ->join('addresses', 'places.address_id', '=', 'addresses.id')
-            ->leftjoin('accessibilities', 'places.id', '=', 'accessibilities.place_id')
-            ->select(DB::raw("places.id,
+        if(isset($request->acc)) {
+
+            $places = DB::table('places')->whereIn('category_id', $request->cat)
+                ->join('addresses', 'places.address_id', '=', 'addresses.id')
+                ->leftjoin('accessibilities', 'places.id', '=', 'accessibilities.place_id')
+                ->whereIn('acces_title_id', $request->acc)
+                ->select(DB::raw("places.id,
                      places.name,
                      addresses.geo_place_id,
                      addresses.map_lat,
@@ -104,18 +114,75 @@ class PlaceController extends Controller
                      addresses.number, 
                      $access_all as access_all, 
                      count(accessibilities.place_id) as aceess_count")
-                     )
-            ->groupBy('places.id',
-                'places.name',
-                'addresses.geo_place_id',
-                'addresses.map_lat',
-                'addresses.map_lng',
-                'addresses.city',
-                'addresses.street',
-                'addresses.number',
-                'access_all'
                 )
-            ->get();
+                ->groupBy('places.id',
+                    'places.name',
+                    'addresses.geo_place_id',
+                    'addresses.map_lat',
+                    'addresses.map_lng',
+                    'addresses.city',
+                    'addresses.street',
+                    'addresses.number',
+                    'access_all'
+                )
+                ->get();
+        }
+        else if(isset($request->cat)){
+            $places = DB::table('places')->whereIn('category_id', $request->cat)
+                ->join('addresses', 'places.address_id', '=', 'addresses.id')
+                ->leftjoin('accessibilities', 'places.id', '=', 'accessibilities.place_id')
+                //->whereIn('acces_title_id', $request->acc)
+                ->select(DB::raw("places.id,
+                     places.name,
+                     addresses.geo_place_id,
+                     addresses.map_lat,
+                     addresses.map_lng,
+                     addresses.city,
+                     addresses.street,
+                     addresses.number, 
+                     $access_all as access_all, 
+                     count(accessibilities.place_id) as aceess_count")
+                )
+                ->groupBy('places.id',
+                    'places.name',
+                    'addresses.geo_place_id',
+                    'addresses.map_lat',
+                    'addresses.map_lng',
+                    'addresses.city',
+                    'addresses.street',
+                    'addresses.number',
+                    'access_all'
+                )
+                ->get();
+        }
+        else {
+            $places = DB::table('places')//->whereIn('category_id', $request->cat)
+                ->join('addresses', 'places.address_id', '=', 'addresses.id')
+                ->leftjoin('accessibilities', 'places.id', '=', 'accessibilities.place_id')
+                //->whereIn('acces_title_id', $request->acc)
+                ->select(DB::raw("places.id,
+                     places.name,
+                     addresses.geo_place_id,
+                     addresses.map_lat,
+                     addresses.map_lng,
+                     addresses.city,
+                     addresses.street,
+                     addresses.number, 
+                     $access_all as access_all, 
+                     count(accessibilities.place_id) as aceess_count")
+                )
+                ->groupBy('places.id',
+                    'places.name',
+                    'addresses.geo_place_id',
+                    'addresses.map_lat',
+                    'addresses.map_lng',
+                    'addresses.city',
+                    'addresses.street',
+                    'addresses.number',
+                    'access_all'
+                )
+                ->get();
+        }
         return $places->toJson(JSON_UNESCAPED_UNICODE, JSON_PRETTY_PRINT);
     }
 
@@ -152,9 +219,22 @@ class PlaceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function GetCategories() {
-        $info = DB::table('categories')
-            ->select('categories.id', 'categories.name', 'categories.comment')
-            ->get()->toJson(JSON_UNESCAPED_UNICODE, JSON_PRETTY_PRINT);
-        return $info;
+        //$info = DB::table('categories')
+        //    ->select('categories.id', 'categories.name', 'categories.comment')
+        //    ->get()->toJson(JSON_UNESCAPED_UNICODE, JSON_PRETTY_PRINT);
+        return Category::all()->toJson(JSON_UNESCAPED_UNICODE, JSON_PRETTY_PRINT);
+        //return $info;
+    }
+    /**
+     * Get all categories with comments
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function GetAccessebilities() {
+        //$info = DB::table('categories')
+        //    ->select('categories.id', 'categories.name', 'categories.comment')
+        //    ->get()->toJson(JSON_UNESCAPED_UNICODE, JSON_PRETTY_PRINT);
+        //$info = AccessibilityTitle::all()->toJson(JSON_UNESCAPED_UNICODE, JSON_PRETTY_PRINT);
+        return AccessibilityTitle::all()->toJson(JSON_UNESCAPED_UNICODE, JSON_PRETTY_PRINT);
     }
 }

@@ -9,8 +9,11 @@ var markerIcon = 'img/red-dot.png';
 
 $(document).ready(function () {
     fillCategories();
-    addMarkersToMap();
-
+    fillAccessebilities();
+    cat = [];
+    acc = [];
+    //$("#submit_params").click();
+    addMarkersToMap(cat,acc);
 });
 
 /****************************************************
@@ -37,7 +40,24 @@ $("#right-bar").click(function(){
 $("#submit_params").click(function() {
     event.preventDefault();
     clearMarkres();
-    alert('Markers cleared');
+    cat = [];
+    acc = [];
+    var o=document.getElementsByName('cat[]');
+    for(var i = 0; i < o.length; i++){
+        if (o[i].checked) {
+            cat.push(o[i].value);
+        }
+    }
+    o=document.getElementsByName('acc[]');
+    for(var i = 0; i < o.length; i++){
+        if (o[i].checked) {
+            acc.push(o[i].value);
+        }
+    }
+
+    //alert(cat);
+    addMarkersToMap(cat,acc);
+    
 });
 
 /****************************************************
@@ -50,7 +70,7 @@ function fillCategories() {
        response = $.parseJSON(response);
        for(var i = 0; i < response.length; i++){
         items += '<div class="accordion-inner">';
-        items += '<label><input type="checkbox"  id="' + response[i].id + '" checked >';
+        items += '<label><input type="checkbox" name="cat[]" id="cat' + response[i].id + '" value="' + response[i].id + '" checked >';
         items += response[i].name;
         items +='<\/label><\/div>';
        }
@@ -59,9 +79,32 @@ function fillCategories() {
 }
 
 /****************************************************
+* Build checkboxes for accessebilities
+ ***************************************************/
+function fillAccessebilities() {
+    //var itemHead = '<div class="accordion-inner">';
+    var items = '';
+    $.get('/getaccessebilities',function(response) {
+       response = $.parseJSON(response);
+       for(var i = 0; i < response.length; i++){
+        items += '<div class="accordion-inner">';
+        //items += '<label><input type="checkbox" name="acc[]" id="acc' + response[i].id + '" value="' + response[i].id + '" checked >';
+           items += '<label><input type="checkbox" name="acc[]" id="acc' + response[i].id + '" value="' + response[i].id + '" >';
+        items += response[i].name;
+        items +='<\/label><\/div>';
+       }
+       document.getElementById("collapseTwo").innerHTML = items;
+    });
+}
+
+/****************************************************
 * Clear all markers on the map
  ****************************************************/
 function clearMarkres() {
+    // удаляем все маркеры
+for (i in markers) {
+    markers[i].setMap(null);
+}
    markers = [];
 }
 
@@ -85,9 +128,12 @@ function addMarker(LatLng, infowindow, contentString, markerIcon, id) {
 /****************************************************
 * Add markers to Google map
 ****************************************************/
-function addMarkersToMap(){
-    $.get('/getplaces',function(response) {
+function addMarkersToMap(cat,acc){
+    $.get('/getplaces',{ "cat[]": cat,
+                         "acc[]": acc,
+     },function(response) {
         var place = $.parseJSON(response , true);
+        //alert(place.length);
         for (var i = 0; i < place.length; i++){
             if (place[i].geo_place_id) {
                 var LatLng = {lat: +place[i].map_lat, lng: +place[i].map_lng};
@@ -138,25 +184,25 @@ function addMarkersToMap(){
                     document.getElementById('info').innerHTML   = this.content;
                     // Additional paramerers
                     $.get('/getinfo', {id:this.place_id}, function(inforesponse){
-                        var info_panel = document.getElementById('info');
+                        var info_add = document.getElementById('infoAdd');
                         var infoStr = '<hr/><h5><ul>';
                         inforesponse = $.parseJSON(inforesponse , true);
                         for (var i = 0; i < inforesponse.length; i++){
                             infoStr += '<li>'+inforesponse[i].comment +': '+ inforesponse[i].value+'</li>';
                         }
                         infoStr += '</ul></h5>';
-                        info_panel.innerHTML += infoStr;
+                        info_add.innerHTML = infoStr;
                     });
                     // Access parameters
                     $.get('/getaccess', {id:this.place_id}, function(accessresp){
-                        var info_panel = document.getElementById('info');
+                       var info_acc = document.getElementById('infoAcc');
                         var infoStr = '<hr/><h5><ul>';
                         accessresp = $.parseJSON(accessresp , true);
                         for (var i = 0; i < accessresp.length; i++){
                             infoStr += '<li>'+accessresp[i].comment +'</li>';
                         }
                         infoStr += '</ul></h5>';
-                        info_panel.innerHTML += infoStr;
+                        info_acc.innerHTML = infoStr;
                     });
 
                     if (hide_right) rigthShow();
