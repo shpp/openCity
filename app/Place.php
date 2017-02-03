@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Accessibility;
 
 class Place extends Model
 {
@@ -13,7 +14,10 @@ class Place extends Model
      */
     protected $fillable = [
         'name', 'comment', 'category_id', 'address_id',
+        'city', 'street', 'number', 'map_lat', 'map_lng',
+        'geo_place_id', 'comment_adr',
     ];
+    
 
     /**
      * The attributes that should be hidden for arrays.
@@ -21,12 +25,13 @@ class Place extends Model
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'created_at', 'updated_at',
     ];
+    protected $appends = ['acc_cnt'];
 
-    public function address()
+    public function getAccCntAttribute()
     {
-        return $this->belongsTo('App\Address');
+        return Accessibility::where('place_id',$this->attributes['id'])->count();
     }
     public function category()
     {

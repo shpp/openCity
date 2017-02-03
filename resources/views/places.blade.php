@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <div class="col-sm-12">
+        <div class="col-md-12">
               <!-- Current Tasks -->
             @if (count($places) > 0)
                 <div class="panel panel-default">
@@ -18,25 +18,20 @@
                         @endif
                         <table class="table table-striped task-table">
                             <thead>
-                                <th class="col-sm-5">Назва</th>
-                                <th class="col-sm-2">Категорія</th>
-                                <th class="col-sm-2">Доступність</th>
-                                <th class="col-sm-2">Додаткова інфо.</th>
-                                <th class="col-sm-1">Адреса</th>
-                                <th class="col-sm-1 text-right">                      
-                                    <form action="{{ url('places/edit/0') }}" method="POST">
-                                        {{ csrf_field() }}
-                                        <button type="submit" class="btn btn-info">
-                                             <i class="fa fa-btn fa-plus"></i> Додати
-                                        </button>
-                                    </form>
+                                <th class="col-md-5">Назва</th>
+                                <th class="col-md-2">Категорія</th>
+                                <th class="col-md-2">Доступність</th>
+                                <th class="col-md-2">Додаткова інфо.</th>
+                                <th class="col-md-1">Адреса</th>
+                                <th class="col-md-1 text-right"> 
+                                <a href="{{ url('places/0/edit') }}" class="btn btn-info"><i class="fa fa-btn fa-plus"></i> Додати</a>
                                 </th>
                             </thead>
                             <tbody>
                                 @foreach ($places as $place)
                                     <tr>
-                                        <td class="table-text"><div>{{$place['name'] }}</div></td>
-                                        <td class="table-text"><div>{{$place['category']}}</div></td>
+                                        <td class="table-text"><div>{{$place->name }}</div></td>
+                                        <td class="table-text"><div>{{$place->category->name}}</div></td>
                                         <td class="table-text"><div>
                                             @if (count($place['accessibility']) > 0)
                                                 @foreach ($place['accessibility'] as $item)
@@ -45,24 +40,25 @@
                                             @endif
                                         </div></td>
                                         <td class="table-text"><div>
-                                            @if (count($place['param']) > 0)
-                                                @foreach ($place['param'] as $item)
+                                            @if (count($place['parameter']) > 0)
+                                                @foreach ($place['parameter'] as $item)
                                                 {{$item->parameterTitle->name}} : {{$item->value}} <br>
                                                 @endforeach
                                             @endif
                                         </div></td>
                                         <td>
-                                        {{$place['address']->city}} {{$place['address']->street}} {{$place['address']->number}}
+                                        {{$place->city}}<br>
+                                        {{$place->street}}<br>
+                                        {{$place->number}}
                                         </td>
 
                                         <!-- Edit Button -->
                                         <td>
-                                            <form action="{{ url('places/edit/'.$place['id']) }}" method="POST">
-                                                {{ csrf_field() }}
-                                                <button type="submit" class="btn btn-default">
-                                                    <i class="fa fa-pencil-square-o"></i>
-                                                </button>
-                                            </form>
+                                        @if ($place->geo_place_id)
+                                            <a href="{{ url('places/'.$place['id'].'/edit') }}" class="btn btn-default"><i class="fa fa-pencil-square-o"></i></a>
+                                        @else
+                                            <a href="{{ url('places/'.$place['id'].'/edit') }}" class="btn btn-danger"><i class="fa fa-pencil-square-o"></i></a>
+                                        @endif
                                         </td>
                                     </tr>
                                 @endforeach

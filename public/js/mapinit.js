@@ -1,6 +1,5 @@
 var map;
 var markers = [];
-
 var hide_right = 1;
 
 var lastInfo = null;
@@ -8,11 +7,10 @@ var markerIcon = 'img/red-dot.png';
 
 
 $(document).ready(function () {
+    var acc = [];
+    var cat = [];
     fillCategories();
     fillAccessebilities();
-    cat = [];
-    acc = [];
-    //$("#submit_params").click();
     addMarkersToMap(cat,acc);
 });
 
@@ -38,11 +36,12 @@ $("#right-bar").click(function(){
 });
 
 $("#submit_params").click(function() {
+    var cat = [];
+    var acc = [];
+    var o=document.getElementsByName('cat[]');
     event.preventDefault();
     clearMarkres();
-    cat = [];
-    acc = [];
-    var o=document.getElementsByName('cat[]');
+
     for(var i = 0; i < o.length; i++){
         if (o[i].checked) {
             cat.push(o[i].value);
@@ -55,7 +54,6 @@ $("#submit_params").click(function() {
         }
     }
 
-    //alert(cat);
     addMarkersToMap(cat,acc);
     
 });
@@ -66,7 +64,8 @@ $("#submit_params").click(function() {
 function fillCategories() {
     //var itemHead = '<div class="accordion-inner">';
     var items = '';
-    $.get('/getcategories',function(response) {
+    $.get('/getcategories', function(response) {
+
        response = $.parseJSON(response);
        for(var i = 0; i < response.length; i++){
         items += '<div class="accordion-inner">';
@@ -74,6 +73,7 @@ function fillCategories() {
         items += response[i].name;
         items +='<\/label><\/div>';
        }
+
        document.getElementById("collapseOne").innerHTML = items;
     });
 }
@@ -129,11 +129,11 @@ function addMarker(LatLng, infowindow, contentString, markerIcon, id) {
 * Add markers to Google map
 ****************************************************/
 function addMarkersToMap(cat,acc){
-    $.get('/getplaces',{ "cat[]": cat,
+    $.get('/getplaces',{"cat[]": cat,
                          "acc[]": acc,
      },function(response) {
-        var place = $.parseJSON(response , true);
-        //alert(place.length);
+        var access_cnt_all = response.access_cnt_all;
+        var place = response.places;
         for (var i = 0; i < place.length; i++){
             if (place[i].geo_place_id) {
                 var LatLng = {lat: +place[i].map_lat, lng: +place[i].map_lng};
@@ -166,8 +166,8 @@ function addMarkersToMap(cat,acc){
                     content: addrString
                 });
 
-                if(place[i].aceess_count != 0){
-                    if (place[i].aceess_count == place[i].access_all)
+                if(place[i].acc_cnt != 0){
+                    if (place[i].acc_cnt == access_cnt_all)
                         markerIcon = 'img/green-dot.png';
                     else
                         markerIcon = 'img/yellow-dot.png';

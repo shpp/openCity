@@ -14,6 +14,11 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
     <link href="/css/app.css" rel="stylesheet">
+    <style>
+        #map {
+            height: 500px;
+        }
+    </style>
 
     <!-- Scripts -->
     <script>
@@ -99,6 +104,13 @@
     </div>
 
     <!-- Scripts -->
+    <script src="https://maps.googleapis.com/maps/api/js?key={{$google_api_key}}&callback=initMap"
+        async defer>
+    </script>
+
+
     <script src="/js/app.js"></script>
+
+    <script src="/js/mapinput.js"></script>
 </body>
 </html>

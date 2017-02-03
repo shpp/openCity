@@ -15,18 +15,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Route::get('/','HomeController@welcome');
+Route::get('/home', 'HomeController@index');
 
 Route::get('/getplaces','PlaceController@GetPlaces');
+
 Route::get('/getinfo','PlaceController@GetPlaceInfo');
 Route::get('/getaccess','PlaceController@GetPlaceAccessebilities');
 Route::get('/getcategories','PlaceController@GetCategories');
 Route::get('/getaccessebilities','PlaceController@GetAccessebilities');
-//Route::get('/getlevels','PlaceController@GetAccessebilityLevel');
+Route::get('/loadplaces','PlaceController@LoadFromFile');
+Route::get('/geo', 'PlaceController@LoadGeo')->middleware('auth');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
 
 Route::get('/register',function(){
     return redirect('/login');
@@ -34,18 +35,28 @@ Route::get('/register',function(){
 
 
 Route::group(['prefix' => 'catalogue', 'middleware' => ['auth']], function() {
-	Route::get('/{id}', 'Catalogue@index');
-	Route::post('/add', 'Catalogue@add');
-	Route::post('/save', 'Catalogue@store');
-	Route::post('/delete', 'Catalogue@destroy');
+	Route::get('/{id}', 'CatalogueController@index');
+	Route::post('/add', 'CatalogueController@add');
+	Route::post('/save', 'CatalogueController@store');
+	Route::post('/delete', 'CatalogueController@destroy');
 }); 
 
-Route::group(['prefix' => 'places', 'middleware' => ['auth']], function() {
-	Route::get('/', 'Places@index');
-	Route::post('/edit/{id}', 'Places@edit');
-	Route::post('/save', 'Places@store');
-	Route::delete('/delete/{id}', 'Places@destroy');
-}); 
+/*Route::group(['prefix' => 'places', 'middleware' => ['auth']], function() {
+	Route::get('/', 'PlaceAdminController@index'); 
+	Route::post('/edit/{id}', 'PlaceAdminController@edit');
+	Route::post('/save', 'PlaceAdminController@store');
+	Route::delete('/delete/{id}', 'PlaceAdminController@destroy');
+}); */
+Route::resource('places', 'PlaceAdminController');
+/*
+Verb	Path	            Action	Route Name
+GET	    /photo	            index	photo.index
+GET	    /photo/create	    create	photo.create
+POST	/photo	            store	photo.store
+GET	    /photo/{photo}	    show	photo.show
+GET	    /photo/{photo}/edit	edit	photo.edit
+PATCH	/photo/{photo}	    update	photo.update
+DELETE	/photo/{photo}	    destroy	photo.destroy
+*/
 
 
-Route::get('/geo', 'PlaceController@LoadGeo')->middleware('auth');

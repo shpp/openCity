@@ -18,12 +18,12 @@
 				  PRIMARY KEY (id))";
 	$conn->query($sql);		
 
-	parse_file("zagalni");
+	/*parse_file("zagalni");
 	parse_file("specialni");
 	parse_file("pozashkilni");
 	parse_file("doshkilni");
 	load_tmp_places('zagalni.json', 1);
 	load_tmp_places('specialni.json', 2);
-	load_tmp_places('pozashkilni.json', 3);
-	load_tmp_places('doshkilni.json', 4);
+	load_tmp_places('pozashkilni.json', 3);*/
+	load_tmp_places('places_med.json', 6);
  ?>

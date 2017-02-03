@@ -13,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->share('google_api_key', env('GOOGLE_API_KEY', false));
     }
 
     /**

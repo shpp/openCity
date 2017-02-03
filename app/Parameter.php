@@ -9,6 +9,9 @@ class Parameter extends Model
     protected $fillable = [
         'id', 'place_id', 'param_title_id', 'value',
     ]; 
+    protected $hidden = [
+        'created_at', 'updated_at',
+    ];    
 	public function place()
 	{
 		return $this->belongsTo('App\Place');

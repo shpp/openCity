@@ -159,7 +159,7 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="/js/mapinit.js"></script>
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDt5Vck3ldCkvKNslOHScKiXdGnKuy1pYI&callback=initMap"
+		<script src="https://maps.googleapis.com/maps/api/js?key={{$google_api_key}}&callback=initMap"
 		async defer>
 	    </script>
 
