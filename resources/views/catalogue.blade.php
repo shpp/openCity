@@ -46,6 +46,7 @@
                 <div class="panel-body">
                     <table class="table table-striped task-table">
                         <thead>
+                            <th>№</th>
                             <th>Назва</th>
                             <th>Коментар</th>
                             <th> </th>
@@ -59,6 +60,11 @@
                         <tbody>
                             @foreach ($datas as $data)
                                 <tr>
+                                    <th class="table-text text-center">
+                                        <div>
+                                            {{$data->id}}                                            
+                                        </div>
+                                    </td>                                
                                     <td class="table-text">
                                         <div>
                                             <input type="text" class="form-control" name="name" form="form{{$data->id}}" value="{{ $data->name }}">
