@@ -17,32 +17,30 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/getplaces','PlaceController@GetPlaces');
+Route::get('/getplaces', 'PlaceController@getPlaces');
 
-Route::get('/getinfo','PlaceController@GetPlaceInfo');
-Route::get('/getaccess','PlaceController@GetPlaceAccessebilities');
-Route::get('/getcategories','PlaceController@GetCategories');
-Route::get('/getaccessebilities','PlaceController@GetAccessebilities');
+Route::get('/getinfo', 'PlaceController@GetPlaceInfo');
+Route::get('/getaccess', 'PlaceController@GetPlaceAccessebilities');
+Route::get('/getcategories', 'PlaceController@GetCategories');
+Route::get('/getaccessebilities', 'PlaceController@GetAccessebilities');
 Route::get('/geo', 'PlaceController@LoadGeo')->middleware('auth');
 
-Route::get('/load_file','FilesController@index');
-Route::post('/load_file','FilesController@load');
-Route::post('/save_file','FilesController@save');
+Route::get('/load_file', 'FilesController@index');
+Route::post('/load_file', 'FilesController@load');
+Route::post('/save_file', 'FilesController@save');
 
 Auth::routes();
 
-
-Route::get('/register',function(){
+Route::get('/register', function () {
     return redirect('/login');
 });
 
-
-Route::group(['prefix' => 'catalogue', 'middleware' => ['auth']], function() {
-	Route::get('/{id}', 'CatalogueController@index');
-	Route::post('/add', 'CatalogueController@add');
-	Route::post('/save', 'CatalogueController@store');
-	Route::post('/delete', 'CatalogueController@destroy');
-}); 
+Route::group(['prefix' => 'catalogue', 'middleware' => ['auth']], function () {
+    Route::get('/{id}', 'CatalogueController@index');
+    Route::post('/add', 'CatalogueController@add');
+    Route::post('/save', 'CatalogueController@store');
+    Route::post('/delete', 'CatalogueController@destroy');
+});
 
 Route::resource('places', 'PlaceAdminController');
 /*

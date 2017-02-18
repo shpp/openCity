@@ -205,35 +205,34 @@ class PlaceController extends Controller
     }
 
 
-    publiC function GetPlaces(Request $request) {
-        $access_cnt_all = AccessibilityTitle::count();
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    publiC function getPlaces(Request $request)
+    {
+        $accessibilityCount = AccessibilityTitle::count();
         if (!isset($request->cat)) {
-            if (isset($request->acc)) {
-                $places = Place::whereHas('accessibility', 
-                    function ($query) use ($acc) {
-                        $query->whereIn('acces_title_id', $acc);
-                    })->get();
+            return response()->json(['success' => true, 'places' => [], 'access_cnt_all' => $accessibilityCount], 200);
+        }
 
-            }else{
-                $places = Place::all();    
-            }
-        }else{
-            $cat = $request->cat;
-            if (isset($request->acc)) {
-                $acc = $request->acc;
-                $places = Place::whereIn('category_id', $cat)
+        $acc = $request->acc;
+        if (isset($acc)) {
+            $places = Place::whereIn('category_id', $request->cat)
                 ->whereHas('accessibility', function ($query) use ($acc) {
                     $query->whereIn('acces_title_id', $acc);
-                })->get();
-            }else{
-                $places = Place::whereIn('category_id', $cat)->get();
-            }
+                })
+                ->with('category')
+                ->without('category_id')
+                ->get();
+        } else {
+            $places = Place::whereIn('category_id', $request->cat)
+                ->with('category')
+                ->without('category_id')
+                ->get();
         }
-        return Response::json([
-            'success' => true,
-            'places'  => $places,
-            'access_cnt_all' => $access_cnt_all,
-            ]);
+
+        return response()->json(['success' => true, 'places' => $places, 'access_cnt_all' => $accessibilityCount], 200);
     }
 
 
