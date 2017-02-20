@@ -10,20 +10,20 @@
 | to using a Closure or controller method. Build something great!
 |
 */
-
+Route::get('/map', 'MapController@index');
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/getplaces', 'PlaceController@getPlaces');
+Route::get('/getplaces', 'PlacesController@getPlaces');
 
-Route::get('/getinfo', 'PlaceController@GetPlaceInfo');
-Route::get('/getaccess', 'PlaceController@getPlaceAccessibility');
-Route::get('/getcategories', 'PlaceController@getCategories');
-Route::get('/getaccessebilities', 'PlaceController@GetAccessebilities');
-Route::get('/geo', 'PlaceController@LoadGeo')->middleware('auth');
+Route::get('/getinfo', 'PlacesController@GetPlaceInfo');
+Route::get('/getaccess', 'PlacesController@getPlaceAccessibility');
+Route::get('/getcategories', 'PlacesController@getCategories');
+Route::get('/getaccessebilities', 'PlacesController@GetAccessebilities');
+Route::get('/geo', 'PlacesController@LoadGeo')->middleware('auth');
 
 Route::get('/load_file', 'FilesController@index');
 Route::post('/load_file', 'FilesController@load');

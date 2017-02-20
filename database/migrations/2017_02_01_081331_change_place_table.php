@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use App\Place;
+use App\Places;
 use App\Address;
 
 class ChangePlaceTable extends Migration
@@ -15,7 +15,7 @@ class ChangePlaceTable extends Migration
      */
     public function up()
     {
-        Schema::table('places', function($table){
+        Schema::table('places', function ($table) {
             $table->string('city')->nullable()->default(null);
             $table->string('street')->nullable()->default(null);
             $table->string('number')->nullable()->default(null);
@@ -25,7 +25,7 @@ class ChangePlaceTable extends Migration
             $table->string('comment_adr')->nullable()->default(null);
         });
 
-        $places = Place::all();
+        $places = Places::all();
         foreach ($places as $place) {
             $address = Address::find($place->address_id);
             $place->city = $address->city;
@@ -49,8 +49,8 @@ class ChangePlaceTable extends Migration
      */
     public function down()
     {
-        Schema::table('places', function($table){
-            $table->dropColumn(['city','street','number','geo_place_id','map_lat','map_lng','comment_adr']);
+        Schema::table('places', function ($table) {
+            $table->dropColumn(['city', 'street', 'number', 'geo_place_id', 'map_lat', 'map_lng', 'comment_adr']);
         });
     }
 }

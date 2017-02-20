@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Accessibility;
 
-class Place extends Model
+class Places extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -17,7 +17,7 @@ class Place extends Model
         'city', 'street', 'number', 'map_lat', 'map_lng',
         'geo_place_id', 'comment_adr',
     ];
-    
+
 
     /**
      * The attributes that should be hidden for arrays.
@@ -31,20 +31,24 @@ class Place extends Model
 
     public function getAccCntAttribute()
     {
-        return Accessibility::where('place_id',$this->attributes['id'])->count();
+        return Accessibility::where('place_id', $this->attributes['id'])->count();
     }
+
     public function category()
     {
         return $this->belongsTo('App\Category');
     }
+
     public function img()
     {
         return $this->hasMany('App\Img');
     }
+
     public function accessibility()
     {
         return $this->hasMany('App\Accessibility');
     }
+
     public function parameter()
     {
         return $this->hasMany('App\Parameter');

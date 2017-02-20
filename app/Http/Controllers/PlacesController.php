@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Place;
+use App\Places;
 use App\Address;
 use App\AccessibilityTitle;
 use App\Category;
@@ -13,7 +13,7 @@ use GuzzleHttp\Client;
 
 use App\TmpPlace;
 
-class PlaceController extends Controller
+class PlacesController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -33,8 +33,7 @@ class PlaceController extends Controller
     public function LoadFromFile()
     {
         $tmpData = TmpPlace::All()->toArray();
-        foreach ($tmpData as $record)
-        {
+        foreach ($tmpData as $record) {
             $record['street'] = str_replace("вул. ", "", $record['street']);
             $addr = new Address($record);
             $address = Address::firstOrCreate($addr->toArray());
@@ -51,7 +50,7 @@ class PlaceController extends Controller
             $param1->save();
             $param2->save();
         }
-       \Session::flash('message', 'Data from temporary table was load successfully!');
+        \Session::flash('message', 'Data from temporary table was load successfully!');
         return view('home');
     }
 
@@ -60,34 +59,34 @@ class PlaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    publiC function LoadGeo() {
+    publiC function LoadGeo()
+    {
         //!!! http://guzzle.readthedocs.io/en/latest/index.html
         $client = new Client([
             'base_uri' => 'https://maps.googleapis.com/maps/api/place/textsearch/',
-            'timeout'  => 10.0,
+            'timeout' => 10.0,
         ]);
         $addr_arr = Address::All()->where('geo_place_id', null);
         $delay = 2;
         // This KEY you can change to you valid Google API key
         //$my_api_key = 'AIzaSyC0sv23re_883wF08TXRjA1_8hNkq5-mww';
         $my_api_key = env('GOOGLE_API_KEY', false);
-        foreach ($addr_arr as $addr){
-            $req = 'json?query='.$addr->city.'+'.$addr->street.'+'.$addr->number.'&language=uk&key='.$my_api_key;
+        foreach ($addr_arr as $addr) {
+            $req = 'json?query=' . $addr->city . '+' . $addr->street . '+' . $addr->number . '&language=uk&key=' . $my_api_key;
             $response = $client->request('POST', $req);
             sleep($delay);
             $result = json_decode($response->getBody(), true);
-            if($result['status'] == 'OK') {
+            if ($result['status'] == 'OK') {
                 $result = $result['results'][0];
                 $addr->map_lat = $result['geometry']['location']['lat'];
                 $addr->map_lng = $result['geometry']['location']['lng'];
                 $addr->geo_place_id = $result['id'];
                 $addr->comment = $result['formatted_address'];
                 $addr->save();
-                echo $addr->geo_place_id . ' ' . $addr->comment . ' ' . $addr->map_lat . ' ' . $addr->map_lng .'<br/>';
-            }
-            else {
-                echo 'Some tuoubles take with status: '. $result['status'] . '<br/>';
-                if($result['status'] == 'OVER_QUERY_LIMIT'){
+                echo $addr->geo_place_id . ' ' . $addr->comment . ' ' . $addr->map_lat . ' ' . $addr->map_lng . '<br/>';
+            } else {
+                echo 'Some tuoubles take with status: ' . $result['status'] . '<br/>';
+                if ($result['status'] == 'OVER_QUERY_LIMIT') {
                     $delay++;
                 }
 
@@ -100,15 +99,15 @@ class PlaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    publiC function GetPlaces_(Request $request) {
-     if(isset($request->acc)){
-         $access_all = DB::table('accessibility_titles')->whereIn('id', $request->acc)->count();
-     }
-     else{
-         $access_all = DB::table('accessibility_titles')->count();
-     }
-    //-----------------------------------------------------------------
-        if(isset($request->acc)) {
+    publiC function GetPlaces_(Request $request)
+    {
+        if (isset($request->acc)) {
+            $access_all = DB::table('accessibility_titles')->whereIn('id', $request->acc)->count();
+        } else {
+            $access_all = DB::table('accessibility_titles')->count();
+        }
+        //-----------------------------------------------------------------
+        if (isset($request->acc)) {
 
             $places = DB::table('places')->whereIn('category_id', $request->cat)
                 ->join('addresses', 'places.address_id', '=', 'addresses.id')
@@ -136,8 +135,7 @@ class PlaceController extends Controller
                     'access_all'
                 )
                 ->get();
-        }
-        else if(isset($request->cat)){
+        } else if (isset($request->cat)) {
             $places = DB::table('places')->whereIn('category_id', $request->cat)
                 ->join('addresses', 'places.address_id', '=', 'addresses.id')
                 ->leftjoin('accessibilities', 'places.id', '=', 'accessibilities.place_id')
@@ -164,10 +162,9 @@ class PlaceController extends Controller
                     'access_all'
                 )
                 ->get();
-        }
-        else {
+        } else {
             $places = DB::table('places')//->whereIn('category_id', $request->cat)
-                ->join('addresses', 'places.address_id', '=', 'addresses.id')
+            ->join('addresses', 'places.address_id', '=', 'addresses.id')
                 ->leftjoin('accessibilities', 'places.id', '=', 'accessibilities.place_id')
                 //->whereIn('acces_title_id', $request->acc)
                 ->select(DB::raw("places.id,
@@ -210,7 +207,7 @@ class PlaceController extends Controller
 
         $acc = $request->acc;
         if (isset($acc)) {
-            $places = Place::whereIn('category_id', $request->cat)
+            $places = Places::whereIn('category_id', $request->cat)
                 ->whereHas('accessibility', function ($query) use ($acc) {
                     $query->whereIn('acces_title_id', $acc);
                 })
@@ -218,7 +215,7 @@ class PlaceController extends Controller
                 ->without('category_id')
                 ->get();
         } else {
-            $places = Place::whereIn('category_id', $request->cat)
+            $places = Places::whereIn('category_id', $request->cat)
                 ->with('category')
                 ->without('category_id')
                 ->get();
@@ -233,10 +230,11 @@ class PlaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function GetPlaceInfo(Request $request) {
+    public function GetPlaceInfo(Request $request)
+    {
         $info = DB::table('parameters')->where('place_id', $request->id)
             ->join('parameter_titles', 'parameters.param_title_id', '=', 'parameter_titles.id')
-            ->select('parameters.place_id','parameter_titles.name','parameter_titles.comment','parameters.value')
+            ->select('parameters.place_id', 'parameter_titles.name', 'parameter_titles.comment', 'parameters.value')
             ->get()->toJson(JSON_UNESCAPED_UNICODE, JSON_PRETTY_PRINT);
         return $info;
     }
@@ -247,10 +245,11 @@ class PlaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getPlaceAccessibility(Request $request) {
+    public function getPlaceAccessibility(Request $request)
+    {
         $info = DB::table('accessibilities')->where('place_id', $request->id)
             ->join('accessibility_titles', 'acces_title_id', '=', 'accessibility_titles.id')
-            ->select('accessibilities.place_id','accessibility_titles.name','accessibility_titles.comment')
+            ->select('accessibilities.place_id', 'accessibility_titles.name', 'accessibility_titles.comment')
             ->get()->toJson(JSON_UNESCAPED_UNICODE, JSON_PRETTY_PRINT);
         return $info;
     }
@@ -260,15 +259,28 @@ class PlaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getCategories() {
+    public function getCategories()
+    {
         return Category::all()->toJson(JSON_UNESCAPED_UNICODE, JSON_PRETTY_PRINT);
     }
+
     /**
      * Get all categories with comments
      *
      * @return \Illuminate\Http\Response
      */
-    public function GetAccessebilities() {
+    public function GetAccessebilities()
+    {
         return AccessibilityTitle::all()->toJson(JSON_UNESCAPED_UNICODE, JSON_PRETTY_PRINT);
+    }
+
+    public function get(Request $request)
+    {
+        if ($request->id) {
+            $places = Places::findOrFail($request->id);
+        } else {
+            $places = Places::all();
+        }
+        return response()->json(['data' => ['places' => $places]]);
     }
 }

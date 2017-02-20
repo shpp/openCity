@@ -16,12 +16,12 @@ class Address extends Model
      * @var array
      */
     protected $hidden = [
-        
+
     ];
 
-	public function place()
-	{
-		return $this->hasMany('App\Place');
-	}
+    public function place()
+    {
+        return $this->hasMany('App\Places');
+    }
 
 }

@@ -1,0 +1,13 @@
+.oc-main-map, .oc-main-map-holder{
+  width: 100%;
+  height: calc(100vh - 36px);
+}
+.oc-main-map {
+  position: absolute;
+  z-index: -1;
+  top: 36px;
+}
+.oc-filter-sidebar {
+  background-color: #fff;
+  padding: 10px;
+}

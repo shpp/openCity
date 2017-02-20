@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Place;
+use App\Places;
 use App\Address;
 use App\Accessibility;
 use App\AccessibilityTitle;
@@ -16,71 +16,72 @@ use App\Http\Controllers\Controller;
 
 class PlaceAdminController extends Controller
 {
-	/**
-    * Create a new controller instance.
-    *
-    * @return void
-    */
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
+
     /**
-    * Show places.
-    *
-    * @param  Request  $request
-    * @return Response
-    */
+     * Show places.
+     *
+     * @param  Request $request
+     * @return Response
+     */
     public function index(Request $request)
     {
-        $places = Place::with('accessibility', 'parameter')->get();
-		return view('places', ['places' => $places]);
+        $places = Places::with('accessibility', 'parameter')->get();
+        return view('places', ['places' => $places]);
     }
 
 
     /**
-    * Show edit page.
-    *
-    * @param  Request  $request
-    * @return Response
-    */
+     * Show edit page.
+     *
+     * @param  Request $request
+     * @return Response
+     */
     public function edit(Request $request, $id)
     {
-            $сategories = Category::all();
-            $accessibilityTitle = AccessibilityTitle::all();
-            $parameterTitle =  ParameterTitle::all();
-            $acc = [];
-            $param = [];
+        $сategories = Category::all();
+        $accessibilityTitle = AccessibilityTitle::all();
+        $parameterTitle = ParameterTitle::all();
+        $acc = [];
+        $param = [];
         if ($id == 0) {//create place
-            $place = New Place;
+            $place = New Places;
             $address = $place;
-        }else{//edit place
-            $place = Place::where('id', $id)->firstOrFail();
+        } else {//edit place
+            $place = Places::where('id', $id)->firstOrFail();
             $accessibility = $place->accessibility()->get()->toArray();
             $parameter = $place->parameter()->get()->toArray();
             //$address = $place;
             foreach ($accessibility as $value) {
-                $acc[]  = $value['acces_title_id'];
+                $acc[] = $value['acces_title_id'];
             }
             foreach ($parameter as $value) {
-                $param[$value['param_title_id']]  = $value['value'];
+                $param[$value['param_title_id']] = $value['value'];
             }
         }
         return view('edit_place', ['place' => $place,
-                                    'accessibilityTitle' => $accessibilityTitle,
-                                    'сategories' => $сategories,
-                                    'parameterTitle' => $parameterTitle,
-                                    'accessibility' => $acc,
-                                    'param' => $param,
-            ]);
+            'accessibilityTitle' => $accessibilityTitle,
+            'сategories' => $сategories,
+            'parameterTitle' => $parameterTitle,
+            'accessibility' => $acc,
+            'param' => $param,
+        ]);
     }
- 
+
     /**
-    * Create or save item.
-    *
-    * @param  Request  $request
-    * @return Response
-    */
+     * Create or save item.
+     *
+     * @param  Request $request
+     * @return Response
+     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -98,13 +99,13 @@ class PlaceAdminController extends Controller
             'map_lng' => ($request->map_lng == '') ? NULL : $request->map_lng,
             'geo_place_id' => $request->geo_place_id,
             'comment_adr' => $request->comment_adr,
-            ];
+        ];
         if (empty($request->id)) {
-            $place = Place::create($data);
-        }else{
-            $place = Place::where('id', $request->id)->firstOrFail();
+            $place = Places::create($data);
+        } else {
+            $place = Places::where('id', $request->id)->firstOrFail();
             $place->update($data);
-         
+
         }
 
         $accessibility = $place->accessibility()->get();
@@ -119,11 +120,12 @@ class PlaceAdminController extends Controller
             foreach ($acc_arr as $value) {
                 if (!$place->accessibility()
                     ->where('acces_title_id', $value)
-                    ->first()) {
+                    ->first()
+                ) {
                     $place->accessibility()->create(['acces_title_id' => $value]);
                 }
             }
-        }else{
+        } else {
             foreach ($accessibility as $value) {
                 $value->delete();
             }
@@ -137,12 +139,12 @@ class PlaceAdminController extends Controller
                 if (!empty($value)) {
                     if (NULL == $parameter) {
                         $place->parameter()->create(['param_title_id' => $key,
-                                                    'value' => $value,
-                                                    ]);
-                    }else{
-                        $parameter->update(['value' => $value]);   
+                            'value' => $value,
+                        ]);
+                    } else {
+                        $parameter->update(['value' => $value]);
                     }
-                }else{
+                } else {
                     if (!(NULL == $parameter)) {
                         $parameter->delete();
                     }
@@ -151,14 +153,14 @@ class PlaceAdminController extends Controller
         }
 
         \Session::flash('status', 'Інформація збережено успішно!');
-        return redirect('places/'.$place->id.'/edit');
+        return redirect('places/' . $place->id . '/edit');
         //return redirect('places');
         //return redirect()->back();
     }
 
     public function destroy(Request $request, $id)
     {
-        $place = Place::where('id', $id)->firstOrFail()->delete();
+        $place = Places::where('id', $id)->firstOrFail()->delete();
         \Session::flash('status', 'Видалено успішно!');
         return redirect('places');
     }
