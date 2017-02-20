@@ -4,20 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Place;
 use App\Address;
-use App\Accessibility;
 use App\AccessibilityTitle;
 use App\Category;
-use App\Img;
 use App\Parameter;
-use App\ParameterTitle;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Response;
 use GuzzleHttp\Client;
 
 use App\TmpPlace;
-use SebastianBergmann\CodeCoverage\Report\PHP;
 
 class PlaceController extends Controller
 {
@@ -38,8 +32,6 @@ class PlaceController extends Controller
      */
     public function LoadFromFile()
     {
-        //DB::table('places')->delete();
-        //DB::table('addresses')->delete();
         $tmpData = TmpPlace::All()->toArray();
         foreach ($tmpData as $record)
         {
@@ -255,7 +247,7 @@ class PlaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function GetPlaceAccessebilities(Request $request) {
+    public function getPlaceAccessibility(Request $request) {
         $info = DB::table('accessibilities')->where('place_id', $request->id)
             ->join('accessibility_titles', 'acces_title_id', '=', 'accessibility_titles.id')
             ->select('accessibilities.place_id','accessibility_titles.name','accessibility_titles.comment')
@@ -268,7 +260,7 @@ class PlaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function GetCategories() {
+    public function getCategories() {
         return Category::all()->toJson(JSON_UNESCAPED_UNICODE, JSON_PRETTY_PRINT);
     }
     /**

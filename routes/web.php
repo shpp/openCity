@@ -20,8 +20,8 @@ Route::get('/home', 'HomeController@index');
 Route::get('/getplaces', 'PlaceController@getPlaces');
 
 Route::get('/getinfo', 'PlaceController@GetPlaceInfo');
-Route::get('/getaccess', 'PlaceController@GetPlaceAccessebilities');
-Route::get('/getcategories', 'PlaceController@GetCategories');
+Route::get('/getaccess', 'PlaceController@getPlaceAccessibility');
+Route::get('/getcategories', 'PlaceController@getCategories');
 Route::get('/getaccessebilities', 'PlaceController@GetAccessebilities');
 Route::get('/geo', 'PlaceController@LoadGeo')->middleware('auth');
 
