@@ -4466,7 +4466,6 @@ label.panel-block:hover {
   -webkit-box-flex: 1;
   flex-grow: 1;
   flex-shrink: 1;
-  padding: 0.75rem;
 }
 
 .columns.is-mobile > .column.is-narrow {
@@ -5240,10 +5239,6 @@ label.panel-block:hover {
   .column.is-offset-12-widescreen {
     margin-left: 100%;
   }
-}
-
-.columns:not(:last-child) {
-  margin-bottom: 0.75rem;
 }
 
 .columns.is-centered {
@@ -6405,6 +6400,9 @@ label.panel-block:hover {
 .oc-filter-sidebar {
   background-color: #fff;
   padding: 10px;
+  height: calc(100vh - 50px);
+  width: 280px;
+  overflow: auto;
 }
 
 /*# sourceMappingURL=map.css.map */

@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use App\Places;
+use App\Place;
 use App\Address;
 
 class ChangePlaceTable extends Migration
@@ -25,7 +25,7 @@ class ChangePlaceTable extends Migration
             $table->string('comment_adr')->nullable()->default(null);
         });
 
-        $places = Places::all();
+        $places = Place::all();
         foreach ($places as $place) {
             $address = Address::find($place->address_id);
             $place->city = $address->city;

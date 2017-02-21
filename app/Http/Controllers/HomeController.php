@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Places;
+use App\Place;
 use App\Address;
 
 class HomeController extends Controller
@@ -35,7 +35,7 @@ class HomeController extends Controller
      */
     public function welcome()
     {
-        $places = Places::All()->where('geo_place_id', '<>', null);
+        $places = Place::All()->where('geo_place_id', '<>', null);
         return view('welcome')->with(['places' => $places]);
     }
 }

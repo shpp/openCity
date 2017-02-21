@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Places;
+use App\Place;
 use App\Accessibility;
 use App\Parameter;
 
@@ -57,7 +57,7 @@ class FilesController extends Controller
             $file_array = Excel::selectSheetsByIndex(0)->load($file);
             //$arr=[];
             $file_array->each(function ($row) {
-                $place = Places::Create($row->toArray());
+                $place = Place::Create($row->toArray());
                 $param_arr = ['',
                     $row['director'],
                     $row['phone'],

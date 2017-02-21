@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Places;
+use App\Place;
 use App\Address;
 use App\AccessibilityTitle;
 use App\Category;
@@ -207,7 +207,7 @@ class PlacesController extends Controller
 
         $acc = $request->acc;
         if (isset($acc)) {
-            $places = Places::whereIn('category_id', $request->cat)
+            $places = Place::whereIn('category_id', $request->cat)
                 ->whereHas('accessibility', function ($query) use ($acc) {
                     $query->whereIn('acces_title_id', $acc);
                 })
@@ -215,7 +215,7 @@ class PlacesController extends Controller
                 ->without('category_id')
                 ->get();
         } else {
-            $places = Places::whereIn('category_id', $request->cat)
+            $places = Place::whereIn('category_id', $request->cat)
                 ->with('category')
                 ->without('category_id')
                 ->get();
@@ -277,9 +277,9 @@ class PlacesController extends Controller
     public function get(Request $request)
     {
         if ($request->id) {
-            $places = Places::findOrFail($request->id);
+            $places = Place::findOrFail($request->id);
         } else {
-            $places = Places::all();
+            $places = Place::all();
         }
         return response()->json(['data' => ['places' => $places]]);
     }

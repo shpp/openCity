@@ -15,7 +15,7 @@ class Parameter extends Model
 
     public function place()
     {
-        return $this->belongsTo('App\Places');
+        return $this->belongsTo('App\Place');
     }
 
     public function parameterTitle()

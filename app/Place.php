@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Accessibility;
 
-class Places extends Model
+class Place extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -18,16 +18,15 @@ class Places extends Model
         'geo_place_id', 'comment_adr',
     ];
 
-
+    protected $attributes = ['id', 'name', 'map_lat', 'map_lng'];
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-    protected $hidden = [
-        'created_at', 'updated_at',
-    ];
+    protected $hidden = ['created_at', 'updated_at'];
     protected $appends = ['acc_cnt'];
+    protected $relations = ['accessibility'];
 
     public function getAccCntAttribute()
     {

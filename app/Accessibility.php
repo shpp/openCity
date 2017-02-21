@@ -15,7 +15,7 @@ class Accessibility extends Model
 
     public function place()
     {
-        return $this->belongsTo('App\Places');
+        return $this->belongsTo('App\Place', 'id', 'place_id');
     }
 
     public function accessibilityTitle()

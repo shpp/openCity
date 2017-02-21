@@ -10,4 +10,7 @@
 .oc-filter-sidebar {
   background-color: #fff;
   padding: 10px;
+  height: calc(100vh - 50px);
+  width: 280px;
+  overflow: auto;
 }

@@ -20,4 +20,5 @@ Route::get('/user', function (Request $request) {
 //1st implementation of api
 Route::group(['prefix' => 'v1'], function () {
     Route::get('/places/{id?}', 'PlacesController@get');
+    Route::get('/filter', 'ApiController@filter');
 });

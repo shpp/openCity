@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Places;
+use App\Place;
 use App\Address;
 use App\Accessibility;
 use App\AccessibilityTitle;
@@ -34,7 +34,7 @@ class PlaceAdminController extends Controller
      */
     public function index(Request $request)
     {
-        $places = Places::with('accessibility', 'parameter')->get();
+        $places = Place::with('accessibility', 'parameter')->get();
         return view('places', ['places' => $places]);
     }
 
@@ -53,10 +53,10 @@ class PlaceAdminController extends Controller
         $acc = [];
         $param = [];
         if ($id == 0) {//create place
-            $place = New Places;
+            $place = New Place;
             $address = $place;
         } else {//edit place
-            $place = Places::where('id', $id)->firstOrFail();
+            $place = Place::where('id', $id)->firstOrFail();
             $accessibility = $place->accessibility()->get()->toArray();
             $parameter = $place->parameter()->get()->toArray();
             //$address = $place;
@@ -101,9 +101,9 @@ class PlaceAdminController extends Controller
             'comment_adr' => $request->comment_adr,
         ];
         if (empty($request->id)) {
-            $place = Places::create($data);
+            $place = Place::create($data);
         } else {
-            $place = Places::where('id', $request->id)->firstOrFail();
+            $place = Place::where('id', $request->id)->firstOrFail();
             $place->update($data);
 
         }
@@ -160,7 +160,7 @@ class PlaceAdminController extends Controller
 
     public function destroy(Request $request, $id)
     {
-        $place = Places::where('id', $id)->firstOrFail()->delete();
+        $place = Place::where('id', $id)->firstOrFail()->delete();
         \Session::flash('status', 'Видалено успішно!');
         return redirect('places');
     }

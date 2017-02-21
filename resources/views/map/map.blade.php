@@ -22,7 +22,7 @@
     </div>
 </nav>
 <div class="columns">
-    <div class="column is-4">
+    <div class="column is-4" id="oc-filter-form">
         <aside class="menu oc-filter-sidebar">
             <p class="menu-label">
                 Заклади
@@ -32,14 +32,16 @@
                     <li>
                         <p class="control">
                             <label class="checkbox" id="cat{{ $category->id }}">
-                                <input type="checkbox" for="cat{{ $category->id }}" checked>
+                                <input type="checkbox"
+                                       for="cat{{ $category->id }}"
+                                       v-model="checkedCategories"
+                                       value="{{ $category->id }}">
                                 {{ $category['name'] }}
                             </label>
                         </p>
                     </li>
                 @endforeach
             </ul>
-
             <p class="menu-label">
                 Доступності
             </p>
@@ -47,8 +49,10 @@
                 @foreach($accessibilities as $accessibility)
                     <li>
                         <p class="control">
-                            <label class="checkbox" for="acces{{ $accessibility->id }}">
-                                <input type="checkbox" id="access{{ $accessibility->id }}" checked>
+                            <label class="checkbox" for="access{{ $accessibility->id }}">
+                                <input type="checkbox" id="access{{ $accessibility->id }}"
+                                       value="{{ $accessibility->id }}"
+                                       v-model="checkedAccessibilities">
                                 {{ $accessibility->accessibilityTitle->name }}
                             </label>
                         </p>
@@ -63,7 +67,8 @@
         <div id="js-main-map" class="oc-main-map-holder"></div>
     </map>
 </div>
-
+{{--ajax library--}}
+<script src="https://unpkg.com/axios@0.12.0/dist/axios.min.js"></script>
 <script src="{{ elixir('js/map.js') }}"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_API_KEY') }}&callback=initMap"></script>
 </body>
