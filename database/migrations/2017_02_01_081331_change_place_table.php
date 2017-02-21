@@ -15,7 +15,7 @@ class ChangePlaceTable extends Migration
      */
     public function up()
     {
-        Schema::table('places', function ($table) {
+        Schema::table('places', function($table){
             $table->string('city')->nullable()->default(null);
             $table->string('street')->nullable()->default(null);
             $table->string('number')->nullable()->default(null);
@@ -49,8 +49,8 @@ class ChangePlaceTable extends Migration
      */
     public function down()
     {
-        Schema::table('places', function ($table) {
-            $table->dropColumn(['city', 'street', 'number', 'geo_place_id', 'map_lat', 'map_lng', 'comment_adr']);
+        Schema::table('places', function($table){
+            $table->dropColumn(['city','street','number','geo_place_id','map_lat','map_lng','comment_adr']);
         });
     }
 }

@@ -13,12 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/user', function (Request $request) {
+/*Route::get('/user', function (Request $request) {
     return $request->user();
-})->middleware('auth:api');
+});//->middleware('auth:api');*/
+Route::group(['prefix' => 'v1'], function() {
+	Route::get('/getplaces','ApiV1Controller@getPlaces');
+	Route::get('/getinfo','ApiV1Controller@getPlaceInfo');
+	//Route::get('/getaccess','ApiV1Controller@GetPlaceAccessebilities');
+	Route::get('/getcategories','ApiV1Controller@getCategories');
+	Route::get('/getaccessebilities','ApiV1Controller@getAccessebilities');
+	Route::get('/getparameters','ApiV1Controller@getParameters');
+	}); 
 
-//1st implementation of api
-Route::group(['prefix' => 'v1'], function () {
-    Route::get('/places/{id?}', 'PlacesController@get');
-    Route::get('/filter', 'ApiController@filter');
-});

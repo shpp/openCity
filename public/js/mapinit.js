@@ -1,17 +1,14 @@
 var map;
 var markers = [];
 var hide_right = 1;
-
+var parameters = [];
+var accessebilities =[];
 var lastInfo = null;
 var markerIcon = 'img/red-dot.png';
 
 
 $(document).ready(function () {
-    var acc = [];
-    var cat = [];
-    fillCategories();
-    fillAccessebilities();
-    addMarkersToMap(cat,acc);
+    addMarkersToMap([], []);
 });
 
 /****************************************************
@@ -38,78 +35,43 @@ $("#right-bar").click(function(){
 $("#submit_params").click(function() {
     var cat = [];
     var acc = [];
-    var o=document.getElementsByName('cat[]');
     event.preventDefault();
     clearMarkres();
-
-    for(var i = 0; i < o.length; i++){
-        if (o[i].checked) {
-            cat.push(o[i].value);
-        }
-    }
-    o=document.getElementsByName('acc[]');
-    for(var i = 0; i < o.length; i++){
-        if (o[i].checked) {
-            acc.push(o[i].value);
-        }
-    }
+    
+    $.each($("input[name='cat[]']").serializeArray(), function(i, obj) { 
+        cat.push(+obj.value);
+    });
+    $.each($("input[name='acc[]']").serializeArray(), function(i, obj) { 
+        acc.push(+obj.value);
+    });
 
     addMarkersToMap(cat,acc);
-    
 });
 
 /****************************************************
-* Build checkboxes for categories
+* Get array in Parameters
  ***************************************************/
-function fillCategories() {
-    //var itemHead = '<div class="accordion-inner">';
+function fillParameters() {
     var items = '';
-    $.get('/getcategories', function(response) {
-
-       response = $.parseJSON(response);
-       for(var i = 0; i < response.length; i++){
-        items += '<div class="accordion-inner">';
-        items += '<label><input type="checkbox" name="cat[]" id="cat' + response[i].id + '" value="' + response[i].id + '" checked >';
-        items += response[i].name;
-        items +='<\/label><\/div>';
-       }
-
-       document.getElementById("collapseOne").innerHTML = items;
+    $.get('/getparameters', function(response) {
+       parameters = $.parseJSON(response);
     });
 }
 
-/****************************************************
-* Build checkboxes for accessebilities
- ***************************************************/
-function fillAccessebilities() {
-    //var itemHead = '<div class="accordion-inner">';
-    var items = '';
-    $.get('/getaccessebilities',function(response) {
-       response = $.parseJSON(response);
-       for(var i = 0; i < response.length; i++){
-        items += '<div class="accordion-inner">';
-        //items += '<label><input type="checkbox" name="acc[]" id="acc' + response[i].id + '" value="' + response[i].id + '" checked >';
-           items += '<label><input type="checkbox" name="acc[]" id="acc' + response[i].id + '" value="' + response[i].id + '" >';
-        items += response[i].name;
-        items +='<\/label><\/div>';
-       }
-       document.getElementById("collapseTwo").innerHTML = items;
-    });
-}
 
 /****************************************************
 * Clear all markers on the map
  ****************************************************/
 function clearMarkres() {
-    // удаляем все маркеры
-for (i in markers) {
-    markers[i].setMap(null);
-}
+    for (i in markers) {
+        markers[i].setMap(null);
+    }
    markers = [];
 }
 
-
-// Adds a marker to the map and push to the array.
+/****************************************************
+* Adds a marker to the map and push to the array.
+****************************************************/
 function addMarker(LatLng, infowindow, contentString, markerIcon, id) {
     var marker = new google.maps.Marker({
                      map: map,
@@ -183,26 +145,33 @@ function addMarkersToMap(cat,acc){
                     lastInfo = this.info;
                     document.getElementById('info').innerHTML   = this.content;
                     // Additional paramerers
-                    $.get('/getinfo', {id:this.place_id}, function(inforesponse){
+                    $.get('/getinfo', {'id':this.place_id}, function(inforesponse){
                         var info_add = document.getElementById('infoAdd');
                         var infoStr = '<hr/><h5><ul>';
-                        inforesponse = $.parseJSON(inforesponse , true);
-                        for (var i = 0; i < inforesponse.length; i++){
-                            infoStr += '<li>'+inforesponse[i].comment +': '+ inforesponse[i].value+'</li>';
+
+                        var param = inforesponse.parameters;
+                        var len = param.length
+                        for (var i = 0; i < len; i++) {
+                            infoStr += '<li>' + param[i].name +': '+ 
+                            param[i].value + '</li>';
                         }
+
                         infoStr += '</ul></h5>';
                         info_add.innerHTML = infoStr;
-                    });
-                    // Access parameters
-                    $.get('/getaccess', {id:this.place_id}, function(accessresp){
-                       var info_acc = document.getElementById('infoAcc');
+
+
+                        var info_acc = document.getElementById('infoAcc');
                         var infoStr = '<hr/><h5><ul>';
-                        accessresp = $.parseJSON(accessresp , true);
-                        for (var i = 0; i < accessresp.length; i++){
-                            infoStr += '<li>'+accessresp[i].comment +'</li>';
+                        //accessresp = $.parseJSON(inforesponse['parameters'] , true);
+                        var acc = inforesponse.accessibilities;
+                        len = acc.length
+                        
+                        for (var i = 0; i < len; i++) {
+                            infoStr += '<li>' + acc[i] + '</li>';
                         }
                         infoStr += '</ul></h5>';
                         info_acc.innerHTML = infoStr;
+
                     });
 
                     if (hide_right) rigthShow();

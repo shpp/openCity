@@ -1,0 +1,86 @@
+html, body {
+    background-color: #fff;
+    color: #636b6f;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 100;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.full-height {
+    height: 100vh;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.position-ref {
+    position: relative;
+}
+
+.top-right {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+
+.content {
+    text-align: center;
+    height: 80%;
+    width: 80%;
+}
+
+.title {
+    font-size: 84px;
+}
+
+.links > a {
+    color: #636b6f;
+    padding: 0 25px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.m-b-md {
+    margin-bottom: 30px;
+}
+.typeahead{
+    width: 95%;
+}
+
+/* Always set the map height explicitly to define the size of the div
+* element that contains the map. */
+#map {
+    height: 100%;
+}
+
+#right-bar{
+    top: 10%;
+    position: fixed;
+    height: 80%;
+    width: 400px;
+    right: -390px;
+    padding: 10px;
+    background-color: #ecf0f1;
+    box-sizing: border-box;
+    border: solid #95a5a6;
+}
+
+#left-bar{
+    top: 10%;
+    position: fixed;
+    height: 80%;
+    width: 192px;
+    left: 0;
+    padding: 10px;
+    background-color: #ecf0f1;
+    box-sizing: border-box;
+    border: solid #95a5a6;
+}

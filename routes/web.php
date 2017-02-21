@@ -10,37 +10,32 @@
 | to using a Closure or controller method. Build something great!
 |
 */
-Route::get('/map', 'MapController@index');
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/home', 'HomeController@index');
+Route::get('/','PlaceController@index');
+Route::get('/home',function(){
+    return view('home');
+})->middleware('auth');
 
-Route::get('/getplaces', 'PlacesController@getPlaces');
+Route::get('/getplaces','PlaceController@getPlaces');
+Route::get('/getinfo','PlaceController@getPlaceInfo');
 
-Route::get('/getinfo', 'PlacesController@GetPlaceInfo');
-Route::get('/getaccess', 'PlacesController@getPlaceAccessibility');
-Route::get('/getcategories', 'PlacesController@getCategories');
-Route::get('/getaccessebilities', 'PlacesController@GetAccessebilities');
-Route::get('/geo', 'PlacesController@LoadGeo')->middleware('auth');
-
-Route::get('/load_file', 'FilesController@index');
-Route::post('/load_file', 'FilesController@load');
-Route::post('/save_file', 'FilesController@save');
+Route::get('/load_file','FilesController@index');
+Route::post('/load_file','FilesController@load');
+Route::post('/save_file','FilesController@save');
 
 Auth::routes();
 
-Route::get('/register', function () {
+Route::get('/register',function(){
     return redirect('/login');
 });
 
-Route::group(['prefix' => 'catalogue', 'middleware' => ['auth']], function () {
-    Route::get('/{id}', 'CatalogueController@index');
-    Route::post('/add', 'CatalogueController@add');
-    Route::post('/save', 'CatalogueController@store');
-    Route::post('/delete', 'CatalogueController@destroy');
-});
+
+Route::group(['prefix' => 'catalogue', 'middleware' => ['auth']], function() {
+	Route::get('/{id}', 'CatalogueController@index');
+	Route::post('/add', 'CatalogueController@add');
+	Route::post('/save', 'CatalogueController@store');
+	Route::post('/delete', 'CatalogueController@destroy');
+}); 
 
 Route::resource('places', 'PlaceAdminController');
 /*

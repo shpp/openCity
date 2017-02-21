@@ -1,10 +1,13 @@
+!!! ВНИМАНИЕ !!!
+!!! изменение путей к api !!!
+
 Получить список мест:
 
-/getplaces
-/getplaces?cat[]=1 или 2 или 3 и т.д.
-/getplaces?acc[]=1 или 2 
-/getplaces?cat[]=1&acc[]=1
-/getplaces?cat[]=1&cat[]=2&acc[]=1&acc[]=2
+/api/v1/getplaces
+/api/v1/getplaces?cat[]=1 или 2 или 3 и т.д.
+/api/v1/getplaces?acc[]=1 или 2 
+/api/v1/getplaces?cat[]=1&acc[]=1
+/api/v1/getplaces?cat[]=1&cat[]=2&acc[]=1&acc[]=2
 
 {	"success"	:	true,
 	"places"	:	[{  "id":43,
@@ -42,7 +45,7 @@
 
 
 Получить список категорий
-/getcategories
+/api/v1/getcategories
 [{	"id":1,
 	"name":"загальні",
 	"comment":"Загальний навчальний заклад"},
@@ -60,56 +63,57 @@
 	"comment":"Медичні заклади"}]
 
 Получить список доступностей
-/getaccessebilities
-[{	"id":1,
-	"name":"є пандус",
-	"comment":"вхід обладнано пандусом"},
-{	"id":2,
-	"name":"є кнопка виклику працівника",
-	"comment":"є в наявності кнопка виклику працівника"}]
+/api/v1/getaccessebilities
+{
+1: {
+	"name": "є пандус",
+	"comment": "вхід обладнано пандусом"
+	},
+2: {
+	"name": "є кнопка виклику працівника",
+	"comment": "є в наявності кнопка виклику працівника"
+	}
+}
 
 Получить доп. параметры по месту
-/getinfo?id=1
+/api/v1/getinfo?id=1
 
-[{	"place_id":1,
-	"name":"Керівник",
-	"comment":"Керівник огрганізації",
-	"value":"Майстрова Ірина Анатоліївна"},
-{	"place_id":1,
-	"name":"Телефон",
-	"comment":"Номер телефна організації",
-	"value":"(0522) 32-25-31"},
-{	"place_id":1,
-	"name":"E-mail",
-	"comment":"Адреса електронної пошти організації",
-	"value":"NVO-1@ukr.net"},
-{	"place_id":1,
-	"name":"Сайт",
-	"comment":"Адреса сайту організації",
-	"value":"http:\/\/shcool1.klasna.com"}]
-
-Получить доступности по месту
-/getaccess?id=1
-
-[{	"place_id":1,
-	"name":"є пандус",
-	"comment":"вхід обладнано пандусом"},
-{	"place_id":1,
-	"name":"є кнопка виклику працівника",
-	"comment":"є в наявності кнопка виклику працівника"}]
+{
+"parameters": {
+	1: "Майстрова Ірина Анатоліївна",
+	2: "(0522) 32-25-31",
+	3: "NVO-1@ukr.net",
+	4: "http://shcool1.klasna.com"
+	},
+"accessibilities": [1,2],
+}
 
 Получить список параметров
-/getparameters
+/api/v1/getparameters
 
-[{	"id":1,
-	"name":"Керівник",
-	"comment":"Керівник огрганізації"},
-{	"id":2,
-	"name":"Телефон",
-	"comment":"Номер телефна організації"},
-{	"id":3,
-	"name":"E-mail",
-	"comment":"Адреса електронної пошти організації"},
-{	"id":4,
-	"name":"Сайт",
-	"comment":"Адреса сайту організації"}]
+{
+1: {
+	"name": "Керівник",
+	"comment": "Керівник огрганізації",
+	"type": "person",
+	"icon": "/img/icons/head.png"
+	},
+2: {
+	"name": "Телефон",
+	"comment": "Номер телефна організації",
+	"type": "phone",
+	"icon": "/img/icons/phone.png"
+	},
+3: {
+	"name": "E-mail",
+	"comment": "Адреса електронної пошти організації",
+	"type": "email",
+	"icon": "/img/icons/email.png"
+	},
+4: {
+	"name": "Сайт",
+	"comment": "Адреса сайту організації",
+	"type": "www",
+	"icon": "/img/icons/website.png"
+	}
+}

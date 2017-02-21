@@ -1,2 +1,0 @@
-1) Скопировать файл cacert.pem из 5719158-master.zip в каталог ПХП. У меня c:\xampp\php\extras\ssl
-2) В php.ini добавить строку в секции CURL:     curl.cainfo = "c:\xampp\php\extras\ssl\cacert.pem"
