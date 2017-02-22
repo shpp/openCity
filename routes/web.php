@@ -18,6 +18,7 @@ Route::get('/home',function(){
 
 Route::get('/getplaces','PlaceController@getPlaces');
 Route::get('/getinfo','PlaceController@getPlaceInfo');
+Route::get('/search','PlaceController@searchPlaces');
 
 Route::get('/load_file','FilesController@index');
 Route::post('/load_file','FilesController@load');

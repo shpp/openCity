@@ -94,4 +94,19 @@ class PlaceController extends Controller
             'accessibilities' => $acc,
             ], 200);
     }
+
+
+    /**
+    * Simple search in Places
+    * @param val - request for search, must be name or adress
+    * @return \Illuminate\Http\Response
+    */
+    public function searchPlaces(Request $req) {
+        if (isset($req->val)) {
+            $places = Place::where('name', 'like', '%' . $req->val.'%')
+            ->orWhere('comment_adr', 'like', '%' . $req->val.'%')
+            ->get();
+            return response()->json(['success' => true, 'places' => $places,], 200);
+        }
+    }
 }
