@@ -11,12 +11,13 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-        <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css">
+        <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css"> -->
         <link rel="stylesheet" type="text/css" href="css/welcom.css">
 
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+        <input class="typeahead" id="search-input" type="text" placeholder="Назва або адреса">
+        <div class="flex-center position-ref full-height">               
             @if (Route::has('login'))
                 <div class="top-right links">
                     <a href="{{ url('/login') }}">Увійти</a>
@@ -27,7 +28,6 @@
 				 <div id="map"></div>
             </div>
             <div id="left-bar">
-
                 <div class="accordion" id="accordion2">
                     <div class="accordion-group">
                         <div class="accordion-heading">
@@ -70,11 +70,14 @@
 
         </div>
 
-        <script src="js/jquery.js"></script>
+        
+        <script src="/js/jquery.js"></script>
+        <script src="/js/bootstrap-typeahead.js"></script>
+        <script src="/js/bootstrap.js"></script>
         <script src="/js/mapinit.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key={{$google_api_key}}&callback=initMap"
         async defer>
         </script>
-        <script src="js/bootstrap.js"></script>
+        
     </body>
 </html>

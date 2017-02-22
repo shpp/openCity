@@ -12,6 +12,41 @@ $(document).ready(function () {
 });
 
 /****************************************************
+*  Searching place on its name
+*****************************************************/
+$('#search-input.typeahead').typeahead({  
+  name: 'places',
+  limit: 10,
+  source: function(query, handler){
+    return $.get('/search', {'val':query}, function(response){
+        var names = [];
+        var places = response.places;
+        for (var i = 0; i < places.length; i++) {
+            names.push(places[i].id+'_'+places[i].name);
+        }
+        return handler(names);
+    }, 'json'); 
+  },
+  updater: function(item){
+     var items = item.split('_');
+     setMapCenter(items[0]);  
+  }
+});
+
+/****************************************************
+* Set focus to marker with some place_id and show info panel
+*****************************************************/
+function setMapCenter(id) {
+    for (var i = 0; i < markers.length; i++) {
+        if(markers[i].place_id == id) {
+            console.log('!! '+i);
+            map.setCenter(markers[i].getPosition());
+            google.maps.event.trigger(markers[i], 'click');
+            break;
+        }
+    }    
+}
+/****************************************************
  * Hide right bar
  ***************************************************/
 function rigthHide() {
