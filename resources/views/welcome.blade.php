@@ -16,7 +16,7 @@
 
     </head>
     <body>
-        <input class="typeahead" id="search-input" type="text" placeholder="Назва або адреса">
+        <input class="typeahead" id="search-input" type="text" placeholder="Почніть набирати назву закладу...">
         <div class="flex-center position-ref full-height">               
             @if (Route::has('login'))
                 <div class="top-right links">

@@ -17,6 +17,8 @@ $(document).ready(function () {
 $('#search-input.typeahead').typeahead({  
   name: 'places',
   limit: 10,
+  highlight: true,
+  minLength: 2,
   source: function(query, handler){
     return $.get('/search', {'val':query}, function(response){
         var names = [];
