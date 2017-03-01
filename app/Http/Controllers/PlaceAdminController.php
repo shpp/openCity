@@ -16,7 +16,7 @@ use App\Http\Controllers\Controller;
 
 class PlaceAdminController extends Controller
 {
-	/**
+    /**
     * Create a new controller instance.
     *
     * @return void
@@ -34,8 +34,23 @@ class PlaceAdminController extends Controller
     */
     public function index(Request $request)
     {
-        $places = Place::with('accessibility', 'parameter')->get();
-		return view('places', ['places' => $places]);
+        $categories = Category::all();
+        $cur_cat =  0;
+        if (!isset($request->category)) {
+            $places = Place::with('accessibility', 'parameter')->get();
+        } else {
+            if (0 == $request->category) {
+                $places = Place::with('accessibility', 'parameter')->get();
+            } else{
+            $places = Place::where('category_id', $request->category)
+                            ->with('accessibility', 'parameter')->get();
+            $cur_cat = $request->category;
+            }
+        }
+        return view('places', [ 'places' => $places,
+                                'categories' => $categories,
+                                'current_category' => $cur_cat,
+                                ]);
     }
 
 
@@ -56,7 +71,7 @@ class PlaceAdminController extends Controller
             $place = New Place;
             $address = $place;
         }else{//edit place
-            $place = Place::where('id', $id)->firstOrFail();
+            $place = Place::findOrFail($id);
             $accessibility = $place->accessibility()->get()->toArray();
             $parameter = $place->parameter()->get()->toArray();
             foreach ($accessibility as $value) {
@@ -89,6 +104,7 @@ class PlaceAdminController extends Controller
         ]);
         $data = [
             'name' => $request->name,
+            'short_name' => $request->short_name,
             'comment' => $request->comment,
             'category_id' => $request->category,
             'city' => $request->city,
@@ -156,7 +172,7 @@ class PlaceAdminController extends Controller
 
     public function destroy(Request $request, $id)
     {
-        $place = Place::where('id', $id)->firstOrFail()->delete();
+        $place = Place::destroy($id);
         \Session::flash('status', 'Видалено успішно!');
         return redirect('places');
     }

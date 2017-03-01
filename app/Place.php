@@ -15,7 +15,7 @@ class Place extends Model
     protected $fillable = [
         'name', 'comment', 'category_id', 'address_id',
         'city', 'street', 'number', 'map_lat', 'map_lng',
-        'geo_place_id', 'comment_adr',
+        'geo_place_id', 'comment_adr', 'short_name',
     ];
     
 

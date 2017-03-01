@@ -15,6 +15,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
     <link href="/css/app.css" rel="stylesheet">
     <link href="/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="/css/bootstrap-select.min.css" media="all" rel="stylesheet" type="text/css" />
 
     <style>
         #map {
@@ -62,8 +63,9 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="{{ url('/catalogue/categories') }}">Категорії</a></li>                                
-                                    <li><a href="{{ url('/catalogue/param_name') }}">Назви параметрів</a></li>
                                     <li><a href="{{ url('/catalogue/acc_name') }}">Назви доступностей</a></li>
+                                    <li><a href="{{ url('/parameters') }}">Назви параметрів</a></li>
+                                    <li><a href="{{ url('/parameter_types') }}">Типи параметрів</a></li>
                                 </ul>
                             </li>
                             <li><a href="{{ url('/load_file') }}">Завантажити данні</a></li>
@@ -129,6 +131,8 @@
 <script src="/js/fileinput.js"></script>
 <script src="/js/ua.js"></script>
 <script>$("#file_fild").fileinput({'language':'ua'});</script>
+<script src="/js/bootstrap-select.js"></script>
+
 <!-- bootstrap.js below is needed if you wish to zoom and view file content 
      in a larger detailed modal dialog -->
 

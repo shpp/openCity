@@ -19,7 +19,23 @@
                         <table class="table table-striped task-table">
                             <thead>
                                 <th class="col-md-5">Назва</th>
-                                <th class="col-md-2">Категорія</th>
+                                <th class="col-md-3">
+                                    <div class="form-group">
+                                    <label for="places_category">Категорія:</label>
+                                    <select class="form-control" name="category" id="places_category"> 
+                                    @if ( 0 == $current_category)
+                                        <option selected value="0"> Обрати...
+                                    @endif
+                                    @foreach ($categories as $category)
+                                        @if ( $category->id == $current_category)
+                                            <option selected value="{{ $category->id }}"> {{ $category->name }}
+                                        @else
+                                            <option value="{{ $category->id }}"> {{ $category->name }}
+                                        @endif
+                                    @endforeach
+                                    </select>
+                                    </div>
+                                </th>
                                 <th class="col-md-2">Доступність</th>
                                 <th class="col-md-2">Додаткова інфо.</th>
                                 <th class="col-md-1">Адреса</th>

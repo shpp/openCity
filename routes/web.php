@@ -37,7 +37,8 @@ Route::group(['prefix' => 'catalogue', 'middleware' => ['auth']], function() {
 	Route::post('/save', 'CatalogueController@store');
 	Route::post('/delete', 'CatalogueController@destroy');
 }); 
-
+Route::resource('parameter_types', 'ParameterTypesController');
+Route::resource('parameters', 'ParametersController');
 Route::resource('places', 'PlaceAdminController');
 /*
 Verb	Path	            Action	Route Name

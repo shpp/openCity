@@ -3,7 +3,11 @@ var geocoder;
 var map;
 
 $(document).ready(function () {
-
+    $("#places_category").change(function(){
+        var curLoc = window.location;
+        var url = curLoc.origin + curLoc.pathname + '?category=' + $(this).val();
+        $(location).attr('href', url);
+    });
 });
 
 /****************************************************

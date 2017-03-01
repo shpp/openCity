@@ -26,6 +26,13 @@
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                                 @endif
+                                <label for="short_name" class="col-md-6 control-label">Коротка назва</label>
+                                <input type="text" class="form-control" name="short_name" value="{{ $place->short_name}}">
+                                @if ($errors->has('short_name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('short_name') }}</strong>
+                                    </span>
+                                @endif
 
                                 <label for="comment" class="col-md-6 control-label">Коментар</label>
                                 <textarea id="comment" class="form-control" name="comment" rows="4">{{ $place->comment }}</textarea>

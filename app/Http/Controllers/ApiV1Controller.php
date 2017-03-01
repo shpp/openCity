@@ -55,7 +55,7 @@ class ApiV1Controller extends Controller
         $parameters = Parameter::where('place_id', $request->id)->get();
         $param = [];
         foreach ($parameters as $value) {
-            $param[$value->param_title_id] = $value->value;
+            $param[+$value->param_title_id] = $value->value;
         }
 
         $parameters = Accessibility::where('place_id', $request->id)->get();

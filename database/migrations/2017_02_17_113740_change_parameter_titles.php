@@ -24,7 +24,7 @@ class ChangeParameterTitles extends Migration
             ['name' => 'person', 'icon' => '/img/icons/head.png'],
             ['name' => 'phone', 'icon' => '/img/icons/phone.png'],
             ['name' => 'email', 'icon' => '/img/icons/email.png'],
-            ['name' => 'www', 'icon' => '/img/icons/website.png'],
+            ['name' => 'web', 'icon' => '/img/icons/website.png'],
             ['name' => 'text', 'icon' => '/img/icons/text.png'],
         ]);
 
