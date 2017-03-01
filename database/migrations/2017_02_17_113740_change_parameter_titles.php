@@ -13,7 +13,7 @@ class ChangeParameterTitles extends Migration
      */
     public function up()
     {
-        Schema::create('parameter_type', function (Blueprint $table) {
+        Schema::create('parameter_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable()->default(null);
             $table->string('icon')->nullable()->default(null);
