@@ -22,12 +22,12 @@ class ParameterTypesController extends Controller
      */
     public function index()
     {
-        $dir    = base_path() . '/public/img/icons';
-        $files  = scandir($dir);
+        $dir    = '/img/icons/';
+        $files  = scandir(public_path() . $dir);
         $counts = count($files);
         $icons = [];
         for ($i=2; $i < $counts; $i++) { 
-            $icons[] = '/img/icons/'.$files[$i];
+            $icons[] = $dir . $files[$i];
         }
         $parameterTypes = ParameterType::all();
         return view('parameter_types', ['icons' => $icons,
