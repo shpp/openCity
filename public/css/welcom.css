@@ -86,4 +86,5 @@ html, body {
     background-color: #ecf0f1;
     box-sizing: border-box;
     border: solid #95a5a6;
+    overflow: scroll;
 }
