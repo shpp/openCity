@@ -62,6 +62,11 @@ return [
             'bucket' => 'your-bucket',
         ],
 
+        'backup' => [
+            'driver' => 'local',
+            'root' => storage_path('laravel-backups'),
+        ],
+
     ],
 
 ];
