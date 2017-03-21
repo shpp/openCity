@@ -68,9 +68,18 @@
                                     <li><a href="{{ url('/parameter_types') }}">Типи параметрів</a></li>
                                 </ul>
                             </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    Системні
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{ url('/destroy_null') }}">Видалити помилкові місця</a></li>
+                                    <li><a href="{{ url('/load_geo') }}">Проставити координати</a></li>
+                                </ul>
+                            </li>                            
                             <li><a href="{{ url('/load_file') }}">Завантажити данні</a></li>
-                            
-                        @endif
+                           @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->

@@ -10,7 +10,7 @@ use App\Img;
 use App\Parameter;
 use App\ParameterTitle;
 use DB;
-
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -176,4 +176,48 @@ class PlaceAdminController extends Controller
         \Session::flash('status', 'Видалено успішно!');
         return redirect('places');
     }
+
+    public function destroyNull()
+    {
+        Place::where('name', null)->delete();
+        \Session::flash('status', 'Видалення нульових записів успішно!');
+        return redirect('places');
+    }    
+    /**
+    * Set geolocation parameters to places in darabase
+    *
+    * @return \Illuminate\Http\Response
+    */
+    publiC function loadGeo() {
+        //!!! http://guzzle.readthedocs.io/en/latest/index.html
+        $client = new Client([
+            'base_uri' => 'https://maps.googleapis.com/maps/api/place/textsearch/',
+            'timeout'  => 10.0,
+        ]);
+        $addr_arr = Place::All()->where('geo_place_id', null);
+        $delay = 2;
+        // This KEY you can change to you valid Google API key
+        $my_api_key = 'AIzaSyC0sv23re_883wF08TXRjA1_8hNkq5-mww';
+        foreach ($addr_arr as $addr){
+            $req = 'json?query='.$addr->city.'+'.$addr->street.'+'.$addr->number.'&language=uk&key='.$my_api_key;
+            $response = $client->request('POST', $req);
+            sleep($delay);
+            $result = json_decode($response->getBody(), true);
+            if($result['status'] == 'OK') {
+                $result = $result['results'][0];
+                $addr->map_lat = $result['geometry']['location']['lat'];
+                $addr->map_lng = $result['geometry']['location']['lng'];
+                $addr->geo_place_id = $result['id'];
+                $addr->comment_adr = $result['formatted_address'];
+                $addr->save();
+                echo $addr->geo_place_id . ' ' . $addr->comment_adr . ' ' . $addr->map_lat . ' ' . $addr->map_lng .'  OK!<br/>';
+            }
+            else {
+                echo 'Some tuoubles take with status: '. $result['status'] . '<br/>';
+                if($result['status'] == 'OVER_QUERY_LIMIT'){
+                    $delay++;
+                }
+            }
+        }
+    }    
 }

@@ -50,5 +50,5 @@ GET	    /photo/{photo}/edit	edit	photo.edit
 PATCH	/photo/{photo}	    update	photo.update
 DELETE	/photo/{photo}	    destroy	photo.destroy
 */
-
-
+Route::get('/destroy_null','PlaceAdminController@destroyNull');
+Route::get('/load_geo','PlaceAdminController@loadGeo');
