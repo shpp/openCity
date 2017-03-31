@@ -1,0 +1,261 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+main {
+  height: 100%;
+}
+
+.content {
+  height: 100%;
+  width: calc(100% - 300px);
+  float: right;
+}
+
+/* Always set the map height explicitly to define the size of the div
+* element that contains the map. */
+#map {
+  height: 100%;
+}
+
+// disable zoom on scrolling
+.content iframe {
+  pointer-events: none;
+}
+
+aside .side-nav.fixed {
+  position: absolute;
+}
+
+aside #nav-mobile li.logo {
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+aside #nav-mobile li.logo a {
+  /*font-family: 'Sansita', sans-serif;*/
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+aside ul.side-nav.fixed li {
+  line-height: 44px;
+}
+
+main {
+  position: relative;
+  overflow: hidden;
+}
+
+.search-wrapper {
+  margin: 0 auto;
+  transition: margin .25s ease;
+  z-index: 99;
+  box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  left: 21rem;
+}
+
+.search-wrapper .twitter-typeahead {
+  width: 100%;
+}
+
+.search-wrapper input#search-input {
+  display: block;
+  font-size: 16px;
+  font-weight: 300;
+  width: calc(100% - 60px);
+  height: 45px;
+  margin: 0;
+  padding: 0 45px 0 15px;
+  border: 0;
+}
+
+.search-wrapper i.material-icons {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.search-wrapper .twitter-typeahead .tt-suggestion {
+  background-color: white;
+  padding: 1rem;
+  margin-top: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+  cursor: pointer;
+}
+
+/*.search-results {
+    margin: 0;
+    border-top: 1px solid #e9e9e9;
+    background-color: #fff;
+}*/
+/*
+aside li.search {
+  margin-bottom: 20px;
+}
+
+aside li.search .search-wrapper.card {
+  width: 90%;
+  margin: 0 auto;
+  border: 0;
+  outline: none;
+}
+
+aside li.search .search-wrapper.card input#search:focus {
+  box-shadow: none;
+}*/
+
+.marker-popup {
+  font-size: 1.1rem;
+}
+
+footer {
+  z-index: 999;
+  position: relative;
+}
+
+#right-bar {
+  top: 5rem;
+  position: absolute;
+  /*height: 80%;*/
+  width: 400px;
+  right: -400px;
+  padding: 1rem 1rem 0.5rem;
+  background-color: white;
+  box-sizing: border-box;
+  box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+  border-radius: .2rem;
+}
+
+#right-bar-close {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+#right-bar-header {
+  position: relative;
+  border-bottom: 1px solid lightgrey;
+  padding-bottom: 1rem;
+}
+
+#right-bar-heading {
+  margin: 0;
+  font-size: 1.2rem;
+  padding-right: 2rem;
+  line-height: 1.5;
+}
+
+#right-bar-access {
+  display: none;
+  border-top: 1px solid lightgrey;
+}
+
+#right-bar-access ul {
+  padding-left: 1.5rem;
+}
+
+#right-bar-access li {
+  list-style-type: circle;
+}
+
+.custom-footer-container {
+  margin: 2rem auto 2rem 300px;
+}
+
+.footer-description {
+  display: inline-block;
+  width: 40%;
+  margin-right: 15%;
+  vertical-align: top;
+}
+
+.footer-description p {
+  font-size: 1.1rem;
+}
+
+.footer-form {
+  display: inline-block;
+  width: 40%;
+  vertical-align: top;
+}
+
+.footer-form form {
+  margin-top: 1rem;
+}
+
+.footer-form-heading {
+  padding-left: .75rem;
+
+}
+
+.footer-form .input-field label {
+  color: white;
+}
+
+.footer-form .input-field input {
+  border-bottom: 1px solid white;
+  color: white;
+}
+
+.footer-form .input-field textarea {
+  border-bottom: 1px solid white;
+  color: white;
+}
+
+.footer-form .input-field input:focus + label {
+  color: white;
+}
+
+.footer-form .input-field input:focus {
+  border-bottom: 1px solid white;
+  box-shadow: 0 1px 0 0 white;
+}
+
+.footer-form .input-field textarea:focus + label {
+  color: white;
+}
+
+.footer-form .input-field textarea:focus {
+  border-bottom: 1px solid white;
+  box-shadow: 0 1px 0 0 white;
+}
+/* valid color */
+/*.footer-form .input-field input[type=text].valid {
+  border-bottom: 1px solid #000;
+  box-shadow: 0 1px 0 0 #000;
+}*/
+/* invalid color */
+/*.footer-form .input-field input[type=text].invalid {
+  border-bottom: 1px solid #000;
+  box-shadow: 0 1px 0 0 #000;
+}*/
+/* icon prefix focus color */
+/*.footer-form .input-field .prefix.active {
+  color: #000;
+}*/
+
+.footer-copyright .container {
+  margin-left: 300px;
+}
+
+.footer-contacts li a {
+  color: inherit;
+  line-height: 1;
+  font-size: 1.3rem;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: .5rem;
+}
+
+.footer-contacts li i {
+  display: inline-block;
+  vertical-align: middle;
+}
