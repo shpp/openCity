@@ -200,4 +200,11 @@ function initMap() {
     //   position: google.maps.ControlPosition.LEFT_CENTER
     // },
   });
+
+  $("#message-form").submit(function () {
+     $.post('/messages',$( this ).serialize());
+     $(this).trigger("reset");
+     alert("Дякуємо! Ваше повідомлення успішно надіслано.");
+     event.preventDefault();
+  });
 }

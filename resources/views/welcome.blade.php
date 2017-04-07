@@ -113,16 +113,17 @@
 				</div>
 				<div class="footer-form">
 					<h5 class="white-text footer-form-heading">Напишіть нам!</h5>
-					<form>
+					<form id="message-form" >
+						{{ csrf_field() }}
 						<div class="row">
 							<div class="input-field col s12">
-								<input id="email" type="email" class="validate">
+								<input id="email" type="email" class="validate" name="email">
 								<label for="email">Email</label>
 							</div>
 						</div>
 						<div class="row">
 							<div class="input-field col s12">
-								<textarea name="" id="message" class="materialize-textarea"></textarea>
+								<textarea name="text" id="message" class="materialize-textarea"></textarea>
 								<label for="message">Ваш комментар</label>
 							</div>
 						</div>

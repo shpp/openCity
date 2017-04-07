@@ -40,6 +40,7 @@ Route::group(['prefix' => 'catalogue', 'middleware' => ['auth']], function() {
 Route::resource('parameter_types', 'ParameterTypesController');
 Route::resource('parameters', 'ParametersController');
 Route::resource('places', 'PlaceAdminController');
+Route::resource('messages', 'MessageController');
 /*
 Verb	Path	            Action	Route Name
 GET	    /photo	            index	photo.index

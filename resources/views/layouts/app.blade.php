@@ -79,6 +79,7 @@
                                 </ul>
                             </li>                            
                             <li><a href="{{ url('/load_file') }}">Завантажити данні</a></li>
+                            <li><a href="{{ url('/messages') }}">Перегляд повідомлень</a></li>
                            @endif
                     </ul>
 
