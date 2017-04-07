@@ -41,7 +41,8 @@ Route::resource('parameter_types', 'ParameterTypesController');
 Route::resource('parameters', 'ParametersController');
 Route::resource('places', 'PlaceAdminController');
 
-Route::post('messages', 'MessageController@store');
+Route::post('/messages', 'MessageController@store');
+Route::get('/messages', 'MessageController@index');
 /*
 Verb	Path	            Action	Route Name
 GET	    /photo	            index	photo.index

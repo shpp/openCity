@@ -14,7 +14,8 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
+        $Messages = Message::all();
+        return view('messages',['Messages' => $Messages] );
     }
 
     /**
