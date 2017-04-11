@@ -7,6 +7,7 @@
 		<title>Місто для всiх</title>
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+		<link rel="stylesheet" href="https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css">
 	  <link rel="stylesheet" href="css/welcome.css">
 	</head>
 	<body>
@@ -27,7 +28,7 @@
             	</a>
               <div class="collapsible-body">
 								<form id="categories-form">
-									<ul id="categories">
+									<ul id="categories" style="max-height: 50vh; overflow: auto; position: relative;">
 										@foreach ($categories as $category)
 										<li>
 											<input
@@ -115,16 +116,17 @@
 					<h5 class="white-text footer-form-heading">Напишіть нам!</h5>
 					<form id="message-form" >
 						{{ csrf_field() }}
-						<div class="row">
+						<!-- TODO -->
+						<!-- <div class="row">
 							<div class="input-field col s12">
 								<input id="email" type="email" class="validate" name="email">
 								<label for="email">Email</label>
 							</div>
-						</div>
+						</div> -->
 						<div class="row">
 							<div class="input-field col s12">
 								<textarea name="text" id="message" class="materialize-textarea"></textarea>
-								<label for="message">Ваш комментар</label>
+								<!-- <label for="message">Ваш комментар</label> -->
 							</div>
 						</div>
 						<div class="row">
@@ -156,6 +158,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script src="/js/typeahead.js"></script>
 	  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+		<script src="https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
 		<script src="https://maps.googleapis.com/maps/api/js?key={{$google_api_key}}&amp;callback=initMap&amp;language=uk_UA&amp;region=ES" async defer></script>
 		<script src="/js/mapinit.js"></script>
 	</body>

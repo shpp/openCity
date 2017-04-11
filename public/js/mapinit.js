@@ -14,6 +14,9 @@ $(document).ready(function() {
   }
 
   $('#right-bar-close').click(hideRightSideBar);
+  $('#categories').mCustomScrollbar({
+    theme: 'rounded-dots-dark'
+  });
 
   addMarkersToMap();
 
@@ -204,7 +207,11 @@ function initMap() {
   $("#message-form").submit(function () {
      $.post('/messages',$( this ).serialize());
      $(this).trigger("reset");
+
+     // alert??!! seriously?
      alert("Дякуємо! Ваше повідомлення успішно надіслано.");
+
+     //// you don't have any event here!!
      event.preventDefault();
   });
 }
