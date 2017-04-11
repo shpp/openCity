@@ -30,14 +30,14 @@ aside .side-nav.fixed {
 
 aside #nav-mobile li.logo {
   text-align: center;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 1.7rem;
+  margin-bottom: 0rem;
+  font-family: 'Ukrainian Play', arial;
 }
 
 aside #nav-mobile li.logo a {
-  /*font-family: 'Sansita', sans-serif;*/
-  font-size: 1.5rem;
-  font-weight: 900;
+  font-size: 2rem;
+  line-height: 1;
 }
 
 aside ul.side-nav.fixed li {

@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Місто для всiх</title>
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link href="http://allfont.net/allfont.css?fonts=ukrainian-play" rel="stylesheet" type="text/css" />
 	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
 		<link rel="stylesheet" href="https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css">
 	  <link rel="stylesheet" href="css/welcome.css">
@@ -17,7 +18,7 @@
         	<a
         		href="http://opencity.shpp.me/"
         		class="brand-logo green-text">
-            Місто для всіх
+            Мicто для вcix
           </a>
         </li>
         <li class="no-padding">
