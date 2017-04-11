@@ -259,3 +259,8 @@ footer {
   display: inline-block;
   vertical-align: middle;
 }
+
+[type="checkbox"].filled-in:checked+label:after {
+    border: 2px solid #4aa54e;
+    background-color: #4aa54e;
+}

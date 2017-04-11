@@ -16,14 +16,14 @@
         <li class="logo">
         	<a
         		href="http://opencity.shpp.me/"
-        		class="brand-logo teal-text">
+        		class="brand-logo green-text">
             Місто для всіх
           </a>
         </li>
         <li class="no-padding">
           <ul class="collapsible collapsible-accordion">
             <li class="bold active">
-            	<a class="collapsible-header waves-effect waves-teal active">
+            	<a class="collapsible-header waves-effect waves-green active">
             		Категорії мiсць
             	</a>
               <div class="collapsible-body">
@@ -48,7 +48,7 @@
               </div>
             </li>
             <li class="bold">
-            	<a class="collapsible-header waves-effect waves-teal">
+            	<a class="collapsible-header waves-effect waves-green">
             		Параметри зручності
             	</a>
               <div class="collapsible-body">
@@ -97,7 +97,7 @@
 				</div>
 			</div>
 		</main>
-    <footer class="page-footer teal">
+    <footer class="page-footer green">
 			<div class="custom-footer-container">
 				<div class="footer-description">
 					<h5 class="white-text">Соціальний проект «Місто для всіх»</h5>
@@ -132,7 +132,7 @@
 						<div class="row">
 							<div class="input-field col s12">
 								<button
-									class="btn white teal-text waves-effect waves-light"
+									class="btn white green-text waves-effect waves-light"
 									type="submit"
 									name="action">
 									Вiдправити
