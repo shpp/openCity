@@ -63,7 +63,7 @@ $(document).ready(function() {
               markerColor = '#F44336';
               break;
             case access_cnt_all:
-              markerColor = '#26a69a';
+              markerColor = '#4aa54e';
               break;
             default:
               markerColor = '#FFEB3B';
