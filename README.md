@@ -1,5 +1,5 @@
 # OpenCity
-[Google Play](https://play.google.com/store/apps/details?id=me.kowo.opencity) [Веб версия](http://opencity.shpp.me/)
+[Google Play](https://play.google.com/store/apps/details?id=me.kowo.opencity) | [Веб версия](http://opencity.shpp.me/)
 
 
 ## Помоги проекту
