@@ -118,16 +118,16 @@
 					<form id="message-form" >
 						{{ csrf_field() }}
 						<!-- TODO -->
-						<!-- <div class="row">
+						<div class="row">
 							<div class="input-field col s12">
 								<input id="email" type="email" class="validate" name="email">
 								<label for="email">Email</label>
 							</div>
-						</div> -->
+						</div>
 						<div class="row">
 							<div class="input-field col s12">
 								<textarea name="text" id="message" class="materialize-textarea"></textarea>
-								<!-- <label for="message">Ваш комментар</label> -->
+								<label for="message">Ваш комментар</label>
 							</div>
 						</div>
 						<div class="row">

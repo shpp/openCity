@@ -207,11 +207,9 @@ function initMap() {
   $("#message-form").submit(function () {
      $.post('/messages',$( this ).serialize());
      $(this).trigger("reset");
-
-     // alert??!! seriously?
-     alert("Дякуємо! Ваше повідомлення успішно надіслано.");
-
-     //// you don't have any event here!!
+     var $toastContent = $('<span>Дякуємо! Ваше повідомлення успішно надіслано.</span>');
+     Materialize.toast($toastContent, 5000);
+     // you don't have any event here!!
      event.preventDefault();
   });
 }
