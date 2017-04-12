@@ -1,4 +1,6 @@
 # OpenCity
+[Google Play](https://play.google.com/store/apps/details?id=me.kowo.opencity) [Веб версия](http://opencity.shpp.me/)
+
 
 ## Помоги проекту
 Мы хотим сделать наш проект лучше. У нас три основных направления: фронтенд, бекенд и андроид приложение.
