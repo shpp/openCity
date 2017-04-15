@@ -180,7 +180,8 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
 	// Laravel BackUp
         Spatie\Backup\BackupServiceProvider::class,
-
+//        Laravel logs
+        Arcanedev\LogViewer\LogViewerServiceProvider::class,
     ],
 
     /*
