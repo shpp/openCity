@@ -38,6 +38,10 @@ class PlaceComment extends Model
         'likes', 'dislikes', 'hidden'];
     protected $hidden = ['created_at', 'updated_at'];
 
+    public function author()
+    {
+        return $this->hasOne('App\User', 'id', 'author_id');
+    }
 //    todo: get author
 //    todo: like. increment like column by 1
 //    todo: dislike. increment dislike column by 1

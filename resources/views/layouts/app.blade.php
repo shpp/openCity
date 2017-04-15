@@ -53,7 +53,7 @@
                         <li><a href="{{ url('/home') }}">Додому</a></li>
                         @role('admin')
                         <li><a href="{{ url('users/all') }}">Користувачі</a></li>
-                        <li><a href="{{ url('/places') }}">Список місць</a></li>
+                        <li><a href="{{ url('admin/places') }}">Список місць</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-expanded="false">

@@ -15,7 +15,7 @@ class BannedMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (!auth()->user()->banned) {
+        if (auth()->user()->banned) {
             return $request->ajax() ?
                 response()->json(['err' => 403, 'message' => 'Can`t do that. You are banned']) :
                 response()->view('errors.403', [], 403);

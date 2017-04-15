@@ -88,4 +88,14 @@ class Place extends Model
     {
         return $this->hasMany('App\Parameter');
     }
+
+    public function all_comments()
+    {
+        return $this->hasMany('App\PlaceComment');
+    }
+
+    public function comments()
+    {
+        return $this->all_comments()->whereHidden(0);
+    }
 }

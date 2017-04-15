@@ -30,7 +30,7 @@ Route::group(['middleware' => ['auth', 'role:admin']],function (){
     Route::get('/load_file', 'FilesController@index');
     Route::post('/load_file', 'FilesController@load');
     Route::post('/save_file', 'FilesController@save');
-    Route::resource('places', 'PlaceAdminController');
+    Route::resource('admin/places', 'PlaceAdminController');
 
     Route::get('/destroy_null', 'PlaceAdminController@destroyNull');
     Route::get('/load_geo', 'PlaceAdminController@loadGeo');
@@ -63,7 +63,9 @@ DELETE	/photo/{photo}	    destroy	photo.destroy
 Auth::routes();
 Route::get('/home', 'HomeController@index');
 
+Route::get('/places', 'PlacesController@all');
+Route::get('/places/{id}', 'PlacesController@show');
 
 Route::group(['middleware' => ['auth', 'banned']],function () {
-//    Route::post('/place/{place_id}/comment', '');
+    Route::post('/places/{place_id}/comments', 'PlaceCommentsController@addPlaceComment');
 });

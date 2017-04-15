@@ -6,7 +6,7 @@ use App\Place;
 use App\PlaceComment;
 use Illuminate\Http\Request;
 
-class CommentsController extends Controller
+class PlaceCommentsController extends Controller
 {
     public function addPlaceComment($placeId, Request $request)
     {
