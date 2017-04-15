@@ -11,32 +11,36 @@
 |
 */
 
-Route::get('/','PlaceController@index');
-Route::get('/home',function(){
+Route::get('/', 'PlaceController@index');
+Route::get('/home', function () {
     return view('home');
 })->middleware('auth');
 
-Route::get('/getplaces','PlaceController@getPlaces');
-Route::get('/getinfo','PlaceController@getPlaceInfo');
-Route::get('/search','PlaceController@searchPlaces');
+Route::get('/getplaces', 'PlaceController@getPlaces');
+Route::get('/getinfo', 'PlaceController@getPlaceInfo');
+Route::get('/search', 'PlaceController@searchPlaces');
 
-Route::get('/load_file','FilesController@index');
-Route::post('/load_file','FilesController@load');
-Route::post('/save_file','FilesController@save');
+Route::get('/load_file', 'FilesController@index');
+Route::post('/load_file', 'FilesController@load');
+Route::post('/save_file', 'FilesController@save');
 
 Auth::routes();
+Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
+Route::get('auth/{provider}/cb', 'Auth\AuthController@handleProviderCallback');
 
-Route::get('/register',function(){
-    return redirect('/login');
+
+//Route::get('/register', function () {
+//    return redirect('/login');
+//});
+
+
+Route::group(['prefix' => 'catalogue', 'middleware' => ['auth']], function () {
+    Route::get('/{id}', 'CatalogueController@index');
+    Route::post('/add', 'CatalogueController@add');
+    Route::post('/save', 'CatalogueController@store');
+    Route::post('/delete', 'CatalogueController@destroy');
 });
 
-
-Route::group(['prefix' => 'catalogue', 'middleware' => ['auth']], function() {
-	Route::get('/{id}', 'CatalogueController@index');
-	Route::post('/add', 'CatalogueController@add');
-	Route::post('/save', 'CatalogueController@store');
-	Route::post('/delete', 'CatalogueController@destroy');
-}); 
 Route::resource('parameter_types', 'ParameterTypesController');
 Route::resource('parameters', 'ParametersController');
 Route::resource('places', 'PlaceAdminController');
@@ -53,5 +57,8 @@ GET	    /photo/{photo}/edit	edit	photo.edit
 PATCH	/photo/{photo}	    update	photo.update
 DELETE	/photo/{photo}	    destroy	photo.destroy
 */
-Route::get('/destroy_null','PlaceAdminController@destroyNull');
-Route::get('/load_geo','PlaceAdminController@loadGeo');
+Route::get('/destroy_null', 'PlaceAdminController@destroyNull');
+Route::get('/load_geo', 'PlaceAdminController@loadGeo');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

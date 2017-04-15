@@ -178,13 +178,15 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
-	// Laravel BackUp
+	    // Laravel BackUp
         Spatie\Backup\BackupServiceProvider::class,
-//        Laravel logs
+        // Laravel logs
         Arcanedev\LogViewer\LogViewerServiceProvider::class,
 
-// ide helper
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class
+        // ide helper
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        // social auth
+        Laravel\Socialite\SocialiteServiceProvider::class,
     ],
 
     /*
@@ -233,9 +235,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-
-
-
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
 ];

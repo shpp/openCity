@@ -15,6 +15,10 @@
 * Должна быть установлена СУБД MySQL;
 * Нужен установленный `Composer`;
 
+#### Социальные ключи для авторизации
+*  [Twitter](https://apps.twitter.com/app/new)
+*  [Facebook](https://developers.facebook.com/apps/)
+
 ####Для настройки проекта выполнить:
 * В консоли перейти в папку с проектом;
 * Выполнить `composer install`;  
