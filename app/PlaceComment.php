@@ -34,7 +34,7 @@ use Illuminate\Database\Eloquent\Model;
 class PlaceComment extends Model
 {
     protected $table = 'place_comments';
-    protected $fillable = ['id', 'author_id', 'author_id', 'author_name', 'comment', 'rating', 'place_id',
+    protected $fillable = ['id', 'author_id', 'author_name', 'comment', 'rating', 'place_id',
         'likes', 'dislikes', 'hidden'];
     protected $hidden = ['created_at', 'updated_at'];
 

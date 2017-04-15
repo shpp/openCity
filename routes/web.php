@@ -36,6 +36,9 @@ Route::group(['middleware' => ['auth', 'role:admin']],function (){
     Route::get('/load_geo', 'PlaceAdminController@loadGeo');
     Route::get('/messages', 'MessageController@index');
 
+    Route::resource('parameter_types', 'ParameterTypesController');
+    Route::resource('parameters', 'ParametersController');
+
     Route::group(['prefix' => 'catalogue',], function () {
         Route::get('/{id}', 'CatalogueController@index');
         Route::post('/add', 'CatalogueController@add');
@@ -44,8 +47,6 @@ Route::group(['middleware' => ['auth', 'role:admin']],function (){
     });
 });
 
-Route::resource('parameter_types', 'ParameterTypesController');
-Route::resource('parameters', 'ParametersController');
 
 Route::post('/messages', 'MessageController@store');
 /*
@@ -60,5 +61,9 @@ DELETE	/photo/{photo}	    destroy	photo.destroy
 */
 
 Auth::routes();
-
 Route::get('/home', 'HomeController@index');
+
+
+Route::group(['middleware' => ['auth', 'banned']],function () {
+//    Route::post('/place/{place_id}/comment', '');
+});
