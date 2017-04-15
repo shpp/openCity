@@ -182,6 +182,9 @@ return [
         Spatie\Backup\BackupServiceProvider::class,
 //        Laravel logs
         Arcanedev\LogViewer\LogViewerServiceProvider::class,
+
+// ide helper
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class
     ],
 
     /*
@@ -230,6 +233,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+
+
 
     ],
 

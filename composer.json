@@ -11,7 +11,8 @@
         "doctrine/dbal": "v2.5.5",
         "maatwebsite/excel": "~2.1.0",
         "spatie/laravel-backup": "^3.11",
-        "arcanedev/log-viewer": "^4.3"
+        "arcanedev/log-viewer": "^4.3",
+        "barryvdh/laravel-ide-helper": "^2.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
