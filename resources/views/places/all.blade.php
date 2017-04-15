@@ -31,7 +31,8 @@
                             <tbody>
                             @foreach ($places as $place)
                                 <tr>
-                                    <td class="table-text"><a href="{{ url('places', $place->id) }}">{{$place->name }}</a></td>
+                                    <td class="table-text"><a
+                                                href="{{ url('places', $place->id) }}">{{$place->name }}</a></td>
                                     <td class="table-text">
                                         <div>{{$place->category->name}}</div>
                                     </td>

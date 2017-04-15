@@ -24,7 +24,6 @@
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
-
     {{--todo: add fancy open graph and twitter card--}}
 </head>
 <body>
@@ -153,6 +152,7 @@
     it as mentioned below -->
 <!-- optionally if you need translation for your language then include 
     locale file as mentioned below -->
+@yield('scripts')
 
 </body>
 </html>

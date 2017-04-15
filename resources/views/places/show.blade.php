@@ -13,28 +13,34 @@
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <address>
-                            {{ $place->city }},
-                            {{ $place->street }}
-                            {{ $place->number }}
-                        </address>
-                        @if (!empty($place->paremeter))
-                            @foreach($place->parameter as $parameter)
-                                {{ $parameter }}<br>
-                            @endforeach
-                        @endif
-                        @if (!empty($place->accessibility))
-                            <ul>
-                                @foreach($place->accessibility as $access)
-                                    <li>
-                                        {{ $access->accessibilityTitle->name }}
-                                    </li>
+                        <div class="col-md-6">
+                            <address>
+                                {{ $place->city }},
+                                {{ $place->street }}
+                                {{ $place->number }}
+                            </address>
+                            @if (!empty($place->paremeter))
+                                @foreach($place->parameter as $parameter)
+                                    {{ $parameter }}<br>
                                 @endforeach
-                            </ul>
-                        @endif
-                        <div>
-                            {{ $place->comment }}
+                            @endif
+                            @if (!empty($place->accessibility))
+                                <ul>
+                                    @foreach($place->accessibility as $access)
+                                        <li>
+                                            {{ $access->accessibilityTitle->name }}
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                            <div>
+                                {{ $place->comment }}
+                            </div>
                         </div>
+                        <div class="col-md-6">
+                            <div id="place_map" style="width: 100%; height: 250px"></div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -82,4 +88,28 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script src="https://api-maps.yandex.ru/2.1/?lang=uk_UA" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        ymaps.ready(function () {
+            var placeMap = new ymaps.Map("place_map", {
+                center: [{{ substr($place->map_lat, 0, 5) }}, {{ substr($place->map_lng, 0, 5)}}],
+                zoom: 16,
+                controls: []
+            });
+
+            var placeObject = new ymaps.Placemark([{{ substr($place->map_lat, 0, 5) }}, {{ substr($place->map_lng, 0, 5)}}], {
+                balloonContent: '{{ $place->name }}',
+                iconCaption: '{{ $place->name }}',
+                preset: 'islands#blackStretchyIcon'
+            });
+
+            placeMap.geoObjects.add(placeObject);
+            placeMap.controls.add(new ymaps.control.ZoomControl());
+        });
+
+
+    </script>
 @endsection
