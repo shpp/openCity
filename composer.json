@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "openCity",
+    "description": "Access map.",
+    "keywords": ["map", "access", "social"],
     "license": "MIT",
     "type": "project",
     "require": {
@@ -13,7 +13,8 @@
         "spatie/laravel-backup": "^3.11",
         "arcanedev/log-viewer": "^4.3",
         "barryvdh/laravel-ide-helper": "^2.3",
-        "laravel/socialite": "^3.0"
+        "laravel/socialite": "^3.0",
+        "zizaco/entrust": "5.2.x-dev"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

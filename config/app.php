@@ -187,6 +187,9 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         // social auth
         Laravel\Socialite\SocialiteServiceProvider::class,
+        // roles and permissions
+        Zizaco\Entrust\EntrustServiceProvider::class,
+
     ],
 
     /*
@@ -236,6 +239,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
     ],
 
 ];
