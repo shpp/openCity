@@ -41,13 +41,14 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name', 'Місто для всіх') }}</a>
+                    <a class="navbar-brand" href="{{ url('') }}">{{ config('app.name', 'Місто для всіх') }}</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         @if (!Auth::guest())
+                            <li><a href="{{ url('users/all') }}">Користувачі</a></li>
                             <li><a href="{{ url('/home') }}">Додому</a></li>
                             <li><a href="{{ url('/places') }}">Список місць</a></li>
                             <li class="dropdown">
