@@ -26,4 +26,20 @@ class PlaceCommentsController extends Controller
             response()->json(['message' => 'Comment added', 'err' => ''], 200) :
             redirect()->back()->with(['messages' => ['Коментар додано']]);
     }
+
+    public function delete($id, Request $request)
+    {
+        $placeComment = PlaceComment::findOrFail($id);
+        if (!auth()->user()->hasRole('admin') && auth()->user()->id != $placeComment->author_id) {
+            return $request->ajax() ?
+                response()->json(['message' => 'You are not allowed to do this', 'err' => 'Forbidden'], 403) :
+                abort(403);
+        }
+
+        $placeComment->delete();
+
+        return $request->ajax() ?
+            response()->json(['message' => 'Comment deleted', 'err' => ''], 200) :
+            redirect()->back()->with(['messages' => ['Коментар видалено']]);
+    }
 }

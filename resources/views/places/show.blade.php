@@ -33,14 +33,12 @@
                                     @endforeach
                                 </ul>
                             @endif
-                            <div>
-                                {{ $place->comment }}
-                            </div>
+                            <div>{{ $place->comment }}</div>
                         </div>
                         <div class="col-md-6">
                             <div id="place_map" style="width: 100%; height: 250px"></div>
                         </div>
-
+                        {{--<a href="{{ url('place', [$place->id, 'suggestions', 'add']) }}" class="btn btn-primary right">Запропонувати зміни</a>--}}
                     </div>
                 </div>
             </div>
@@ -53,14 +51,42 @@
                         <ul class="media-list">
                             @foreach($place->comments as $comment)
                                 <li class="media">
-                                    {{--<div class="media-left">--}}
-                                    {{--<a href="#">--}}
-                                    {{--<img class="media-object" src="..." alt="...">--}}
-                                    {{--</a>--}}
-                                    {{--</div>--}}
                                     <div class="media-body">
-                                        <h4 class="media-heading">{{ $comment->comment }} {{ $comment->rating }}</h4>
+
+                                        <h4 class="media-heading">"{{ $comment->comment }} {{ $comment->rating }}"</h4>
                                         {{ $comment->author->name }} {{ Carbon\Carbon::parse($comment->created_at)->format('d.m.y H:i:s') }}
+                                        <button type="button" class="btn btn-danger btn-xs" data-toggle="modal"
+                                                data-target="#delete-comet-{{ $place->id }}">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                        <div class="modal fade" id="delete-comet-{{ $place->id }}" tabindex="-1"
+                                             role="dialog"
+                                             aria-labelledby="delete-comet-{{ $place->id }}Label">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                        <h4 class="modal-title" id="delete-comet-{{ $place->id }}Label">
+                                                            Дійсно видалити коментар?
+                                                        </h4>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                            Скасувати
+                                                        </button>
+                                                        @if(auth()->user()->hasRole('admin') || auth()->user()->id == $comment->author_id)
+                                                            {!! Form::open(['url' => url('place-comments', $comment->id),
+                                                             'method' =>'delete', 'style' => 'display: inline;']) !!}
+                                                            <input type="submit" class="btn btn-danger" value="Видалити">
+                                                            {!! Form::close() !!}
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </li>
                             @endforeach
@@ -109,7 +135,5 @@
             placeMap.geoObjects.add(placeObject);
             placeMap.controls.add(new ymaps.control.ZoomControl());
         });
-
-
     </script>
 @endsection

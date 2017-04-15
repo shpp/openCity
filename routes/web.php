@@ -68,4 +68,5 @@ Route::get('/places/{id}', 'PlacesController@show');
 
 Route::group(['middleware' => ['auth', 'banned']],function () {
     Route::post('/places/{place_id}/comments', 'PlaceCommentsController@addPlaceComment');
+    Route::delete('/place-comments/{id}', 'PlaceCommentsController@delete');
 });

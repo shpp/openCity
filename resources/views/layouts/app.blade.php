@@ -48,6 +48,7 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
+                    <li><a href="{{ url('places') }}">Місця</a></li>
                     @if (!Auth::guest())
                         <li><a href="{{ url('/home') }}">Додому</a></li>
                         @role('admin')
