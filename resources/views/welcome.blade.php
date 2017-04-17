@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
     <link rel="stylesheet" href="https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css">
     <link rel="stylesheet" href="css/welcome.css">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     {{--TODO: opengraph--}}
     @include('components.analytics')
 </head>
@@ -17,7 +18,7 @@
 <aside>
     <ul id="nav-mobile" class="side-nav fixed">
         <li class="logo">
-            <a href="http://opencity.shpp.me/" class="brand-logo green-text">Мicто для вcix</a>
+            <a href="{{ url('/') }}" class="brand-logo green-text">Мicто для вcix</a>
         </li>
         <li class="no-padding">
             <ul class="collapsible collapsible-accordion">
@@ -30,13 +31,12 @@
                             <ul id="categories" style="max-height: 50vh; overflow: auto; position: relative;">
                                 @foreach ($categories as $category)
                                     <li>
-                                        <input
-                                                type="checkbox"
-                                                name="cat[]"
-                                                id="cat{{$category->id}}"
-                                                value="{{$category->id}}"
-                                                class="filled-in"
-                                                checked/>
+                                        <input type="checkbox"
+                                               name="cat[]"
+                                               id="cat{{$category->id}}"
+                                               value="{{$category->id}}"
+                                               class="filled-in"
+                                               checked/>
                                         <label for="cat{{$category->id}}" class="black-text">
                                             {{$category->name}}
                                         </label>
@@ -55,12 +55,11 @@
                             <ul id="accessibility">
                                 @foreach ($accessibilities as $accessibility)
                                     <li>
-                                        <input
-                                                type="checkbox"
-                                                name="acc[]"
-                                                id="acc{{$accessibility->id}}"
-                                                value="{{$accessibility->id}}"
-                                                class="filled-in"/>
+                                        <input type="checkbox"
+                                               name="acc[]"
+                                               id="acc{{$accessibility->id}}"
+                                               value="{{$accessibility->id}}"
+                                               class="filled-in"/>
                                         <label for="acc{{$accessibility->id}}" class="black-text">
                                             {{$accessibility->name}}
                                         </label>
@@ -77,21 +76,19 @@
 <main>
     <div class="content">
         <div class="search-wrapper card">
-            <input
-                    id="search-input"
-                    placeholder="Почніть набирати назву закладу..."
-                    class="typeahead">
+            <input id="search-input" placeholder="Почніть набирати назву закладу..." class="typeahead">
             <i class="material-icons">search</i>
         </div>
-        <div id="map"></div>
-        <div id="right-bar">
-            <div id="right-bar-header">
-                <span id="right-bar-close"><i class="material-icons">close</i></span>
-                <h3 id="right-bar-heading"></h3>
-            </div>
-            <div id="right-bar-address"></div>
-            <div id="right-bar-access"></div>
+        <div class="login-float-block">
+            @if (auth()->guest())
+                <a href="{{ url('/login') }}" class="login-float__link">Увійти</a>
+                {{-- todo: login modal window --}}
+            @else
+                <div class="user-control-block">{{ auth()->user()->name }}</div>
+            @endif
         </div>
+        <div id="map"></div>
+        @include('components.right-bar')
     </div>
 </main>
 <footer class="page-footer green">
@@ -131,8 +128,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <button
-                                class="btn white green-text waves-effect waves-light"
+                        <button class="btn white green-text waves-effect waves-light"
                                 type="submit"
                                 name="action">
                             Вiдправити
@@ -146,8 +142,7 @@
     <div class="footer-copyright">
         <div class="container">
             © 2017 made with love by
-            <a
-                    href="http://programming.kr.ua"
+            <a href="http://programming.kr.ua"
                     class="white-text"
                     target="_blank">
                 Ш++

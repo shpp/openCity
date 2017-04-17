@@ -37,7 +37,7 @@ return [
 
         'attributes' => [
             'prefix'     => 'logs',
-            'middleware' => null,
+            'middleware' => 'role:admin',
         ],
     ],
 

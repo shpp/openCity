@@ -52,7 +52,6 @@
                             @foreach($place->comments as $comment)
                                 <li class="media">
                                     <div class="media-body">
-
                                         <h4 class="media-heading">"{{ $comment->comment }} {{ $comment->rating }}"</h4>
                                         {{ $comment->author->name }} {{ Carbon\Carbon::parse($comment->created_at)->format('d.m.y H:i:s') }}
                                         <button type="button" class="btn btn-danger btn-xs" data-toggle="modal"
@@ -95,7 +94,8 @@
                         <h5>Коментарів поки немає. Залиште перший</h5>
                     @endif
 
-                    {!! Form::open(['url' => url('places', [$place->id, 'comments']), 'method' => 'post']) !!}
+                    {!! Form::open(['url' => url('place-comments'), 'method' => 'post']) !!}
+                        <input type="hidden" value="{{ $place->id }}" name="place-id">
                     <label for="comment"></label>
                     {!! Form::textarea('comment', '', ['class' => 'form-control', 'id'=> 'comment', 'rows' => 2]) !!}
                     @if(auth()->user())

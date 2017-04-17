@@ -46,7 +46,9 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         if ($exception instanceof TokenMismatchException) {
-            return response()->view('welcome');
+            return $request->ajax() ?
+                response()->json(['error' => 'TokenMismatchException', 'message' => 'Your session is old'], 403):
+                response()->redirectTo('/')->with(['messages' => ['Your session is old']]);
         }
         return parent::render($request, $exception);
     }

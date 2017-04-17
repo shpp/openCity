@@ -13,7 +13,35 @@ $(document).ready(function() {
     $rightSideBar.animate({right: '1rem'}, 400);
   }
 
+  function submitComment() {
+      var placeId = $('#right-bar-place-id__input').val();
+      var comment = $('#comment').val();
+      if (!comment.trim()) {
+          // todo: pretty alerts
+          alert('Введіть коментар!');
+          return;
+      }
+
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+      $.ajax({
+          url: 'place-comments',
+          method: 'POST',
+          data: {'place-id': placeId, 'comment': comment}
+      }).done(function (response) {
+          // todo: pretty alerts
+          alert('Коментар додано');
+      }).error(function (err) {
+          // todo: pretty alerts
+          console.log(err);
+      });
+  }
+
   $('#right-bar-close').click(hideRightSideBar);
+  $('#right-bar-comment__submit').click(submitComment);
   $('#categories').mCustomScrollbar({
     theme: 'rounded-dots-dark'
   });
@@ -118,7 +146,9 @@ $(document).ready(function() {
   ****************************************************/
   function addMarker(LatLng, infowindow, contentString, markerColor, id) {
     var markerIcon = {
-      path: 'M256,0C149.969,0,64,85.969,64,192c0,43.188,14.25,83,38.313,115.094L256,512l153.688-204.906 C433.75,275,448,235.188,448,192C448,85.969,362.031,0,256,0z M256,320c-70.688,0-128-57.313-128-128S185.313,64,256,64 s128,57.313,128,128S326.688,320,256,320z',
+      path: 'M256,0C149.969,0,64,85.969,64,192c0,43.188,14.25,83,38.313,115.094L256,512l153.688-204.906 C433.75,275,' +
+      '448,235.188,448,192C448,85.969,362.031,0,256,0z M256,320c-70.688,0-128-57.313-128-128S185.313,64,256,64 s128,57.' +
+      '313,128,128S326.688,320,256,320z',
       fillColor: markerColor,
       fillOpacity: 1,
       scale: .08,
@@ -141,7 +171,7 @@ $(document).ready(function() {
       if (lastInfo) lastInfo.close();
       place.info.open(map, place);
       lastInfo = place.info;
-
+      $('#right-bar-place-id__input').val(place.place_id)
       $.get('/getinfo', {'id': place.place_id}, function(response) {
           if (response.success) {
             var $address = $('#right-bar-address');
@@ -169,6 +199,18 @@ $(document).ready(function() {
             showRightSideBar();
           }
       });
+        $.ajax({
+            url: '/place/' + place.place_id + '/comments',
+            method: 'get'
+        }).done(function (response) {
+            var comments = response.data;
+            for (var i = 0, arrLength = comments.length; i < arrLength; i++) {
+                var comment = comments[i];
+                // todo: make it nicer
+                var commentDiv = $('<div>').text('"' + comment.comment + '"  ' + comment.author.name);
+                $('.right-bar-comments').append(commentDiv, $('<hr style="margin: 0; color:fafafa">'));
+            }
+        })
     });
 
     markers.push(marker);

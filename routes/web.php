@@ -10,7 +10,6 @@
 | to using a Closure or controller method. Build something great!
 |
 */
-
 Route::get('/', 'PlaceController@index');
 Route::get('/home', function () {
     return view('home');
@@ -25,7 +24,7 @@ Auth::routes();
 Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
 Route::get('auth/{provider}/cb', 'Auth\AuthController@handleProviderCallback');
 
-Route::group(['middleware' => ['auth', 'role:admin']],function (){
+Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('users/all', 'UsersController@showAll');
     Route::get('/load_file', 'FilesController@index');
     Route::post('/load_file', 'FilesController@load');
@@ -65,8 +64,9 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/places', 'PlacesController@all');
 Route::get('/places/{id}', 'PlacesController@show');
+Route::get('/place/{id}/comments/', 'PlaceController@getComments');
 
-Route::group(['middleware' => ['auth', 'banned']],function () {
-    Route::post('/places/{place_id}/comments', 'PlaceCommentsController@addPlaceComment');
+Route::group(['middleware' => ['auth', 'banned']], function () {
+    Route::post('/place-comments', 'PlaceCommentsController@addPlaceComment');
     Route::delete('/place-comments/{id}', 'PlaceCommentsController@delete');
 });

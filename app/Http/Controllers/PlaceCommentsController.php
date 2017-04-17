@@ -8,16 +8,16 @@ use Illuminate\Http\Request;
 
 class PlaceCommentsController extends Controller
 {
-    public function addPlaceComment($placeId, Request $request)
+    public function addPlaceComment(Request $request)
     {
         $this->validate($request, [
+            'place-id' => 'required|exists:places,id',
             'comment' => 'required|max:2500',
         ]);
 
-        $place = Place::findOrFail($placeId);
         PlaceComment::create([
             'author_id' => auth()->user()->id,
-            'place_id' => $place->id,
+            'place_id' => $request->input('place-id'),
             'comment' => htmlspecialchars($request->comment),
             'hidden' => false
         ]);

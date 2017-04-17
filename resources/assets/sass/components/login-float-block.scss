@@ -1,0 +1,24 @@
+.login-float-block {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  z-index: 1;
+}
+
+.login-float__link {
+  display: block;
+  padding: 0.8rem 1.5rem;
+  border-radius: 1px;
+  text-transform: uppercase;
+  background: #fff;
+  color: #4aa54e;
+  box-shadow: rgba(0, 0, 0, 0.298039) 0 1px 4px -1px;
+}
+
+.user-control-block {
+  @extend .login-float__link;
+  text-transform: none;
+  height: 3rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

@@ -9,3 +9,4 @@ Homestead.yaml
 .composer.lock
 .phpstorm.meta.php
 _ide_helper.php
+storage/debugbar/*

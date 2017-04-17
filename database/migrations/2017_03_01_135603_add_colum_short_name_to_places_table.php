@@ -14,9 +14,7 @@ class AddColumShortNameToPlacesTable extends Migration
     public function up()
     {
         Schema::table('places', function (Blueprint $table) {
-            $table->string('short_name')
-                    ->nullable()
-                    ->default(null);
+            $table->string('short_name')->nullable()->default(null);
         });
     }
 
@@ -27,7 +25,7 @@ class AddColumShortNameToPlacesTable extends Migration
      */
     public function down()
     {
-        Schema::table('places', function($table){
+        Schema::table('places', function ($table) {
             $table->dropColumn(['short_name',]);
         });
     }
