@@ -34,10 +34,9 @@ return [
      */
     'route'         => [
         'enabled'    => true,
-
         'attributes' => [
             'prefix'     => 'logs',
-            'middleware' => 'role:admin',
+            'middleware' => ['web', 'auth', 'role:admin'],
         ],
     ],
 

@@ -25,6 +25,9 @@ Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
 Route::get('auth/{provider}/cb', 'Auth\AuthController@handleProviderCallback');
 
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
+    Route::get('places/create', 'PlaceController@create'); // todo: add create place permission middleware
+    Route::post('places/', 'PlaceController@store'); // todo: add create place permission middleware
+
     Route::get('users/all', 'UsersController@showAll');
     Route::get('/load_file', 'FilesController@index');
     Route::post('/load_file', 'FilesController@load');
@@ -59,7 +62,6 @@ PATCH	/photo/{photo}	    update	photo.update
 DELETE	/photo/{photo}	    destroy	photo.destroy
 */
 
-Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::get('/places', 'PlacesController@all');

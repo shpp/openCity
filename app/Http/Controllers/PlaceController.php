@@ -10,8 +10,6 @@ use App\Accessibility;
 use App\ParameterTitle;
 use App\AccessibilityTitle;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Response;
 
 class PlaceController extends Controller
 {
@@ -20,7 +18,7 @@ class PlaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    publiC function index()
+    public function index()
     {
         $categories = Category::All();
         $accessibilities = AccessibilityTitle::All();
@@ -120,5 +118,18 @@ class PlaceController extends Controller
         // todo: hide author info
         $comments = PlaceComment::wherePlaceId($id)->with('author')->get();
         return response()->json(['data' => $comments, 'count' => $comments->count()]);
+    }
+
+    public function create()
+    {
+        $accessibilityTitle = AccessibilityTitle::all();
+        $parameterTitle = ParameterTitle::all();
+        $categories = Category::all();
+        return view('places.form', compact('categories', 'accessibilityTitle', 'parameterTitle'));
+    }
+
+    public function store(Request $request)
+    {
+//        todo: add validation and store place
     }
 }

@@ -20,7 +20,7 @@
                         <th class="col-md-2">Від кого</th>
                         <th class="col-md-4">Текст</th>
                         <th class="col-md-1">Перглянуто</th>
-                        <th class="col-md-1"> </th>
+                        <th class="col-md-1"></th>
                         <!-- Add Button -->
                         {{--<th class="col-md-1 text-right">--}}
                             {{--<button type="submit" id="add_parameter" class="btn btn-info" data-toggle="modal" data-target="#addInfo">   <i class="fa fa-btn fa-plus"></i> Додати--}}
@@ -53,11 +53,11 @@
                                 </td>
                                 <td class="table-text">
                                     <div>
-                                     @if ($message->read))
-                                         Так
-                                     @else
-                                         Ні
-                                     @endif
+                                        @if ($message->read))
+                                        Так
+                                        @else
+                                            Ні
+                                        @endif
                                     </div>
                                 </td>
                                 <!-- Save Button -->

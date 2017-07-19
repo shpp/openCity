@@ -7,11 +7,13 @@
     <title>Місто для всiх</title>
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="http://allfont.net/allfont.css?fonts=ukrainian-play" rel="stylesheet" type="text/css"/>
+    {{--todo: bundle this styles --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
     <link rel="stylesheet" href="https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css">
     <link rel="stylesheet" href="css/welcome.css">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     {{--TODO: opengraph--}}
+    {{--todo: add fancy favicon--}}
     @include('components.analytics')
 </head>
 <body>
@@ -23,9 +25,7 @@
         <li class="no-padding">
             <ul class="collapsible collapsible-accordion">
                 <li class="bold active">
-                    <a class="collapsible-header waves-effect waves-green active">
-                        Категорії мiсць
-                    </a>
+                    <a class="collapsible-header waves-effect waves-green active">Категорії мiсць</a>
                     <div class="collapsible-body">
                         <form id="categories-form">
                             <ul id="categories" style="max-height: 50vh; overflow: auto; position: relative;">
@@ -150,6 +150,7 @@
         </div>
     </div>
 </footer>
+{{--todo: bundle this scripts--}}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="/js/typeahead.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>

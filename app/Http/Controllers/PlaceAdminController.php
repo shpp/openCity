@@ -3,16 +3,11 @@ namespace App\Http\Controllers;
 
 use App\Place;
 use App\Address;
-use App\Accessibility;
-use App\AccessibilityTitle;
 use App\Category;
-use App\Img;
-use App\Parameter;
-use App\ParameterTitle;
-use DB;
 use GuzzleHttp\Client;
+use App\ParameterTitle;
+use App\AccessibilityTitle;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class PlaceAdminController extends Controller
 {
@@ -62,15 +57,15 @@ class PlaceAdminController extends Controller
      */
     public function edit(Request $request, $id)
     {
-        $сategories = Category::all();
+        $categories = Category::all();
         $accessibilityTitle = AccessibilityTitle::all();
         $parameterTitle = ParameterTitle::all();
         $acc = [];
         $param = [];
-        if ($id == 0) {//create place
+        if ($id == 0) { // create place
             $place = New Place;
             $address = $place;
-        } else {//edit place
+        } else { // edit place
             $place = Place::findOrFail($id);
             $accessibility = $place->accessibility()->get()->toArray();
             $parameter = $place->parameter()->get()->toArray();
@@ -83,7 +78,7 @@ class PlaceAdminController extends Controller
         }
         return view('edit_place', ['place' => $place,
             'accessibilityTitle' => $accessibilityTitle,
-            'сategories' => $сategories,
+            'сategories' => $categories,
             'parameterTitle' => $parameterTitle,
             'accessibility' => $acc,
             'param' => $param,
