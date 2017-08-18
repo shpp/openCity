@@ -3,6 +3,9 @@
 @section('content')
     <div class="container">
         <div class="col-md-12">
+            @role('admin')
+            <a href="{{ url('places/create') }}" class="btn btn-primary right">➕ Додати місце</a>
+            @endrole
             <!-- Current Tasks -->
             @if (count($places) > 0)
                 <div class="panel panel-default">

@@ -23,10 +23,12 @@ Route::get('/search', 'PlaceController@searchPlaces');
 Auth::routes();
 Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
 Route::get('auth/{provider}/cb', 'Auth\AuthController@handleProviderCallback');
-
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('places/create', 'PlaceController@create'); // todo: add create place permission middleware
     Route::post('places/', 'PlaceController@store'); // todo: add create place permission middleware
+    Route::get('places/{id}/edit', 'PlaceAdminController@edit'); // todo: add edit place permission middleware
+
+    Route::get('permissions', 'PermissionsController@index');
 
     Route::get('users/all', 'UsersController@showAll');
     Route::get('/load_file', 'FilesController@index');
@@ -49,18 +51,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     });
 });
 
-
 Route::post('/messages', 'MessageController@store');
-/*
-Verb	Path	            Action	Route Name
-GET	    /photo	            index	photo.index
-GET	    /photo/create	    create	photo.create
-POST	/photo	            store	photo.store
-GET	    /photo/{photo}	    show	photo.show
-GET	    /photo/{photo}/edit	edit	photo.edit
-PATCH	/photo/{photo}	    update	photo.update
-DELETE	/photo/{photo}	    destroy	photo.destroy
-*/
 
 Route::get('/home', 'HomeController@index');
 

@@ -1,6 +1,6 @@
 const elixir = require('laravel-elixir');
-
-require('laravel-elixir-vue-2');
+// let mix = require('laravel-mix').mix;
+// require('laravel-elixir-vue-2');
 
 /*
  |--------------------------------------------------------------------------
@@ -14,9 +14,10 @@ require('laravel-elixir-vue-2');
  */
 
 elixir(mix => {
-    mix
+  mix
     .sass('app.scss')
     .webpack('map.js')
-    .webpack('app.js');
+    .webpack('app.js')
+    .version(['css/app.css', 'js/map.js', 'js/app.js']);
 })
-;
+// ;

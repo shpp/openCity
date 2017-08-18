@@ -30,7 +30,7 @@ class Parameter extends Model
 
     public function place()
     {
-        return $this->belongsTo('App\Place');
+        return $this->belongsTo(Place::class);
     }
 
     public function parameterTitle()

@@ -51,7 +51,8 @@ class Place extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'comment', 'category_id', 'address_id',
+    protected $fillable = [
+        'name', 'comment', 'category_id', 'address_id',
         'city', 'street', 'number', 'map_lat', 'map_lng',
         'geo_place_id', 'comment_adr', 'short_name',
     ];
@@ -71,27 +72,27 @@ class Place extends Model
 
     public function category()
     {
-        return $this->belongsTo('App\Category');
+        return $this->belongsTo(Category::class);
     }
 
     public function img()
     {
-        return $this->hasMany('App\Img');
+        return $this->hasMany(Img::class);
     }
 
     public function accessibility()
     {
-        return $this->hasMany('App\Accessibility');
+        return $this->hasMany(Accessibility::class);
     }
 
     public function parameter()
     {
-        return $this->hasMany('App\Parameter');
+        return $this->hasMany(Parameter::class);
     }
 
     public function all_comments()
     {
-        return $this->hasMany('App\PlaceComment');
+        return $this->hasMany(PlaceComment::class);
     }
 
     public function comments()
