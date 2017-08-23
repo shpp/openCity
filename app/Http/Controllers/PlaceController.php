@@ -30,12 +30,10 @@ class PlaceController extends Controller
 
     /**
      * Get places with filters
-     * @param
-     *      cat[] - array of id's categories
-     *      acc[] - array of id's accessibilities
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    publiC function getPlaces(Request $request)
+    public function getPlaces(Request $request)
     {
         $access_cnt_all = AccessibilityTitle::count();
         if (!isset($request->cat)) {
@@ -99,7 +97,7 @@ class PlaceController extends Controller
 
     /**
      * Simple search in Places
-     * @param val - request for search, must be name or adress
+     * @param Request $req
      * @return \Illuminate\Http\Response
      */
     public function searchPlaces(Request $req)
@@ -153,7 +151,6 @@ class PlaceController extends Controller
         } else {
             $place = Place::where('id', $request->id)->firstOrFail();
             $place->update($data);
-
         }
 
         $accessibility = $place->accessibility()->get();
@@ -161,7 +158,7 @@ class PlaceController extends Controller
         if (isset($request->acc)) {
             $acc_arr = $request->acc;
             foreach ($accessibility as $value) {
-                if (!in_array($value->acces_title_id, $acc_arr)) {
+                if (!in_array($value->acces_title_id, $acc_arr, true)) {
                     $value->delete();
                 }
             }

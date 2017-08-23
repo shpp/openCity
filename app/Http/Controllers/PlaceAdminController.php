@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Place;
@@ -166,9 +167,14 @@ class PlaceAdminController extends Controller
         return redirect('places/' . $place->id . '/edit');
     }
 
-    public function destroy(Request $request, $id)
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function destroy($id)
     {
-        $place = Place::destroy($id);
+        Place::destroy($id);
+        \Log::info('user ' . auth()->user()->email . ' delete place ' . $id);
         \Session::flash('status', 'Видалено успішно!');
         return redirect('places');
     }
@@ -192,16 +198,15 @@ class PlaceAdminController extends Controller
             'base_uri' => 'https://maps.googleapis.com/maps/api/place/textsearch/',
             'timeout' => 10.0,
         ]);
-        $addr_arr = Place::All()->where('geo_place_id', null);
+        $addr_arr = Place::all()->where('geo_place_id', null);
         $delay = 2;
-        // This KEY you can change to you valid Google API key
-        $my_api_key = 'AIzaSyC0sv23re_883wF08TXRjA1_8hNkq5-mww';
+        $my_api_key = env('GOOGLE_API_KEY');
         foreach ($addr_arr as $addr) {
             $req = 'json?query=' . $addr->city . '+' . $addr->street . '+' . $addr->number . '&language=uk&key=' . $my_api_key;
             $response = $client->request('POST', $req);
             sleep($delay);
             $result = json_decode($response->getBody(), true);
-            if ($result['status'] == 'OK') {
+            if ($result['status'] === 'OK') {
                 $result = $result['results'][0];
                 $addr->map_lat = $result['geometry']['location']['lat'];
                 $addr->map_lng = $result['geometry']['location']['lng'];
@@ -211,7 +216,7 @@ class PlaceAdminController extends Controller
                 echo $addr->geo_place_id . ' ' . $addr->comment_adr . ' ' . $addr->map_lat . ' ' . $addr->map_lng . '  OK!<br/>';
             } else {
                 echo 'Some tuoubles take with status: ' . $result['status'] . '<br/>';
-                if ($result['status'] == 'OVER_QUERY_LIMIT') {
+                if ($result['status'] === 'OVER_QUERY_LIMIT') {
                     $delay++;
                 }
             }
