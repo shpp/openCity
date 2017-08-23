@@ -130,6 +130,77 @@ class PlaceController extends Controller
 
     public function store(Request $request)
     {
-//        todo: add validation and store place
+        // todo: refactor this
+        $this->validate($request, [
+            'name' => 'required|max:500',
+            'category' => 'required|max:5',
+        ]);
+        $data = [
+            'name' => $request->name,
+            'short_name' => $request->short_name,
+            'comment' => $request->comment,
+            'category_id' => $request->category,
+            'city' => $request->city,
+            'street' => $request->street,
+            'number' => $request->number,
+            'map_lat' => !$request->map_lat ? null : $request->map_lat,
+            'map_lng' => !$request->map_lng ? null : $request->map_lng,
+            'geo_place_id' => $request->geo_place_id,
+            'comment_adr' => $request->comment_adr,
+        ];
+        if (empty($request->id)) {
+            $place = Place::create($data);
+        } else {
+            $place = Place::where('id', $request->id)->firstOrFail();
+            $place->update($data);
+
+        }
+
+        $accessibility = $place->accessibility()->get();
+        $parameters = $place->parameter()->get();
+        if (isset($request->acc)) {
+            $acc_arr = $request->acc;
+            foreach ($accessibility as $value) {
+                if (!in_array($value->acces_title_id, $acc_arr)) {
+                    $value->delete();
+                }
+            }
+            foreach ($acc_arr as $value) {
+                if (!$place->accessibility()
+                    ->where('acces_title_id', $value)
+                    ->first()
+                ) {
+                    $place->accessibility()->create(['acces_title_id' => $value]);
+                }
+            }
+        } else {
+            foreach ($accessibility as $value) {
+                $value->delete();
+            }
+
+        }
+
+        if (isset($request->param)) {
+            $param_arr = $request->param;
+            foreach ($param_arr as $key => $value) {
+                $parameter = $parameters->where('param_title_id', $key)->first();
+                if (!empty($value)) {
+                    if (null == $parameter) {
+                        $place->parameter()->create(['param_title_id' => $key,
+                            'value' => $value,
+                        ]);
+                    } else {
+                        $parameter->update(['value' => $value]);
+                    }
+                } else {
+                    if (!(null == $parameter)) {
+                        $parameter->delete();
+                    }
+                }
+            }
+        }
+        \Log::info(auth()->user()->email . ' create new place '. $request->name . ' id:' . $place->id);
+        \Session::flash('status', 'Інформація збережено успішно!');
+        return redirect('places/' . $place->id . '/edit');
     }
 }
