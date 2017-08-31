@@ -33,7 +33,7 @@ class Category extends Model
         'comment' => 'max:255',
     ];
 
-    public function place()
+    public function places()
     {
         return $this->hasMany(Place::class);
     }

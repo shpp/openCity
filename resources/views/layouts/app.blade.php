@@ -13,7 +13,7 @@
     <link href="/css/app.css" rel="stylesheet">
     <link href="/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
     <link href="/css/bootstrap-select.min.css" media="all" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('css/b.min.css') }}">
     @yield('styles')
     <!-- Scripts -->
     <script>
@@ -55,6 +55,7 @@
 <script src="/js/ua.js"></script>
 <script>$("#file_fild").fileinput({'language': 'ua'});</script>
 <script src="/js/bootstrap-select.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 @yield('scripts')
 
 </body>

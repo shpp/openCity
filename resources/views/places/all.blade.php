@@ -37,7 +37,7 @@
                                     <td class="table-text"><a
                                                 href="{{ url('places', $place->id) }}">{{$place->name }}</a></td>
                                     <td class="table-text">
-                                        <div>{{$place->category->name}}</div>
+                                        <a href="{{url('categories', $place->category->id)}}">{{$place->category->name}}</a>
                                     </td>
                                     <td class="table-text">
                                         <div>

@@ -30,9 +30,9 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 
     Route::get('/categories/create', 'CategoriesController@create');
     Route::post('/categories/create', 'CategoriesController@store');
-    Route::get('/categories/{id}', 'CategoriesController@show');
-    Route::get('/categories/{id}/edit', 'CategoriesController@edit');
-    Route::post('/categories/{id}/edit', 'CategoriesController@save');
+    Route::delete('/categories/{category}/delete', 'CategoriesController@destroy');
+    Route::get('/categories/{category}/edit', 'CategoriesController@edit');
+    Route::post('/categories/{category}/edit', 'CategoriesController@save');
 
     Route::get('permissions', 'PermissionsController@index');
 
@@ -61,6 +61,8 @@ Route::post('/messages', 'MessageController@store');
 
 Route::get('/home', 'HomeController@index');
 Route::get('/categories', 'CategoriesController@all');
+Route::get('/categories/{category}', 'CategoriesController@show');
+
 Route::get('/places', 'PlacesController@all');
 Route::get('/places/{id}', 'PlacesController@show');
 Route::get('/place/{id}/comments/', 'PlaceController@getComments');

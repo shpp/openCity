@@ -4,7 +4,7 @@
         <div class="col-md-12">
             <h1 class="text-center">
                 @if($category->id)
-                    Редагувати категорію {{$category->name}}
+                    Редагувати категорію "{{$category->name}}"
                 @else
                     Створити категорію
                 @endif
@@ -14,7 +14,6 @@
             @else
                 {!! Form::model($category, ['action' => 'CategoriesController@store']) !!}
             @endif
-            {!! Form::hidden('id', '') !!}
             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                 <label for="name">Имя</label>
                 {!! Form::text('name', old('name') ?: $category->name ?: '', ['class' => 'form-control',]) !!}
