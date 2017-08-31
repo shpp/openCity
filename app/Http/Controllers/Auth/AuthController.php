@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Log;
 use App\User;
 use Socialite;
 use Validator;
@@ -63,6 +64,7 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+        Log::notice($data['email'] . ' user was created. Name' . $data['name']);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -91,7 +93,6 @@ class AuthController extends Controller
     public function handleProviderCallback($provider)
     {
         $user = Socialite::driver($provider)->user();
-
         $authUser = $this->findOrCreateUser($user, $provider);
         auth()->login($authUser, true);
         return redirect($this->redirectTo);
@@ -111,6 +112,7 @@ class AuthController extends Controller
             return $authUser;
         }
 
+        Log::notice($user->email . ' user was created. Name' . $user->name);
         return User::create([
             'name'     => $user->name,
             'email'    => $user->email,

@@ -5,7 +5,7 @@
         <div class="col-md-12">
             @if ($places->count() > 0)
                 <div class="panel panel-default">
-                    <div class="panel-heading">Список місць</div>
+                    <div class="panel-heading">🏙️ Список місць</div>
                     <div class="panel-body">
                         @if (session('status'))
                             <div class="alert alert-success">{{ session('status') }}</div>

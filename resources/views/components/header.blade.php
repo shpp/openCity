@@ -12,7 +12,6 @@
             <!-- Branding Image -->
             <a class="navbar-brand" href="{{ url('') }}"><b>{{ config('app.name', 'Місто для всіх') }}</b></a>
         </div>
-
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
@@ -20,10 +19,10 @@
                     <li><a href="{{ url('/home') }}">Додому</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-expanded="false">Довідники</a>
+                           aria-expanded="false">Довідники <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ url('places') }}">Місця</a></li>
-                            <li><a href="{{ url('categories') }}">Категорії</a></li>
+                            <li><a href="{{ url('places') }}">🏠 Місця</a></li>
+                            <li><a href="{{ url('categories') }}">📌 Категорії</a></li>
                             @role('admin')
                             <li><a href="{{ url('users/all') }}">Користувачі</a></li>
                             <li><a href="{{ url('/catalogue/acc_name') }}">Назви доступностей</a></li>
@@ -61,16 +60,13 @@
                            aria-expanded="false">
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
-
                         <ul class="dropdown-menu" role="menu">
                             <li>
                                 <a href="{{ url('/logout') }}"
                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     Вийти
                                 </a>
-
-                                <form id="logout-form" action="{{ url('/logout') }}" method="POST"
-                                      style="display: none;">
+                                <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
                             </li>

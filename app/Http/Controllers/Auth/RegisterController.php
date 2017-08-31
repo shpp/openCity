@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Log;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -62,11 +63,11 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        Log::notice($data['email'] . ' user was created. Name' . $data['name']);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
-//        return redirect('/login');
     }
 }

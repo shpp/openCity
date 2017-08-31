@@ -9,7 +9,7 @@
             <!-- Current Tasks -->
             @if (count($places) > 0)
                 <div class="panel panel-default">
-                    <div class="panel-heading">Список місць</div>
+                    <div class="panel-heading">🏙️ Список місць</div>
                     <div class="panel-body">
                         @if (session('status'))
                             <div class="alert alert-success">
