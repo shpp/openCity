@@ -4,6 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\RoleUser
+ *
+ * @property int $user_id
+ * @property int $role_id
+ * @property-read \App\Role $role
+ * @property-read \App\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\RoleUser whereRoleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\RoleUser whereUserId($value)
+ * @mixin \Eloquent
+ */
 class RoleUser extends Model
 {
     protected $table = 'role_user';

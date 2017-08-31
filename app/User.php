@@ -25,6 +25,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Query\Builder|\App\User whereRememberToken($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $provider
+ * @property string|null $provider_id
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Role[] $roles
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereProvider($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereProviderId($value)
  */
 class User extends Authenticatable
 {

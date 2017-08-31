@@ -43,6 +43,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Place whereStreet($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Place whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\PlaceComment[] $all_comments
  */
 class Place extends Model
 {
@@ -65,6 +66,9 @@ class Place extends Model
     protected $hidden = ['created_at', 'updated_at',];
     protected $appends = ['acc_cnt'];
 
+    /**
+     * @return int
+     */
     public function getAccCntAttribute()
     {
         return Accessibility::where('place_id', $this->attributes['id'])->count();

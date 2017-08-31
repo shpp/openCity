@@ -4,6 +4,25 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Accessibility
+ *
+ * @property int $id
+ * @property int|null $place_id
+ * @property int|null $acces_title_id
+ * @property string|null $comment
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property-read \App\AccessibilityTitle|null $accessibilityTitle
+ * @property-read \App\Place|null $place
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Accessibility whereAccesTitleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Accessibility whereComment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Accessibility whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Accessibility whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Accessibility wherePlaceId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Accessibility whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Accessibility extends Model
 {
     protected $fillable = [

@@ -28,6 +28,12 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('places/', 'PlaceController@store'); // todo: add create place permission middleware
     Route::get('places/{id}/edit', 'PlaceAdminController@edit'); // todo: add edit place permission middleware
 
+    Route::get('/categories/create', 'CategoriesController@create');
+    Route::post('/categories/create', 'CategoriesController@store');
+    Route::get('/categories/{id}', 'CategoriesController@show');
+    Route::get('/categories/{id}/edit', 'CategoriesController@edit');
+    Route::post('/categories/{id}/edit', 'CategoriesController@save');
+
     Route::get('permissions', 'PermissionsController@index');
 
     Route::get('users/all', 'UsersController@showAll');
@@ -54,7 +60,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 Route::post('/messages', 'MessageController@store');
 
 Route::get('/home', 'HomeController@index');
-
+Route::get('/categories', 'CategoriesController@all');
 Route::get('/places', 'PlacesController@all');
 Route::get('/places/{id}', 'PlacesController@show');
 Route::get('/place/{id}/comments/', 'PlaceController@getComments');

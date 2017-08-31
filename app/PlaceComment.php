@@ -30,6 +30,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\PlaceComment whereRating($value)
  * @method static \Illuminate\Database\Query\Builder|\App\PlaceComment whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \App\User $author
  */
 class PlaceComment extends Model
 {
@@ -40,7 +41,7 @@ class PlaceComment extends Model
 
     public function author()
     {
-        return $this->hasOne('App\User', 'id', 'author_id');
+        return $this->hasOne(User::class, 'id', 'author_id');
     }
 //    todo: get author
 //    todo: like. increment like column by 1

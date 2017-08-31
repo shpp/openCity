@@ -17,16 +17,14 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
                 <li><a href="{{ url('places') }}">Місця</a></li>
+                <li><a href="{{ url('categories') }}">Категорії</a></li>
                 @if (!Auth::guest())
                     <li><a href="{{ url('/home') }}">Додому</a></li>
                     @role('admin')
                     <li><a href="{{ url('users/all') }}">Користувачі</a></li>
-                    <li><a href="{{ url('admin/places') }}">Список місць</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-expanded="false">
-                            Довідники
-                        </a>
+                           aria-expanded="false">Довідники</a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ url('/catalogue/categories') }}">Категорії</a></li>
                             <li><a href="{{ url('/catalogue/acc_name') }}">Назви доступностей</a></li>
@@ -39,7 +37,6 @@
                            aria-expanded="false">
                             Системні
                         </a>
-
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ url('/destroy_null') }}">Видалити помилкові місця</a></li>
                             <li><a href="{{ url('/load_geo') }}">Проставити координати</a></li>
