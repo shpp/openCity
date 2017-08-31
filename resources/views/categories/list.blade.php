@@ -6,9 +6,7 @@
             <!-- Current Tasks -->
             @if (count($categories) > 0)
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Список місць
-                    </div>
+                    <div class="panel-heading">Список категорій</div>
                     <div class="panel-body">
                         @if (session('status'))
                             <div class="alert alert-success">{{ session('status') }}</div>
