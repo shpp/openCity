@@ -25,8 +25,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Accessibility extends Model
 {
+    protected $table = 'accessibilities';
     protected $fillable = [
-        'id', 'name', 'place_id', 'acces_title_id', 'comment',
+        // fixme: migrate column and write access title id correctly, probably not shortened
+        'name', 'place_id', 'acces_title_id', 'comment',
     ];
     protected $hidden = [
         'created_at', 'updated_at',

@@ -60,12 +60,15 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 Route::post('/messages', 'MessageController@store');
 
 Route::get('/home', 'HomeController@index');
+
 Route::get('/categories', 'CategoriesController@all');
 Route::get('/categories/{category}', 'CategoriesController@show');
 
 Route::get('/places', 'PlacesController@all');
 Route::get('/places/{id}', 'PlacesController@show');
 Route::get('/place/{id}/comments/', 'PlaceController@getComments');
+
+Route::get('/accessibility_titles/{accessibility_title}', 'AccessibilityTitleController@show');
 
 Route::group(['middleware' => ['auth', 'banned']], function () {
     Route::post('/place-comments', 'PlaceCommentsController@addPlaceComment');

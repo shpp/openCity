@@ -10,7 +10,7 @@
                 <span class="icon-bar"></span>
             </button>
             <!-- Branding Image -->
-            <a class="navbar-brand" href="{{ url('') }}">{{ config('app.name', 'Місто для всіх') }}</a>
+            <a class="navbar-brand" href="{{ url('') }}"><b>{{ config('app.name', 'Місто для всіх') }}</b></a>
         </div>
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">

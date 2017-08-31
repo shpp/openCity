@@ -9,10 +9,7 @@
             <!-- Current Tasks -->
             @if (count($places) > 0)
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Список місць
-                    </div>
-
+                    <div class="panel-heading">Список місць</div>
                     <div class="panel-body">
                         @if (session('status'))
                             <div class="alert alert-success">
@@ -43,7 +40,10 @@
                                         <div>
                                             @if (count($place['accessibility']) > 0)
                                                 @foreach ($place['accessibility'] as $item)
-                                                    {{$item->accessibilityTitle->name}}<br>
+                                                    <a href="{{url('accessibility_titles', $item->accessibilityTitle->id)}}">
+                                                        {{$item->accessibilityTitle->name}}
+                                                    </a>
+                                                    <br>
                                                 @endforeach
                                             @endif
                                         </div>

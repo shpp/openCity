@@ -22,11 +22,18 @@ use Illuminate\Database\Eloquent\Model;
  */
 class AccessibilityTitle extends Model
 {
-    protected $fillable = ['id', 'name', 'comment',];
+    protected $table = 'accessibility_titles';
+    protected $fillable = ['name', 'comment',];
     protected $hidden = ['created_at', 'updated_at',];
 
     public function accessibility()
     {
         return $this->hasMany(Accessibility::class, 'acces_title_id', 'id');
+    }
+
+    public function places()
+    {
+        return $this->belongsToMany(Place::class, 'accessibilities', 'acces_title_id', 'place_id', 'id');
+
     }
 }
