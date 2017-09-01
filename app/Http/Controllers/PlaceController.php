@@ -20,12 +20,9 @@ class PlaceController extends Controller
      */
     public function index()
     {
-        $categories = Category::All();
-        $accessibilities = AccessibilityTitle::All();
-
-        return view('welcome')
-            ->with('categories', $categories)
-            ->with('accessibilities', $accessibilities);
+        return view('app')
+            ->with('categories', Category::all())
+            ->with('accessibilities', AccessibilityTitle::all());
     }
 
     /**

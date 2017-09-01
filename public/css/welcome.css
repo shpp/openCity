@@ -229,13 +229,19 @@ footer {
   background-color: #4aa54e;
 }
 
-.main-social-taxi__button {
+.main-trolley__button {
   position: absolute;
   bottom: 20px;
   right: 20px;
 }
 
-.main-social-taxi__icon {
+.main-social-taxi__button {
+  position: absolute;
+  bottom: 65px;
+  right: 20px;
+}
+
+.main-button__icon {
   font-size: 23px;
 }
 

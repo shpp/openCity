@@ -93,7 +93,8 @@
         </div>
         <div id="map"></div>
         @include('components.right-bar')
-        <a class="waves-effect waves-light btn modal-trigger main-social-taxi__button yellow accent-2 black-text" href="#social_taxi_modal"><span class="main-social-taxi__icon">🚕</span> Соціальне таксі</a>
+        <a class="waves-effect waves-light btn modal-trigger main-trolley__button light-blue lighten-5 black-text" href="#low_trolley_modal"><span class="main-button__icon">🚎</span> Низькополий тролейбус</a>
+        <a class="waves-effect waves-light btn modal-trigger main-social-taxi__button yellow accent-2 black-text" href="#social_taxi_modal"><span class="main-button__icon">🚕</span> Соціальне таксі</a>
     </div>
 </main>
 
@@ -175,9 +176,18 @@
     </div>
 </footer>
 <!-- Modal Structure -->
+<div id="low_trolley_modal" class="modal">
+    <div class="modal-content">
+        <h5 class="center-align">Місце знаходження низькополого тролейбусу</h5>
+        Щоб дізнатися, де знаходиться низькополий тролейбус, наберіть цей номер: <a href="tel:+380957260939">(095)726-09-39</a>
+    </div>
+    <div class="modal-footer">
+        <button href="#!" class="modal-action modal-close waves-effect waves-green btn">Добре</button>
+    </div>
+</div>
 <div id="social_taxi_modal" class="modal">
     <div class="modal-content">
-        <h4>Соціальне таксі</h4>
+        <h4 class="center-align">Соціальне таксі</h4>
         Щоб викликати соціальне таксі, вам потрібно зв'язатися з територіальним центром соціального обслуговування.
         Скористатися послугою можуть особи, які стоять на обліку в управлінні соціального захисту населення. Замовити таксі можливо у будні з 8:00 до 17:00 тільки у державні установи.
         <br><br>
@@ -196,16 +206,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/typeahead.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
-<script>
-  $(document).ready(function(){
-    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
-    $('.modal').modal();
-  });
-
-</script>
 <script src="https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key={{$google_api_key}}&amp;callback=initMap&amp;language=uk_UA&amp;region=ES"
-        async defer></script>
+async defer></script>
 <script src="/js/mapinit.js"></script>
+<script>
+  $(document).ready(function(){
+    $('.modal').modal();
+  });
+</script>
 </body>
 </html>
