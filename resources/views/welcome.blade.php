@@ -47,9 +47,7 @@
                     </div>
                 </li>
                 <li class="bold">
-                    <a class="collapsible-header waves-effect waves-green">
-                        Параметри зручності
-                    </a>
+                    <a class="collapsible-header waves-effect waves-green">Параметри зручності</a>
                     <div class="collapsible-body">
                         <form id="access-form">
                             <ul id="accessibility">
@@ -69,10 +67,16 @@
                         </form>
                     </div>
                 </li>
+                <li>
+                    <a href="https://play.google.com/store/apps/details?id=me.kowo.opencity"
+                       class="btn green waves waves-light"
+                       target="_blank">🤖 Завантажити додаток</a>
+                </li>
             </ul>
         </li>
     </ul>
 </aside>
+
 <main>
     <div class="content">
         <div class="search-wrapper card">
@@ -89,8 +93,10 @@
         </div>
         <div id="map"></div>
         @include('components.right-bar')
+        <a class="waves-effect waves-light btn modal-trigger main-social-taxi__button yellow accent-2 black-text" href="#social_taxi_modal"><span class="main-social-taxi__icon">🚕</span> Соціальне таксі</a>
     </div>
 </main>
+
 <footer class="page-footer green">
     <div class="custom-footer-container">
         <div class="footer-description">
@@ -140,20 +146,63 @@
         </div>
     </div>
     <div class="footer-copyright">
-        <div class="container">
-            © 2017 made with love by
-            <a href="http://programming.kr.ua"
-                    class="white-text"
-                    target="_blank">
-                Ш++
-            </a>
+        <div class="container row" style="margin: 0 auto;">
+            <div class="col s6">
+                © 2017 made with love by
+                <a href="http://programming.kr.ua"
+                   class="white-text"
+                   target="_blank">
+                    Ш++
+                </a>
+            </div>
+            <div class="col s6 right-align">
+                <a href="https://www.facebook.com/groups/1531774503500273/?fref=ts" target="_blank">
+                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                         viewBox="0 0 167.657 167.657"
+                         style="enable-background:new 0 0 167.657 167.657; width: 25px; height: 25px"
+                         xml:space="preserve">
+<g>
+    <path style="fill:#fff;" d="M83.829,0.349C37.532,0.349,0,37.881,0,84.178c0,41.523,30.222,75.911,69.848,82.57v-65.081H49.626
+        v-23.42h20.222V60.978c0-20.037,12.238-30.956,30.115-30.956c8.562,0,15.92,0.638,18.056,0.919v20.944l-12.399,0.006
+        c-9.72,0-11.594,4.618-11.594,11.397v14.947h23.193l-3.025,23.42H94.026v65.653c41.476-5.048,73.631-40.312,73.631-83.154
+        C167.657,37.881,130.125,0.349,83.829,0.349z"/>
+</g></svg>
+                    <span class="foot-facebook-link__text"> Місто для всіх</span>
+                </a>
+            </div>
         </div>
     </div>
 </footer>
+<!-- Modal Structure -->
+<div id="social_taxi_modal" class="modal">
+    <div class="modal-content">
+        <h4>Соціальне таксі</h4>
+        Щоб викликати соціальне таксі, вам потрібно зв'язатися з територіальним центром соціального обслуговування.
+        Скористатися послугою можуть особи, які стоять на обліку в управлінні соціального захисту населення. Замовити таксі можливо у будні з 8:00 до 17:00 тільки у державні установи.
+        <br><br>
+        Фортечний район (за три доби тричі на місяць): <address>вул. Шатила, 12</address><br>
+        телефони: <a href="tel:+38(0522)37-12-75">(0522) 37-12-75</a>, <a href="tel:+38(099)-666 29 41">(099) 666-29-41</a><br>
+        e-mail: <a href="mailto:kirtercentr@mail.ru">kirtercentr@mail.ru</a><br><br>
+        Подільський район (за добу): <address>вул. Архітектора Паученка 53/39</address><br>
+        телефон: <a href="tel:+38(0522)22-08-67">(0522) 22-08-67</a><br>
+        e-mail: <a href="mailto:len.upszn@krmr.gov.ua">len.upszn@krmr.gov.ua</a><br>
+    </div>
+    <div class="modal-footer">
+        <button href="#!" class="modal-action modal-close waves-effect waves-green btn">Добре</button>
+    </div>
+</div>
 {{--todo: bundle this scripts--}}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/typeahead.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+<script>
+  $(document).ready(function(){
+    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+    $('.modal').modal();
+  });
+
+</script>
 <script src="https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key={{$google_api_key}}&amp;callback=initMap&amp;language=uk_UA&amp;region=ES"
         async defer></script>

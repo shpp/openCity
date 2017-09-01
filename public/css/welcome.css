@@ -7,6 +7,10 @@ main {
   height: 100%;
 }
 
+address {
+  display: inline-block;
+}
+
 .content {
   height: 100%;
   width: calc(100% - 300px);
@@ -30,14 +34,19 @@ aside .side-nav.fixed {
 
 aside #nav-mobile li.logo {
   text-align: center;
-  margin-top: 1.7rem;
+  height: 55px;
   margin-bottom: 0;
-  font-family: 'Ukrainian Play', arial;
+  font-family: 'Ukrainian Play', Helvetica, arial, sans-serif;
 }
 
 aside #nav-mobile li.logo a {
   font-size: 2rem;
-  line-height: 1;
+  line-height: 65px;
+  height: 55px;
+}
+
+.side-nav .logo a:hover {
+  background-color: rgb(235, 255, 236);
 }
 
 aside ul.side-nav.fixed li {
@@ -116,7 +125,7 @@ aside li.search .search-wrapper.card input#search:focus {
 }
 
 footer {
-  z-index: 999;
+  z-index: 1000;
   position: relative;
 }
 
@@ -181,6 +190,7 @@ footer {
   border-bottom: 1px solid white;
   box-shadow: 0 1px 0 0 white;
 }
+
 /* valid color */
 /*.footer-form .input-field input[type=text].valid {
   border-bottom: 1px solid #000;
@@ -214,7 +224,27 @@ footer {
   vertical-align: middle;
 }
 
-[type="checkbox"].filled-in:checked+label:after {
-    border: 2px solid #4aa54e;
-    background-color: #4aa54e;
+[type="checkbox"].filled-in:checked + label:after {
+  border: 2px solid #4aa54e;
+  background-color: #4aa54e;
 }
+
+.main-social-taxi__button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+.main-social-taxi__icon {
+  font-size: 23px;
+}
+
+/* vv weird typeahead bug workaround*/
+.twitter-typeahead .tt-query, .twitter-typeahead .tt-hint {
+  padding: 0 45px 0 15px;
+  font-size: 16px;
+  font-weight: 300;
+  width: calc(100% - 60px);
+  height: 45px;
+}
+/* ^^ end weird typeahead workaround*/

@@ -53,7 +53,7 @@
                 <!-- Authentication Links -->
                 @if (Auth::guest())
                     <li><a href="{{ url('/login') }}">Увійти</a></li>
-                    {{--<li><a href="{{ url('/register') }}">Зареєструватись</a></li>--}}
+                    <li><a href="{{ url('/register') }}">Зареєструватись</a></li>
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
