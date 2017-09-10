@@ -121,7 +121,7 @@ return [
     */
 
     'log' => env('APP_LOG', 'daily'),
-
+    'log_max_files' => 100,
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
     /*
@@ -178,7 +178,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
-	    // Laravel BackUp
+        // Laravel BackUp
         Spatie\Backup\BackupServiceProvider::class,
         // Laravel logs
         Arcanedev\LogViewer\LogViewerServiceProvider::class,

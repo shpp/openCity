@@ -1,20 +1,21 @@
-var marker;
-var geocoder;
-var map;
+let marker;
+let geocoder;
+let map;
 
 $(document).ready(function () {
   $("#places_category").change(function () {
-    var curLoc = window.location;
-    var url = curLoc.origin + curLoc.pathname + '?category=' + $(this).val();
+    let curLoc = window.location;
+    let url = curLoc.origin + curLoc.pathname + '?category=' + $(this).val();
     $(location).attr('href', url);
   });
+
 });
 
 /****************************************************
  * Google map add marker
  ****************************************************/
 function addMarker(location) {
-  var image = new google.maps.MarkerImage('/img/green-dot.png');//,
+  let image = new google.maps.MarkerImage('/img/green-dot.png');//,
   if (marker) {
     marker.setMap(null);
   }
@@ -39,8 +40,8 @@ function addMarker(location) {
  * Google map initialization
  ****************************************************/
 function initMap() {
-  var latLng_data;
-  var divMap = document.getElementById('map');
+  let latLng_data;
+  let divMap = document.getElementById('map');
 
   if (!divMap) {
     return false;
@@ -65,10 +66,10 @@ function initMap() {
 
   document.getElementById('find_address').addEventListener('click', function (event) {
     event.preventDefault();
-    var find_option = $('input[name="find_option"]:checked')[0].value;
-    if ('adr' == find_option) {
+    let find_option = $('input[name="find_option"]:checked')[0].value;
+    if ('adr' === find_option) {
       geocodeAddress();
-    } else if ('gps' == find_option) {
+    } else if ('gps' === find_option) {
       geocodeLatLng();
     } else {
       return false;
@@ -85,11 +86,11 @@ function initMap() {
  * Google geocode search coordinate by address
  ****************************************************/
 function geocodeAddress() {
-  address = $('input[name="city"]').val() + " " +
-    $('input[name="street"]').val() + " " +
-    $('input[name="number"]').val();
+  let address = `${$('input[name="city"]').val()} ${$('input[name="street"]').val()} ${$('input[name="number"]').val()}`;
+  console.log(geocoder);
   geocoder.geocode({'address': address}, function (results, status) {
-    if (status == google.maps.GeocoderStatus.OK) {
+    console.log(results, status);
+    if (status === google.maps.GeocoderStatus.OK) {
       if (results[0]) {
         fillAddress(results[0]);
         addMarker(latLng());
@@ -104,7 +105,7 @@ function geocodeAddress() {
  * Google geocode address search by coordinates
  ****************************************************/
 function geocodeLatLng() {
-  var latLng_data = latLng();
+  let latLng_data = latLng();
   geocoder.geocode({'location': latLng_data}, function (results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
       if (results[0]) {
@@ -120,8 +121,8 @@ function geocodeLatLng() {
 }
 
 function latLng() {
-  var lat = $('input[name="map_lat"]').val();
-  var lng = $('input[name="map_lng"]').val();
+  let lat = $('input[name="map_lat"]').val();
+  let lng = $('input[name="map_lng"]').val();
   return {lat: +lat, lng: +lng}
 }
 

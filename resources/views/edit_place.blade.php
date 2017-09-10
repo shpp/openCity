@@ -69,8 +69,6 @@
                                             @endforeach
                                         </div>
                                     </div>
-
-
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             <strong>Додаткові параметри&nbsp;</strong>
@@ -81,12 +79,11 @@
                                                 <label class="col-md-6 control-label">{{$item->name}}:</label>
                                                 <div class="col-md-8">
                                                     <input type="text" class="form-control" name="param[{{$item->id}}]"
-                                                           value="{{(isset($param[$item->id]))? $param[$item->id]:""}}">
+                                                           value="{{(isset($param[$item->id]))? $param[$item->id]:''}}">
                                                 </div>
                                             @endforeach
                                         </div>
                                     </div>
-
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
@@ -94,10 +91,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            Адреса
-
-                                        </div>
+                                        <div class="panel-heading">Адреса</div>
                                         <div class="panel-body">
                                             <label class="radio-inline"><input type="radio" name="find_option"
                                                                                value="adr" CHECKED>За адресою</label>

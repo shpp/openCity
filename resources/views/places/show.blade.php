@@ -1,10 +1,9 @@
 @extends('layouts.app')
-
 @section('content')
     <div class="container">
         <div class="col-md-12">
             <div class="bs-callout bs-callout-info" id="callout-helper-bg-specificity">
-                <h3>{{ $place->name }}</h3>
+                <h3 class="text-center">{{ $place->name }}</h3>
                 @if($place->short_name)
                     <h6>{{ $place->short_name }}</h6>
                 @endif
@@ -26,14 +25,17 @@
                             @endif
                             @if (!empty($place->accessibility))
                                 <ul>
+
                                     @foreach($place->accessibility as $access)
-                                        <li>
-                                            {{ $access->accessibilityTitle->name }}
-                                        </li>
+                                        <li>{{ $access->accessibilityTitle->name }}</li>
                                     @endforeach
+
                                 </ul>
                             @endif
                             <div>{{ $place->comment }}</div>
+                            @role('admin')
+                            <a href="{{ url('places', [$place->id, 'edit']) }}" class="btn btn-info">✏️ Редагувати</a>
+                            @endrole
                         </div>
                         <div class="col-md-6">
                             <div id="place_map" style="width: 100%; height: 250px"></div>
@@ -73,13 +75,15 @@
                                                         </h4>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                                                        <button type="button" class="btn btn-default"
+                                                                data-dismiss="modal">
                                                             Скасувати
                                                         </button>
                                                         @if(auth()->user()->hasRole('admin') || auth()->user()->id == $comment->author_id)
                                                             {!! Form::open(['url' => url('place-comments', $comment->id),
                                                              'method' =>'delete', 'style' => 'display: inline;']) !!}
-                                                            <input type="submit" class="btn btn-danger" value="Видалити">
+                                                            <input type="submit" class="btn btn-danger"
+                                                                   value="Видалити">
                                                             {!! Form::close() !!}
                                                         @endif
                                                     </div>
@@ -95,7 +99,7 @@
                     @endif
 
                     {!! Form::open(['url' => url('place-comments'), 'method' => 'post']) !!}
-                        <input type="hidden" value="{{ $place->id }}" name="place-id">
+                    <input type="hidden" value="{{ $place->id }}" name="place-id">
                     <label for="comment"></label>
                     {!! Form::textarea('comment', '', ['class' => 'form-control', 'id'=> 'comment', 'rows' => 2]) !!}
                     @if(auth()->user())
@@ -115,25 +119,23 @@
         </div>
     </div>
 @endsection
+{{--todo: change to google maps--}}
 @section('scripts')
     <script src="https://api-maps.yandex.ru/2.1/?lang=uk_UA" type="text/javascript"></script>
-
     <script type="text/javascript">
-        ymaps.ready(function () {
-            var placeMap = new ymaps.Map("place_map", {
-                center: [{{ substr($place->map_lat, 0, 5) }}, {{ substr($place->map_lng, 0, 5)}}],
-                zoom: 16,
-                controls: []
-            });
-
-            var placeObject = new ymaps.Placemark([{{ substr($place->map_lat, 0, 5) }}, {{ substr($place->map_lng, 0, 5)}}], {
-                balloonContent: '{{ $place->name }}',
-                iconCaption: '{{ $place->name }}',
-                preset: 'islands#blackStretchyIcon'
-            });
-
-            placeMap.geoObjects.add(placeObject);
-            placeMap.controls.add(new ymaps.control.ZoomControl());
+      ymaps.ready(function () {
+        const placeMap = new ymaps.Map("place_map", {
+          center: [{{ substr($place->map_lat, 0, 5) }}, {{ substr($place->map_lng, 0, 5)}}],
+          zoom: 16,
+          controls: []
         });
+        const placeObject = new ymaps.Placemark([{{ substr($place->map_lat, 0, 5) }}, {{ substr($place->map_lng, 0, 5)}}], {
+          balloonContent: '{{ $place->name }}',
+          iconCaption: '{{ $place->name }}',
+          preset: 'islands#blackStretchyIcon'
+        });
+        placeMap.geoObjects.add(placeObject);
+        placeMap.controls.add(new ymaps.control.ZoomControl());
+      });
     </script>
 @endsection

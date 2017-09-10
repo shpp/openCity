@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Session;
 use App\Place;
 use App\Address;
 use App\Category;
@@ -90,7 +91,7 @@ class PlaceAdminController extends Controller
      * Create or save item.
      *
      * @param  Request $request
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
     {
@@ -116,7 +117,6 @@ class PlaceAdminController extends Controller
         } else {
             $place = Place::where('id', $request->id)->firstOrFail();
             $place->update($data);
-
         }
 
         $accessibility = $place->accessibility()->get();
@@ -131,8 +131,7 @@ class PlaceAdminController extends Controller
             foreach ($acc_arr as $value) {
                 if (!$place->accessibility()
                     ->where('acces_title_id', $value)
-                    ->first()
-                ) {
+                    ->first()) {
                     $place->accessibility()->create(['acces_title_id' => $value]);
                 }
             }
@@ -163,7 +162,7 @@ class PlaceAdminController extends Controller
             }
         }
 
-        \Session::flash('status', 'Інформація збережено успішно!');
+        Session::flash('status', 'Інформація збережено успішно!');
         return redirect('places/' . $place->id . '/edit');
     }
 
@@ -182,7 +181,7 @@ class PlaceAdminController extends Controller
     public function destroyNull()
     {
         Place::where('name', null)->delete();
-        \Session::flash('status', 'Видалення нульових записів успішно!');
+        Session::flash('status', 'Видалення нульових записів успішно!');
         return redirect('places');
     }
 
@@ -198,7 +197,7 @@ class PlaceAdminController extends Controller
             'base_uri' => 'https://maps.googleapis.com/maps/api/place/textsearch/',
             'timeout' => 10.0,
         ]);
-        $addr_arr = Place::all()->where('geo_place_id', null);
+        $addr_arr = Place::all()->where('geo_place_id', null)->get();
         $delay = 2;
         $my_api_key = env('GOOGLE_API_KEY');
         foreach ($addr_arr as $addr) {
@@ -215,7 +214,7 @@ class PlaceAdminController extends Controller
                 $addr->save();
                 echo $addr->geo_place_id . ' ' . $addr->comment_adr . ' ' . $addr->map_lat . ' ' . $addr->map_lng . '  OK!<br/>';
             } else {
-                echo 'Some tuoubles take with status: ' . $result['status'] . '<br/>';
+                echo 'Some troubles take with status: ' . $result['status'] . '<br/>';
                 if ($result['status'] === 'OVER_QUERY_LIMIT') {
                     $delay++;
                 }

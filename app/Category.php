@@ -33,6 +33,9 @@ class Category extends Model
         'comment' => 'max:255',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function places()
     {
         return $this->hasMany(Place::class);
