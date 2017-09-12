@@ -36,7 +36,7 @@ return [
         'enabled'    => true,
         'attributes' => [
             'prefix'     => 'logs',
-            'middleware' => ['web', 'auth', 'role:admin'],
+            'middleware' => ['web', 'auth', 'banned', 'role:admin'],
         ],
     ],
 
