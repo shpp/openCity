@@ -208,13 +208,13 @@
                 {{ csrf_field() }}
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="email" type="email" class="validate">
+                        <input id="email" type="email" class="validate" name="email">
                         <label for="email">Електронна пошта</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="password" type="password" class="validate">
+                        <input id="password" type="password" class="validate" name="password">
                         <label for="password">Пароль</label>
                     </div>
                 </div>
