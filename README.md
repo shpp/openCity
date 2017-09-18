@@ -27,17 +27,6 @@
 * Через `PhpMyadmin` импортировать в базу данные из файла `database/data/cityguide.sql`;
 * Выполнить `php artisan key:generate`;
 
-> Linux note:
-``` bash
-git clone https://github.com/shpp/openCity
-cd openCity
-cp .env.example .env
-php composer.phar install
-mysql -u root -p < database/init.sql
-mysql -u root -p --database shpp_opencity < database/data/cityguide.sql
-php artisan key:generate
-```
-
 ##### Все. Проект готов к работе.  
 
 ##### Для входа в админку необходимо ввести:
