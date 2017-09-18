@@ -25,12 +25,18 @@
         <li class="no-padding">
             <ul class="collapsible collapsible-accordion">
                 <li class="bold active">
-                    <a class="collapsible-header waves-effect waves-green active">Категорії мiсць</a>
+                    <a class="collapsible-header waves-effect waves-green active">
+                        Категорії мiсць
+                    </a>
                     <div class="collapsible-body">
                         <form id="categories-form">
                             <ul id="categories" style="max-height: 50vh; overflow: auto; position: relative;">
+                                <li>
+                                    <input type="checkbox" id="checkAll" class="filled-in" checked/>
+                                    <label for="checkAll" class="black-text">Усі місця</label>
+                                </li>
                                 @foreach ($categories as $category)
-                                    <li>
+                                    <li class="category-toggle">
                                         <input type="checkbox"
                                                name="cat[]"
                                                id="cat{{$category->id}}"
@@ -210,8 +216,10 @@
 <script src="https://maps.googleapis.com/maps/api/js?key={{$google_api_key}}&amp;callback=initMap&amp;language=uk_UA&amp;region=ES"
 async defer></script>
 <script src="/js/mapinit.js"></script>
+<script src="/js/MassToggler.js"></script>
 <script>
   $(document).ready(function(){
+    MassToggler('aside input#checkAll', 'aside li.category-toggle input'); 
     $('.modal').modal();
   });
 </script>
