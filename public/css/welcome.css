@@ -17,6 +17,10 @@ address {
   float: right;
 }
 
+.modal.modal-small {
+  width: 35%;
+}
+
 /* Always set the map height explicitly to define the size of the div
 * element that contains the map. */
 #map {
