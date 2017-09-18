@@ -10,7 +10,9 @@
     {{--todo: bundle this styles --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
     <link rel="stylesheet" href="https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/welcome.css">
+    <link rel="stylesheet" href="css/materialize-social.css">    
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     {{--TODO: opengraph--}}
     {{--todo: add fancy favicon--}}
@@ -195,27 +197,21 @@
         <h5 class="center-align">Вхід в аккаунт</h5>
         <div class="section"></div>
         <div class="row">
-            <form class="col s12" role="form" method="POST" action="{{ url('/login') }}">
+            <form class="col s6" role="form" method="POST" action="{{ url('/login') }}">
                 <div class="row">
-                    <div class="input-field col s7">
+                    <div class="input-field col s12">
                         <input id="email" type="email" class="validate">
                         <label for="email">Електронна пошта</label>
                     </div>
-                    <div class="input-field col s5">
-                        <a class="btn btn-full" href="{{ url('register') }}">Зареєструватися</a>
-                    </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s7">
+                    <div class="input-field col s12">
                         <input id="password" type="password" class="validate">
                         <label for="password">Пароль</label>
                     </div>
-                    <div class="input-field col s5">
-                        <a class="btn btn-full" href="{{ url('/password/reset') }}">Забули пароль?</a>
-                    </div>
                 </div>
                 <div class="row">
-                    <div class="col s12 right-align">
+                    <div class="col s12">
                         <input type="checkbox" id="login-remember-me" class="filled-in"/>
                         <label for="login-remember-me" class="black-text">Запам’ятати мене</label>
                     </div>
@@ -226,6 +222,27 @@
                     </div>
                 </div>
             </form>
+            <div class="col s6">
+                <div class="row">
+                    <a class="col s12 waves-effect waves-light btn social facebook"
+                        href="{{ url('/auth/facebook') }}"
+                    >
+                        <i class="fa fa-facebook"></i> Вхід через facebook</a>
+                </div>
+                <div class="row">
+                    <a class="col s12 waves-effect waves-light btn social twitter"
+                        href="{{ url('/auth/twitter') }}"
+                    >
+                        <i class="fa fa-twitter"></i> Вхід через twitter</a>
+                </div>
+                <div class="section"></div>
+                <div class="row">
+                    <a class="col s12 btn" href="{{ url('register') }}">Зареєструватися</a>
+                </div>
+                <div class="row">
+                    <a class="col s12 btn btn-full" href="{{ url('/password/reset') }}">Забули пароль?</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
