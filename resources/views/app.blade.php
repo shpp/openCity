@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
     <link rel="stylesheet" href="https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/welcome.css">
     <link rel="stylesheet" href="css/materialize-social.css">    
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -78,7 +79,9 @@
                     <li>
                         <a href="https://play.google.com/store/apps/details?id=me.kowo.opencity"
                         class="btn green waves waves-light"
-                        target="_blank">🤖 Завантажити додаток</a>
+                        target="_blank">
+                            <i class="material-icons white-text">android</i>
+                            Завантажити</a>
                     </li>
                 </ul>
             </li>
@@ -100,8 +103,12 @@
             </div>
             <div id="map"></div>
             @include('components.right-bar')
-            <a class="waves-effect waves-light btn modal-trigger main-trolley__button light-blue lighten-5 black-text" href="#low_trolley_modal"><span class="main-button__icon">🚎</span> Низькополий тролейбус</a>
-            <a class="waves-effect waves-light btn modal-trigger main-social-taxi__button yellow accent-2 black-text" href="#social_taxi_modal"><span class="main-button__icon">🚕</span> Соціальне таксі</a>
+            <a class="waves-effect waves-light btn modal-trigger main-trolley__button light-blue lighten-5 black-text" href="#low_trolley_modal">
+                <i class="material-icons left">directions_bus</i>
+                Низькополий тролейбус</a>
+            <a class="waves-effect waves-light btn modal-trigger main-social-taxi__button yellow accent-2 black-text" href="#social_taxi_modal">
+                <i class="material-icons left">local_taxi</i>
+                Соціальне таксі</a>
         </div>
     </main>
 
@@ -216,10 +223,9 @@
                         <label for="login-remember-me" class="black-text">Запам’ятати мене</label>
                     </div>
                 </div>
+                <div class="section"></div>
                 <div class="row">
-                    <div class="input-field col s12">
-                        <input type="submit" class="btn btn-full" value="Продовжити"></input>
-                    </div>
+                    <button type="submit" class="btn btn-full">Продовжити</button>
                 </div>
             </form>
             <div class="col s6">
