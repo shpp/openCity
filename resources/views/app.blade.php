@@ -205,6 +205,7 @@
         <div class="section"></div>
         <div class="row">
             <form class="col s6" role="form" method="POST" action="{{ url('/login') }}">
+                {{ csrf_field() }}
                 <div class="row">
                     <div class="input-field col s12">
                         <input id="email" type="email" class="validate">
@@ -269,13 +270,13 @@
 </div>
 {{--todo: bundle this scripts--}}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="./js/typeahead.js"></script>
+<script src="/js/typeahead.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
 <script src="https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key={{$google_api_key}}&amp;callback=initMap&amp;language=uk_UA&amp;region=ES"
 async defer></script>
-<script src="./js/mapinit.js"></script>
-<script src="./js/MassToggler.js"></script>
+<script src="/js/mapinit.js"></script>
+<script src="/js/MassToggler.js"></script>
 <script>
   $(document).ready(function(){
     MassToggler('aside input#checkAll', 'aside li.category-toggle input'); 
