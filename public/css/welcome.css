@@ -262,3 +262,17 @@ footer {
   height: 45px;
 }
 /* ^^ end weird typeahead workaround*/
+
+/* label focus color */
+.shpp-theme .input-field input:focus + label {
+  color: #4CAF50 !important;
+}
+/* label underline focus color */
+.shpp-theme .row .input-field input:focus {
+  border-bottom: 1px solid #4CAF50 !important;
+  box-shadow: 0 1px 0 0 #4CAF50 !important
+}
+
+.shpp-theme .btn:not(.social) {
+  background-color: #4CAF50;
+}

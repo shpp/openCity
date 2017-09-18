@@ -192,7 +192,7 @@
         <button href="#!" class="modal-action modal-close waves-effect waves-green btn">Добре</button>
     </div>
 </div>
-<div id="login_modal" class="modal">
+<div id="login_modal" class="modal shpp-theme">
     <div class="modal-content">
         <h5 class="center-align">Вхід в аккаунт</h5>
         <div class="section"></div>
@@ -225,14 +225,12 @@
             <div class="col s6">
                 <div class="row">
                     <a class="col s12 waves-effect waves-light btn social facebook"
-                        href="{{ url('/auth/facebook') }}"
-                    >
+                        href="{{ url('/auth/facebook') }}">
                         <i class="fa fa-facebook"></i> Вхід через facebook</a>
                 </div>
                 <div class="row">
                     <a class="col s12 waves-effect waves-light btn social twitter"
-                        href="{{ url('/auth/twitter') }}"
-                    >
+                        href="{{ url('/auth/twitter') }}">
                         <i class="fa fa-twitter"></i> Вхід через twitter</a>
                 </div>
                 <div class="section"></div>
