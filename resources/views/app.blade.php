@@ -190,26 +190,39 @@
         <button href="#!" class="modal-action modal-close waves-effect waves-green btn">Добре</button>
     </div>
 </div>
-<div id="login_modal" class="modal modal-small">
+<div id="login_modal" class="modal">
     <div class="modal-content">
         <h5 class="center-align">Вхід в аккаунт</h5>
+        <div class="section"></div>
         <div class="row">
-            <form class="col s12">
+            <form class="col s12" role="form" method="POST" action="{{ url('/login') }}">
                 <div class="row">
-                    <div class="input-field col s12">
+                    <div class="input-field col s7">
                         <input id="email" type="email" class="validate">
                         <label for="email">Електронна пошта</label>
                     </div>
+                    <div class="input-field col s5">
+                        <a class="btn btn-full" href="{{ url('register') }}">Зареєструватися</a>
+                    </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s12">
+                    <div class="input-field col s7">
                         <input id="password" type="password" class="validate">
                         <label for="password">Пароль</label>
+                    </div>
+                    <div class="input-field col s5">
+                        <a class="btn btn-full" href="{{ url('/password/reset') }}">Забули пароль?</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 right-align">
+                        <input type="checkbox" id="login-remember-me" class="filled-in"/>
+                        <label for="login-remember-me" class="black-text">Запам’ятати мене</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <a href=""></a>
+                        <input type="submit" class="btn btn-full" value="Продовжити"></input>
                     </div>
                 </div>
             </form>

@@ -21,6 +21,10 @@ address {
   width: 35%;
 }
 
+.btn.btn-full {
+  width: 100%;
+}
+
 /* Always set the map height explicitly to define the size of the div
 * element that contains the map. */
 #map {
