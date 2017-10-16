@@ -3,7 +3,12 @@ var markers = [];
 var lastInfo = null;
 
 $(document).ready(function() {
-  $rightSideBar = $("#right-bar");
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  const $rightSideBar = $("#right-bar");
 
   function hideRightSideBar() {
     $rightSideBar.animate({right: '-400px'}, 400);
@@ -30,11 +35,11 @@ $(document).ready(function() {
       $.ajax({
           url: 'place-comments',
           method: 'POST',
-          data: {'place-id': placeId, 'comment': comment}
+          data: {'place-id': placeId, 'comment': comment, token: ''}
       }).done(function (response) {
           // todo: pretty alerts
           alert('Коментар додано');
-      }).error(function (err) {
+      }).fail(function (err) {
           // todo: pretty alerts
           console.log(err);
       });
@@ -135,7 +140,7 @@ $(document).ready(function() {
   * Clear all markers on the map
    ****************************************************/
   function clearMarkers() {
-    for (i in markers) {
+    for (let i in markers) {
       markers[i].setMap(null);
     }
     markers = [];

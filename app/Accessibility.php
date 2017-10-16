@@ -43,5 +43,4 @@ class Accessibility extends Model
     {
         return $this->belongsTo(AccessibilityTitle::class, 'acces_title_id', 'id');
     }
-
 }
