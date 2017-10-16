@@ -66,14 +66,14 @@ class Place extends Model
     protected $hidden = ['created_at', 'updated_at',];
     protected $appends = ['acc_cnt'];
 
-// commented 10.09.17
-//    /**
-//     * @return int
-//     */
-//    public function getAccCntAttribute()
-//    {
-//        return Accessibility::where('place_id', $this->attributes['id'])->count();
-//    }
+    /**
+     * Used for frontend calls
+     * @return int
+     */
+    public function getAccCntAttribute()
+    {
+        return Accessibility::where('place_id', $this->attributes['id'])->count();
+    }
 
     public function category()
     {
