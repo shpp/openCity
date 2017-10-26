@@ -68,10 +68,26 @@ $(document).ready(function() {
       setMapCenter(item.id);
     });
 
-  function addMarkersToMap(query) {
-    query = query ? '?' + query : '';
 
-    $.get('/getplaces' + query, function(response) {
+  var placesCache = null;
+  function getMarkersList(query, forceNoCache, cb) {
+    if (!forceNoCache && placesCache !== null)
+      return cb(placesCache);
+    $.get('/getplaces', function(response) {
+      placesCache = response;
+      cb(response);
+    });
+  }
+
+  var deferTimeMarker = 0;
+  var deferTimeout = 300;
+  function addMarkersToMap(query, forceNoCache) {
+    const now = Date.now();
+    if (now - deferTimeMarker < deferTimeout) return;
+    deferTimeMarker = now;
+
+    query = query ? '?' + query : '';
+    getMarkersList(query, forceNoCache, function(response) {
       var access_cnt_all = response.access_cnt_all;
       var places = response.places;
 
@@ -104,6 +120,7 @@ $(document).ready(function() {
           addMarker(LatLng, popupInfo, place.name, markerColor, place.id);
         });
     });
+
   }
 
   /****************************************************
