@@ -9,6 +9,16 @@ $(document).ready(function() {
     }
   });
 
+  var placesCache = null;
+  function getMarkersList(query, forceNoCache, cb) {
+    if (!forceNoCache && placesCache !== null)
+      return cb(placesCache);
+    $.get('/getplaces', function(response) {
+      placesCache = response;
+      cb(response);
+    });
+  }
+  
   var deferTimeMarker = 0;
   var deferTimeout = 300;
   function addMarkersToMap(query, forceNoCache) {
@@ -116,17 +126,6 @@ $(document).ready(function() {
       $(this).blur();
       setMapCenter(item.id);
     });
-
-
-  var placesCache = null;
-  function getMarkersList(query, forceNoCache, cb) {
-    if (!forceNoCache && placesCache !== null)
-      return cb(placesCache);
-    $.get('/getplaces', function(response) {
-      placesCache = response;
-      cb(response);
-    });
-  }
 
   /****************************************************
   * Focus on marker with same place_id and show popup
