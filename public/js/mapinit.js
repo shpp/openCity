@@ -8,6 +8,50 @@ $(document).ready(function() {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
   });
+
+  var deferTimeMarker = 0;
+  var deferTimeout = 300;
+  function addMarkersToMap(query, forceNoCache) {
+    const now = Date.now();
+    if (now - deferTimeMarker < deferTimeout) return;
+    deferTimeMarker = now;
+
+    query = query ? '?' + query : '';
+    getMarkersList(query, forceNoCache, function(response) {
+      var access_cnt_all = response.access_cnt_all;
+      var places = response.places;
+
+      clearMarkers();
+
+      places
+        .filter(function(place) {
+          return place.geo_place_id;
+        })
+        .map(function(place) {
+          var LatLng = {lat: +place.map_lat, lng: +place.map_lng};
+          var addrString = '<div class="marker-popup">' + place.street + ', '+ place.number + '</div>';
+          var markerColor = '';
+
+          switch (place.acc_cnt) {
+            case 0:
+              markerColor = '#F44336';
+              break;
+            case access_cnt_all:
+              markerColor = '#4aa54e';
+              break;
+            default:
+              markerColor = '#FFEB3B';
+          }
+
+          var popupInfo = new google.maps.InfoWindow({
+              content: addrString
+          });
+
+          addMarker(LatLng, popupInfo, place.name, markerColor, place.id);
+        });
+    });
+  }
+  
   const $rightSideBar = $("#right-bar");
 
   function hideRightSideBar() {
@@ -82,50 +126,6 @@ $(document).ready(function() {
       placesCache = response;
       cb(response);
     });
-  }
-
-  var deferTimeMarker = 0;
-  var deferTimeout = 300;
-  function addMarkersToMap(query, forceNoCache) {
-    const now = Date.now();
-    if (now - deferTimeMarker < deferTimeout) return;
-    deferTimeMarker = now;
-
-    query = query ? '?' + query : '';
-    getMarkersList(query, forceNoCache, function(response) {
-      var access_cnt_all = response.access_cnt_all;
-      var places = response.places;
-
-      clearMarkers();
-
-      places
-        .filter(function(place) {
-          return place.geo_place_id;
-        })
-        .map(function(place) {
-          var LatLng = {lat: +place.map_lat, lng: +place.map_lng};
-          var addrString = '<div class="marker-popup">' + place.street + ', '+ place.number + '</div>';
-          var markerColor = '';
-
-          switch (place.acc_cnt) {
-            case 0:
-              markerColor = '#F44336';
-              break;
-            case access_cnt_all:
-              markerColor = '#4aa54e';
-              break;
-            default:
-              markerColor = '#FFEB3B';
-          }
-
-          var popupInfo = new google.maps.InfoWindow({
-              content: addrString
-          });
-
-          addMarker(LatLng, popupInfo, place.name, markerColor, place.id);
-        });
-    });
-
   }
 
   /****************************************************
