@@ -11,14 +11,14 @@ $(document).ready(function() {
 
   var placesCache = null;
   function getMarkersList(query, forceNoCache, cb) {
-    if (!forceNoCache && placesCache !== null)
+    if (!forceNoCache && placesCache)
       return cb(placesCache);
     $.get('/getplaces', function(response) {
       placesCache = response;
       cb(response);
     });
   }
-  
+
   var deferTimeMarker = 0;
   var deferTimeout = 300;
   function addMarkersToMap(query, forceNoCache) {
