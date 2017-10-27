@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Log;
 use Session;
 use App\ParameterType;
 use App\ParameterTitle;
