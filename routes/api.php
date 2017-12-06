@@ -21,5 +21,6 @@ Route::group(['prefix' => 'v1'], function () {
     Route::get('/getcategories', 'ApiV1Controller@getCategories');
     Route::get('/getaccessebilities', 'ApiV1Controller@getAccessebilities');
     Route::get('/getparameters', 'ApiV1Controller@getParameters');
+    Route::post('/messages/send', 'MessageController@store');
 });
 

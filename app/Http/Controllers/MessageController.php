@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Message;
 use Illuminate\Http\Request;
+use Validator;
 
 
 class MessageController extends Controller
@@ -37,15 +38,21 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'email' => 'required|email',
-            'text' => 'required|max:500',
+            'text' => 'required|string|max:255',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
         $message = Message::create($request->toArray());
         if ($request->ajax()) {
             return response()->json(['message' => 'Повідомлення надіслано успішно', 'created' => $message]);
+        } else {
+            return response()->json(['message' => 'Повідомлення надіслано успішно'],200);
         }
-        return redirect('/');
     }
 
     /**
