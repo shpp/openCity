@@ -38,7 +38,7 @@ $(document).ready(function() {
           return place.geo_place_id;
         })
         .map(function(place) {
-          var LatLng = {lat: +place.map_lat, lng: +place.map_lng};
+          var LatLng ={lat: +place.map_lat, lng: +place.map_lng};
           var addrString = '<div class="marker-popup">' + place.street + ', '+ place.number + '</div>';
           var markerColor = '';
 
@@ -176,10 +176,11 @@ $(document).ready(function() {
       strokeWeight: 1,
       strokeColor: 'grey'
     };
+    console.log(new google.maps.LatLng(LatLng));
 
     var marker = new google.maps.Marker({
       map: map,
-      position: LatLng,
+      position: new google.maps.LatLng(LatLng),
       info: infowindow,
       content: contentString,
       icon: markerIcon,

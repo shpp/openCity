@@ -10,6 +10,7 @@ use GuzzleHttp\Client;
 use App\ParameterTitle;
 use App\AccessibilityTitle;
 use Illuminate\Http\Request;
+use Mapper;
 
 class PlaceAdminController extends Controller
 {
@@ -201,7 +202,7 @@ class PlaceAdminController extends Controller
         $delay = 2;
         $my_api_key = env('GOOGLE_API_KEY');
         foreach ($addr_arr as $addr) {
-            $req = 'json?query=' . $addr->city . '+' . $addr->street . '+' . $addr->number . '&language=uk&key=' . $my_api_key;
+            $req = 'json?query=' . $addr->city . '+' . $addr->street . '+' . $addr->number ("<div class='container'>"). '&language=uk&key=' . $my_api_key;
             $response = $client->request('POST', $req);
             sleep($delay);
             $result = json_decode($response->getBody(), true);
@@ -220,5 +221,49 @@ class PlaceAdminController extends Controller
                 }
             }
         }
+    }
+
+    /**
+     * page for edit coordinates of places
+     * draw map and add markers
+     *
+     */
+
+    public function editCoordinates()
+    {
+        Mapper::map(48.5050277987034, 32.2593695292334,['zoom'=> 15,'cluster' => false]);
+        $places = Place::all();
+
+        foreach ($places as $place){
+            if(isset($place->map_lat) && isset($place->map_lng)){
+                Mapper::marker($place->map_lat, $place->map_lng, [
+                    'draggable' => true,
+                    'title' =>$place->name.'|'.$place->street.'|'.$place->number,
+                    'eventDragEnd' => 'changeMarkersCoordinates(
+                                          this.title.split(\'|\').shift(), 
+                                          event.latLng.lat(), 
+                                          event.latLng.lng())'
+                ]);
+            }
+        }
+
+        return view('edit_coordinates');
+    }
+    /**
+     * change coordinates of place
+     * ajax post request
+     *
+     * @param  Request $request
+     * @return
+     */
+
+    public function changeCoordinates(Request $request)
+    {
+        $place = Place::whereName($request->name)->firstOrFail();
+        $place->map_lat = $request->lat;
+        $place->map_lng = $request->lng;
+        $place->save();
+
+        return "$request->name $request->lat $request->lng;";
     }
 }
