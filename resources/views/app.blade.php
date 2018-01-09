@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/welcome.css">
-    <link rel="stylesheet" href="css/materialize-social.css">    
+    <link rel="stylesheet" href="css/materialize-social.css">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     {{--TODO: opengraph--}}
     {{--todo: add fancy favicon--}}
@@ -79,10 +79,10 @@
                 </li>
                 <li>
                     <a href="https://play.google.com/store/apps/details?id=me.kowo.opencity"
-                        class="btn green waves waves-light"
-                        target="_blank">
-                            <i class="material-icons white-text">android</i>
-                            Завантажити</a>
+                       class="btn green waves waves-light"
+                       target="_blank">
+                        <i class="material-icons white-text">android</i>
+                        Завантажити</a>
                 </li>
             </ul>
         </li>
@@ -98,16 +98,33 @@
         <div class="login-float-block">
             @if (auth()->guest())
                 <a class="login-float__link modal-trigger" href="#login_modal">Увійти</a>
-                @else
-                <div class="user-control-block">{{ auth()->user()->name }}</div>
+            @else
+                <a class='dropdown-button btn' href='#' data-activates='dropdown1'>
+                    {{ auth()->user()->name }}
+                </a>
+                <ul id='dropdown1' class='dropdown-content'>
+                    <li>
+                        <a href="{{ url('/logout') }}"
+                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            Вийти
+                        </a>
+                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
+                </ul>
             @endif
         </div>
+
+
         <div id="map"></div>
         @include('components.right-bar')
-        <a class="waves-effect waves-light btn modal-trigger main-trolley__button light-blue lighten-5 black-text" href="#low_trolley_modal">
+        <a class="waves-effect waves-light btn modal-trigger main-trolley__button light-blue lighten-5 black-text"
+           href="#low_trolley_modal">
             <i class="material-icons left">directions_bus</i>
             Низькополий тролейбус</a>
-        <a class="waves-effect waves-light btn modal-trigger main-social-taxi__button yellow accent-2 black-text" href="#social_taxi_modal">
+        <a class="waves-effect waves-light btn modal-trigger main-social-taxi__button yellow accent-2 black-text"
+           href="#social_taxi_modal">
             <i class="material-icons left">local_taxi</i>
             Соціальне таксі</a>
     </div>
@@ -174,7 +191,7 @@
             <div class="col s6 right-align">
                 <a href="https://www.facebook.com/groups/1531774503500273/?fref=ts" target="_blank">
                     <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                         x="0px" y="0px"
                          viewBox="0 0 167.657 167.657"
                          style="enable-background:new 0 0 167.657 167.657; width: 25px; height: 25px"
                          xml:space="preserve">
@@ -233,12 +250,12 @@
             <div class="col s6">
                 <div class="row">
                     <a class="col s12 waves-effect waves-light btn social facebook"
-                        href="{{ url('/auth/facebook') }}">
+                       href="{{ url('/auth/facebook') }}">
                         <i class="fa fa-facebook"></i> Вхід через facebook</a>
                 </div>
                 <div class="row">
                     <a class="col s12 waves-effect waves-light btn social twitter"
-                        href="{{ url('/auth/twitter') }}">
+                       href="{{ url('/auth/twitter') }}">
                         <i class="fa fa-twitter"></i> Вхід через twitter</a>
                 </div>
                 <div class="section"></div>
@@ -256,12 +273,18 @@
     <div class="modal-content">
         <h4 class="center-align">Соціальне таксі</h4>
         Щоб викликати соціальне таксі, вам потрібно зв'язатися з територіальним центром соціального обслуговування.
-        Скористатися послугою можуть особи, які стоять на обліку в управлінні соціального захисту населення. Замовити таксі можливо у будні з 8:00 до 17:00 тільки у державні установи.
+        Скористатися послугою можуть особи, які стоять на обліку в управлінні соціального захисту населення. Замовити
+        таксі можливо у будні з 8:00 до 17:00 тільки у державні установи.
         <br><br>
-        Фортечний район (за три доби тричі на місяць): <address>вул. Шатила, 12</address><br>
-        телефони: <a href="tel:+38(0522)37-12-75">(0522) 37-12-75</a>, <a href="tel:+38(099)-666 29 41">(099) 666-29-41</a><br>
+        Фортечний район (за три доби тричі на місяць):
+        <address>вул. Шатила, 12</address>
+        <br>
+        телефони: <a href="tel:+38(0522)37-12-75">(0522) 37-12-75</a>, <a href="tel:+38(099)-666 29 41">(099)
+            666-29-41</a><br>
         e-mail: <a href="mailto:kirtercentr@mail.ru">kirtercentr@mail.ru</a><br><br>
-        Подільський район (за добу): <address>вул. Архітектора Паученка 53/39</address><br>
+        Подільський район (за добу):
+        <address>вул. Архітектора Паученка 53/39</address>
+        <br>
         телефон: <a href="tel:+38(0522)22-08-67">(0522) 22-08-67</a><br>
         e-mail: <a href="mailto:len.upszn@krmr.gov.ua">len.upszn@krmr.gov.ua</a><br>
     </div>
@@ -275,14 +298,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
 <script src="https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key={{$google_api_key}}&amp;callback=initMap&amp;language=uk_UA&amp;region=ES"
-async defer></script>
+        async defer></script>
 <script src="/js/mapinit.js"></script>
 <script src="/js/MassToggler.js"></script>
 <script>
-  $(document).ready(function(){
-    MassToggler('aside input#checkAll', 'aside li.category-toggle input'); 
-    $('.modal').modal();
-  });
+    $(document).ready(function () {
+        MassToggler('aside input#checkAll', 'aside li.category-toggle input');
+        $('.modal').modal();
+    });
 </script>
 </body>
 </html>
