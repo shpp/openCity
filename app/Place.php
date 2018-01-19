@@ -67,13 +67,13 @@ class Place extends Model
     protected $appends = ['acc_cnt'];
 
 // commented 10.09.17
-//    /**
-//     * @return int
-//     */
-//    public function getAccCntAttribute()
-//    {
-//        return Accessibility::where('place_id', $this->attributes['id'])->count();
-//    }
+    /**
+     * @return int
+     */
+    public function getAccCntAttribute()
+    {
+        return Accessibility::where('place_id', $this->attributes['id'])->count();
+    }
 
     public function category()
     {

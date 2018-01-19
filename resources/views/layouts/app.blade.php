@@ -14,6 +14,32 @@
     <link href="/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
     <link href="/css/bootstrap-select.min.css" media="all" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="{{ asset('css/b.min.css') }}">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/icons/favicon-16x16.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="mask-icon" href="/img/icons/safari-pinned-tab.svg" color="#4CAF50">
+    <link rel="shortcut icon" href="/img/icons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/img/icons/mstile-144x144.png">
+    <meta name="msapplication-config" content="/img/icons/browserconfig.xml">
+    <meta name="theme-color" content="#4CAF50">
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="Місто для всіх" />
+    <meta property="twitter:image" content="/img/logo.png" />
+    <meta property="twitter:description" content="Карта доступності міста Кропивницький для людей з інвалідністю та батьків з маленькими дітьми. На карті можна знайти об’єкт та дізнатися його координати, контакти та атрибути доступності (наявність пандуса та кнопки виклику)." />
+
+    <meta property="og:title" content="Місто для всіх" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://opencity.shpp.me" />
+    <meta property="og:image" content="/img/logo.png" />
+    <meta property="og:description" content="Карта доступності міста Кропивницький для людей з інвалідністю та батьків з маленькими дітьми. На карті можна знайти об’єкт та дізнатися його координати, контакти та атрибути доступності (наявність пандуса та кнопки виклику)." />
+
+
+
+
     @yield('styles')
     <!-- Scripts -->
     <script>
