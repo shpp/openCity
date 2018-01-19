@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Message;
 use Illuminate\Http\Request;
+use Validator;
 
 
 class MessageController extends Controller
@@ -15,7 +17,7 @@ class MessageController extends Controller
     public function index()
     {
         $Messages = Message::all();
-        return view('messages',['Messages' => $Messages] );
+        return view('messages', ['Messages' => $Messages]);
     }
 
     /**
@@ -31,24 +33,32 @@ class MessageController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'email' => 'required|email',
-            'text' => 'required|max:500',
+            'text' => 'required|string|max:255',
         ]);
-        Message::create($request->toArray());
-        //\Session::flash('status', 'Створено успішно!');
-        return redirect('/');
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $message = Message::create($request->toArray());
+        if ($request->ajax()) {
+            return response()->json(['message' => 'Повідомлення надіслано успішно', 'created' => $message]);
+        } else {
+            return response()->json(['message' => 'Повідомлення надіслано успішно'],200);
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -59,7 +69,7 @@ class MessageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -70,8 +80,8 @@ class MessageController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -82,7 +92,7 @@ class MessageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

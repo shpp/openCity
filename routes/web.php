@@ -45,6 +45,8 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/destroy_null', 'PlaceAdminController@destroyNull');
     Route::get('/load_geo', 'PlaceAdminController@loadGeo');
     Route::get('/messages', 'MessageController@index');
+    Route::get('/edit_coordinates', 'PlaceAdminController@editCoordinates');
+    Route::post('/edit_coordinates', 'PlaceAdminController@changeCoordinates');
 
     Route::resource('parameter_types', 'ParameterTypesController');
     Route::resource('parameters', 'ParametersController');

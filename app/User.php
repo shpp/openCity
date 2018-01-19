@@ -36,21 +36,10 @@ class User extends Authenticatable
     use Notifiable;
     use EntrustUserTrait;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'name', 'email', 'password', 'provider', 'provider_id', 'banned',
     ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = ['password', 'remember_token',];
+    protected $hidden = ['password', 'remember_token', 'created_at', 'updated_at'];
 
     public function roles()
     {

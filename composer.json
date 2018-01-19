@@ -13,19 +13,21 @@
         "maatwebsite/excel": "~2.1.0",
         "spatie/laravel-backup": "^3.11",
         "arcanedev/log-viewer": "^4.3",
-        "barryvdh/laravel-ide-helper": "^2.3",
         "laravel/socialite": "^3.0",
         "zizaco/entrust": "5.2.x-dev",
         "laravelcollective/html": "^5.3.0",
-        "barryvdh/laravel-debugbar": "^2.3",
-        "paragonie/random_compat": "~1.4"
+        "paragonie/random_compat": "~1.4",
+        "cornford/googlmapper": "v2.29.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~5.0",
         "symfony/css-selector": "3.1.*",
-        "symfony/dom-crawler": "3.1.*"
+        "symfony/dom-crawler": "3.1.*",
+        "barryvdh/laravel-debugbar": "^2.3",
+        "barryvdh/laravel-ide-helper": "^2.3",
+        "xethron/migrations-generator": "v2.0.2"
     },
     "autoload": {
         "classmap": [

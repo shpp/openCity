@@ -3,7 +3,66 @@ var markers = [];
 var lastInfo = null;
 
 $(document).ready(function() {
-  $rightSideBar = $("#right-bar");
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  var placesCache = null;
+  function getMarkersList(query, forceNoCache, cb) {
+    if (!forceNoCache && placesCache)
+      return cb(placesCache);
+    $.get('/getplaces', function(response) {
+      placesCache = response;
+      cb(response);
+    });
+  }
+
+  var deferTimeMarker = 0;
+  var deferTimeout = 300;
+  function addMarkersToMap(query, forceNoCache) {
+    const now = Date.now();
+    if (now - deferTimeMarker < deferTimeout) return;
+    deferTimeMarker = now;
+
+    query = query ? '?' + query : '';
+    getMarkersList(query, forceNoCache, function(response) {
+      var access_cnt_all = response.access_cnt_all;
+      var places = response.places;
+
+      clearMarkers();
+
+      places
+        .filter(function(place) {
+          return place.geo_place_id;
+        })
+        .map(function(place) {
+          var LatLng ={lat: +place.map_lat, lng: +place.map_lng};
+          var addrString = '<div class="marker-popup">' + place.street + ', '+ place.number + '</div>';
+          var markerColor = '';
+
+          switch (place.acc_cnt) {
+            case 0:
+              markerColor = '#F44336';
+              break;
+            case access_cnt_all:
+              markerColor = '#4aa54e';
+              break;
+            default:
+              markerColor = '#FFEB3B';
+          }
+
+          var popupInfo = new google.maps.InfoWindow({
+              content: addrString
+          });
+
+          addMarker(LatLng, popupInfo, place.name, markerColor, place.id);
+        });
+    });
+  }
+  
+  const $rightSideBar = $("#right-bar");
 
   function hideRightSideBar() {
     $rightSideBar.animate({right: '-400px'}, 400);
@@ -30,11 +89,11 @@ $(document).ready(function() {
       $.ajax({
           url: 'place-comments',
           method: 'POST',
-          data: {'place-id': placeId, 'comment': comment}
+          data: {'place-id': placeId, 'comment': comment, token: ''}
       }).done(function (response) {
           // todo: pretty alerts
           alert('Коментар додано');
-      }).error(function (err) {
+      }).fail(function (err) {
           // todo: pretty alerts
           console.log(err);
       });
@@ -68,44 +127,6 @@ $(document).ready(function() {
       setMapCenter(item.id);
     });
 
-  function addMarkersToMap(query) {
-    query = query ? '?' + query : '';
-
-    $.get('/getplaces' + query, function(response) {
-      var access_cnt_all = response.access_cnt_all;
-      var places = response.places;
-
-      clearMarkers();
-
-      places
-        .filter(function(place) {
-          return place.geo_place_id;
-        })
-        .map(function(place) {
-          var LatLng = {lat: +place.map_lat, lng: +place.map_lng};
-          var addrString = '<div class="marker-popup">' + place.street + ', '+ place.number + '</div>';
-          var markerColor = '';
-
-          switch (place.acc_cnt) {
-            case 0:
-              markerColor = '#F44336';
-              break;
-            case access_cnt_all:
-              markerColor = '#4aa54e';
-              break;
-            default:
-              markerColor = '#FFEB3B';
-          }
-
-          var popupInfo = new google.maps.InfoWindow({
-              content: addrString
-          });
-
-          addMarker(LatLng, popupInfo, place.name, markerColor, place.id);
-        });
-    });
-  }
-
   /****************************************************
   * Focus on marker with same place_id and show popup
   *****************************************************/
@@ -135,7 +156,7 @@ $(document).ready(function() {
   * Clear all markers on the map
    ****************************************************/
   function clearMarkers() {
-    for (i in markers) {
+    for (let i in markers) {
       markers[i].setMap(null);
     }
     markers = [];
@@ -156,10 +177,11 @@ $(document).ready(function() {
       strokeColor: 'grey',
       anchor: new google.maps.Point(250, 500)
     };
+    console.log(new google.maps.LatLng(LatLng));
 
     var marker = new google.maps.Marker({
       map: map,
-      position: LatLng,
+      position: new google.maps.LatLng(LatLng),
       info: infowindow,
       content: contentString,
       icon: markerIcon,

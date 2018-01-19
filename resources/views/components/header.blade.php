@@ -40,6 +40,7 @@
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ url('/destroy_null') }}">Видалити помилкові місця</a></li>
                             <li><a href="{{ url('/load_geo') }}">Проставити координати</a></li>
+                            <li><a href="{{ url('/edit_coordinates') }}">Редагувати координати</a></li>
                         </ul>
                     </li>
                     <li><a href="{{ url('/load_file') }}">Завантажити данні</a></li>

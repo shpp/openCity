@@ -182,7 +182,8 @@ return [
         Spatie\Backup\BackupServiceProvider::class,
         // Laravel logs
         Arcanedev\LogViewer\LogViewerServiceProvider::class,
-
+        //maps service provider
+        Cornford\Googlmapper\MapperServiceProvider::class,
         // ide helper
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         // social auth
@@ -191,6 +192,9 @@ return [
         Zizaco\Entrust\EntrustServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        //migrations generator
+        Way\Generators\GeneratorsServiceProvider::class,
+        Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider::class,
     ],
 
     /*
@@ -244,6 +248,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Mapper'   => Cornford\Googlmapper\Facades\MapperFacade::class,
 
     ],
 

@@ -47,27 +47,16 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Place extends Model
 {
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'name', 'comment', 'category_id', 'address_id',
         'city', 'street', 'number', 'map_lat', 'map_lng',
         'geo_place_id', 'comment_adr', 'short_name',
     ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = ['created_at', 'updated_at',];
     protected $appends = ['acc_cnt'];
 
-// commented 10.09.17
     /**
+     * Used for frontend calls
      * @return int
      */
     public function getAccCntAttribute()

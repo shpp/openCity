@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -30,10 +31,20 @@ class LoginController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @return void
      */
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'logout']);
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        if ($request->ajax()){
+            return response()->json([
+                'auth' => auth()->check(),
+                'user' => $user,
+                'intended' => $this->redirectPath(),
+            ]);
+        }
     }
 }

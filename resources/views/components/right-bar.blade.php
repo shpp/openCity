@@ -5,9 +5,7 @@
     </div>
     <div id="right-bar-address"></div>
     <div id="right-bar-access"></div>
-    <div class="right-bar-comments">
-
-    </div>
+    <div class="right-bar-comments"></div>
     <div class="right-bar-comments__form">
         <hr style="margin: 0">
         <div class="input-field">
